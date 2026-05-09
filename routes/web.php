@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PartnershipController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
 
@@ -36,12 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept']);
     Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject']);
 
-    // halaman produk
-    Route::get('/products', function () {
-    $products = Product::all(); // ambil semua produk
-    return view('products', compact('products'));
-
-    });
+    // Product CRUD dengan validasi
+    Route::resource('products', ProductController::class);
+    
+    // API endpoint untuk validasi real-time
+    Route::post('/products/validate', [ProductController::class, 'validateProduct']);
 
 });
 

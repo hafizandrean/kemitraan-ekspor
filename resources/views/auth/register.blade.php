@@ -41,10 +41,11 @@
 
         <div class="mt-4">
             <label for="role">Pilih Role</label>
-            <select name="role" class="block mt-1 w-full">
-                <option value="petani">Petani</option>
-                <option value="eksportir">Eksportir</option>
+            <select name="role" id="role" class="block mt-1 w-full">
+                <option value="petani" {{ old('role') === 'petani' ? 'selected' : '' }}>Petani</option>
+                <option value="eksportir" {{ old('role') === 'eksportir' ? 'selected' : '' }}>Eksportir</option>
             </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
