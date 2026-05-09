@@ -9,15 +9,25 @@ use App\Models\Product;
 class PartnershipController extends Controller
 {
     // 🔥 Eksportir ajukan kerja sama
-    public function apply($productId)
+    public function apply(Request $request, Product $product)
     {
-        $product = Product::findOrFail($productId);
+        abort_unless($request->user()?->role === 'eksportir', 403);
+
+        $exists = Partnership::query()
+            ->where('product_id', $product->id)
+            ->where('eksportir_id', $request->user()->id)
+            ->whereIn('status', ['pending', 'accepted'])
+            ->exists();
+
+        if ($exists) {
+            return back()->with('success', 'Pengajuan kamu untuk produk ini sudah ada.');
+        }
 
         Partnership::create([
             'product_id' => $product->id,
             'petani_id' => $product->user_id,
-            'eksportir_id' => auth()->id(),
-            'status' => 'pending'
+            'eksportir_id' => $request->user()->id,
+            'status' => 'pending',
         ]);
 
         return back()->with('success', 'Pengajuan dikirim!');
@@ -26,7 +36,14 @@ class PartnershipController extends Controller
     // 🔥 Petani lihat request
     public function requests()
     {
-        $requests = Partnership::where('petani_id', auth()->id())->get();
+        abort_unless(request()->user()?->role === 'petani', 403);
+
+        $requests = Partnership::query()
+            ->where('petani_id', auth()->id())
+            ->with(['product', 'eksportir'])
+            ->latest()
+            ->get();
+
         return view('requests', compact('requests'));
     }
 
@@ -34,6 +51,10 @@ class PartnershipController extends Controller
     public function accept($id)
     {
         $p = Partnership::findOrFail($id);
+        abort_unless(request()->user()?->role === 'petani', 403);
+        abort_unless($p->petani_id === auth()->id(), 403);
+        abort_unless($p->status === 'pending', 422);
+
         $p->status = 'accepted';
         $p->save();
 
@@ -44,6 +65,10 @@ class PartnershipController extends Controller
     public function reject($id)
     {
         $p = Partnership::findOrFail($id);
+        abort_unless(request()->user()?->role === 'petani', 403);
+        abort_unless($p->petani_id === auth()->id(), 403);
+        abort_unless($p->status === 'pending', 422);
+
         $p->status = 'rejected';
         $p->save();
 

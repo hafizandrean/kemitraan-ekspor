@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PartnershipController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,31 +17,47 @@ use App\Models\Product;
 */
 
 Route::get('/', function () {
-    return redirect('login');
+    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
-    // Eksportir ajukan kerja sama
-    Route::post('/apply/{product}', [PartnershipController::class, 'apply']);
+    // Eksportir: produk + search + detail + apply
+    Route::get('/products', [ProductController::class, 'index'])
+        ->middleware('role:eksportir')
+        ->name('products.index');
+    Route::get('/products/{product}', [ProductController::class, 'show'])
+        ->middleware('role:eksportir')
+        ->name('products.show');
+    Route::post('/products/{product}/apply', [PartnershipController::class, 'apply'])
+        ->middleware('role:eksportir')
+        ->name('partnerships.apply');
 
-    // Petani lihat request
-    Route::get('/requests', [PartnershipController::class, 'requests']);
+    // Petani: produk milik sendiri + tambah produk
+    Route::get('/petani/products', [ProductController::class, 'myIndex'])
+        ->middleware('role:petani')
+        ->name('petani.products.index');
+    Route::get('/petani/products/create', [ProductController::class, 'create'])
+        ->middleware('role:petani')
+        ->name('petani.products.create');
+    Route::post('/petani/products', [ProductController::class, 'store'])
+        ->middleware('role:petani')
+        ->name('petani.products.store');
 
-    // Petani accept / reject
-    Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept']);
-    Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject']);
-
-    // halaman produk
-    Route::get('/products', function () {
-    $products = Product::all(); // ambil semua produk
-    return view('products', compact('products'));
-
-    });
+    // Petani: permintaan masuk
+    Route::get('/requests', [PartnershipController::class, 'requests'])
+        ->middleware('role:petani')
+        ->name('requests.index');
+    Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept'])
+        ->middleware('role:petani')
+        ->name('requests.accept');
+    Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject'])
+        ->middleware('role:petani')
+        ->name('requests.reject');
 
 });
 

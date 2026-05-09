@@ -15,6 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    @if (Auth::user()->role === 'petani')
+                        <x-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')">
+                            {{ __('Produk Saya') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.*')">
+                            {{ __('Permintaan Masuk') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (Auth::user()->role === 'eksportir')
+                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                            {{ __('Cari Produk') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +85,21 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if (Auth::user()->role === 'petani')
+                <x-responsive-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')">
+                    {{ __('Produk Saya') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.*')">
+                    {{ __('Permintaan Masuk') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if (Auth::user()->role === 'eksportir')
+                <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                    {{ __('Cari Produk') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

@@ -9,17 +9,30 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <div class="text-lg font-semibold">
+                        Halo, {{ auth()->user()->name }}!
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Role: <span class="font-medium">{{ auth()->user()->role }}</span>
+                    </div>
 
-                    @if(auth()->user()->role == 'admin')
-                        <h1>Dashboard Admin</h1>
+                    @if(auth()->user()->role === 'petani')
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="{{ route('petani.products.index') }}">
+                                <x-primary-button>Kelola Produk</x-primary-button>
+                            </a>
+                            <a href="{{ route('requests.index') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 self-center">
+                                Lihat Permintaan Masuk →
+                            </a>
+                        </div>
                     @endif
 
-                    @if(auth()->user()->role == 'petani')
-                        <h1>Dashboard Petani</h1>
-                    @endif
-
-                    @if(auth()->user()->role == 'eksportir')
-                        <h1>Dashboard Eksportir</h1>
+                    @if(auth()->user()->role === 'eksportir')
+                        <div class="mt-6 flex flex-wrap gap-3">
+                            <a href="{{ route('products.index') }}">
+                                <x-primary-button>Cari Produk</x-primary-button>
+                            </a>
+                        </div>
                     @endif
 
                 </div>

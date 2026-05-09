@@ -7,6 +7,38 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Kemitraan Ekspor (MVP)
+
+### MVP flow (end-to-end)
+
+- **Register & Login** sebagai:
+  - `petani`
+  - `eksportir`
+- **Petani**:
+  - Buka `Dashboard` → `Kelola Produk` → `Tambah Produk` → isi `Nama produk`, `Jumlah`, `Lokasi` → simpan
+  - Buka `Permintaan Masuk` → `Accept` / `Reject`
+- **Eksportir**:
+  - Buka `Cari Produk` → search dengan keyword nama produk → buka detail → `Ajukan Kerja Sama`
+  - Status request default: `pending`, lalu akan berubah menjadi `accepted` / `rejected` dari sisi Petani
+
+### Setup lokal (singkat)
+
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+npm run dev
+php artisan serve
+```
+
+### Tests
+
+```bash
+php artisan test
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
