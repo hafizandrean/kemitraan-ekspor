@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Partnership;
 use App\Models\Product;
+use App\Models\SystemNotification;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -40,9 +41,12 @@ class MvpFlowTest extends TestCase
             ->assertStatus(302);
 
         $partnership = Partnership::query()->where('product_id', $product->id)->firstOrFail();
+        $petaniNotif = SystemNotification::query()->where('user_id', $petani->id)->latest()->first();
         $this->assertSame('pending', $partnership->status);
         $this->assertSame($petani->id, $partnership->petani_id);
         $this->assertSame($eksportir->id, $partnership->eksportir_id);
+        $this->assertNotNull($petaniNotif);
+        $this->assertStringContainsString('mengajukan kerja sama', $petaniNotif->message);
 
         // Petani sees request list
         $this->actingAs($petani)
@@ -57,7 +61,10 @@ class MvpFlowTest extends TestCase
             ->assertStatus(302);
 
         $partnership->refresh();
+        $eksportirNotif = SystemNotification::query()->where('user_id', $eksportir->id)->latest()->first();
         $this->assertSame('accepted', $partnership->status);
+        $this->assertNotNull($eksportirNotif);
+        $this->assertStringContainsString('diterima', $eksportirNotif->message);
     }
 
     public function test_petani_cannot_apply_and_eksportir_cannot_accept_or_view_requests(): void

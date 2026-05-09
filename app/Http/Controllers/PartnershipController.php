@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Partnership;
+use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\SystemNotification;
 
 class PartnershipController extends Controller
 {
@@ -28,6 +29,13 @@ class PartnershipController extends Controller
             'petani_id' => $product->user_id,
             'eksportir_id' => $request->user()->id,
             'status' => 'pending',
+        ]);
+
+        SystemNotification::create([
+            'user_id' => $product->user_id,
+            'title' => 'Permintaan kerja sama baru',
+            'message' => $request->user()->name.' mengajukan kerja sama untuk produk '.$product->nama_produk.'.',
+            'is_read' => false,
         ]);
 
         return back()->with('success', 'Pengajuan dikirim!');
@@ -58,6 +66,13 @@ class PartnershipController extends Controller
         $p->status = 'accepted';
         $p->save();
 
+        SystemNotification::create([
+            'user_id' => $p->eksportir_id,
+            'title' => 'Pengajuan diterima',
+            'message' => 'Pengajuan kerja sama kamu untuk produk '.$p->product->nama_produk.' telah diterima.',
+            'is_read' => false,
+        ]);
+
         return back();
     }
 
@@ -71,6 +86,13 @@ class PartnershipController extends Controller
 
         $p->status = 'rejected';
         $p->save();
+
+        SystemNotification::create([
+            'user_id' => $p->eksportir_id,
+            'title' => 'Pengajuan ditolak',
+            'message' => 'Pengajuan kerja sama kamu untuk produk '.$p->product->nama_produk.' ditolak.',
+            'is_read' => false,
+        ]);
 
         return back();
     }

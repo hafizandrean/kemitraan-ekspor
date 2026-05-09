@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PartnershipController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -9,9 +12,9 @@ Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     // Eksportir: produk + search + detail + apply
@@ -24,6 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product}/apply', [PartnershipController::class, 'apply'])
         ->middleware('role:eksportir')
         ->name('partnerships.apply');
+    Route::post('/products/{product}/favorite', [FavoriteController::class, 'toggle'])
+        ->middleware('role:eksportir')
+        ->name('favorites.toggle');
+    Route::get('/favorites', [FavoriteController::class, 'index'])
+        ->middleware('role:eksportir')
+        ->name('favorites.index');
 
     // Petani: produk milik sendiri + tambah produk
     Route::get('/petani/products', [ProductController::class, 'myIndex'])
@@ -46,6 +55,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject'])
         ->middleware('role:petani')
         ->name('requests.reject');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
 });
 
 Route::middleware('auth')->group(function () {

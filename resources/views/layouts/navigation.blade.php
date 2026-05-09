@@ -27,11 +27,24 @@
                         <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                             {{ __('Cari Produk') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
+                            {{ __('Favorit') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>
 
             <div class="hidden md:flex md:items-center md:gap-3">
+                <a href="{{ route('notifications.index') }}" class="relative inline-flex items-center justify-center h-9 w-9 rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/>
+                    </svg>
+                    @if(($unreadNotificationsCount ?? 0) > 0)
+                        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-5 h-5 rounded-full bg-red-500 px-1.5 text-[10px] font-bold text-white">
+                            {{ $unreadNotificationsCount > 99 ? '99+' : $unreadNotificationsCount }}
+                        </span>
+                    @endif
+                </a>
                 <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-100 ring-1 ring-white/15">
                     {{ Auth::user()->role === 'petani' ? 'Petani' : 'Eksportir' }}
                 </span>
@@ -91,7 +104,17 @@
                 <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                     {{ __('Cari Produk') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
+                    {{ __('Favorit') }}
+                </x-responsive-nav-link>
             @endif
+
+            <x-responsive-nav-link :href="route('notifications.index')" :active="request()->routeIs('notifications.*')" dark-nav>
+                {{ __('Notifikasi') }}
+                @if(($unreadNotificationsCount ?? 0) > 0)
+                    ({{ $unreadNotificationsCount }})
+                @endif
+            </x-responsive-nav-link>
         </div>
 
         <div class="pt-3 pb-4 px-4 border-t border-white/10">

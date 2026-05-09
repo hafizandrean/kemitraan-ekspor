@@ -36,10 +36,16 @@
                     <a href="{{ route('products.index') }}" class="text-sm font-semibold text-stone-600 hover:text-emerald-800">
                         ← Kembali ke daftar
                     </a>
-                    <form method="POST" action="{{ route('partnerships.apply', $product) }}">
-                        @csrf
-                        <x-primary-button class="w-full sm:w-auto justify-center">Ajukan kerja sama</x-primary-button>
-                    </form>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <form method="POST" action="{{ route('favorites.toggle', $product) }}">
+                            @csrf
+                            <x-secondary-button class="w-full sm:w-auto justify-center">Toggle Favorit</x-secondary-button>
+                        </form>
+                        <form method="POST" action="{{ route('partnerships.apply', $product) }}">
+                            @csrf
+                            <x-primary-button class="w-full sm:w-auto justify-center">Ajukan kerja sama</x-primary-button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
