@@ -1,40 +1,47 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Detail Produk') }}
-        </h2>
+        <div>
+            <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">
+                {{ __('Detail produk') }}
+            </h2>
+            <p class="mt-1 text-sm text-stone-600">Tinjau informasi sebelum mengajukan kerja sama.</p>
+        </div>
     </x-slot>
 
-    <div class="py-10">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto space-y-6">
             @if (session('success'))
-                <div class="mb-4 rounded-md bg-green-50 p-4 text-green-800">
+                <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6">
-                <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            <div class="rounded-2xl border border-stone-200/80 bg-white/90 p-8 shadow-sm shadow-stone-900/5">
+                <h3 class="font-display text-2xl font-semibold text-stone-900">
                     {{ $product->nama_produk }}
-                </div>
+                </h3>
 
-                <div class="mt-3 text-gray-700 dark:text-gray-200">
-                    <div><span class="font-medium">Jumlah:</span> {{ $product->jumlah }}</div>
-                    <div class="mt-1"><span class="font-medium">Lokasi:</span> {{ $product->lokasi }}</div>
-                </div>
+                <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+                    <div class="rounded-xl bg-stone-50 px-4 py-3 ring-1 ring-stone-200/80">
+                        <dt class="text-xs font-semibold uppercase tracking-wide text-stone-500">Jumlah</dt>
+                        <dd class="mt-1 text-lg font-semibold text-stone-900">{{ $product->jumlah }}</dd>
+                    </div>
+                    <div class="rounded-xl bg-stone-50 px-4 py-3 ring-1 ring-stone-200/80">
+                        <dt class="text-xs font-semibold uppercase tracking-wide text-stone-500">Lokasi</dt>
+                        <dd class="mt-1 text-lg font-semibold text-stone-900">{{ $product->lokasi }}</dd>
+                    </div>
+                </dl>
 
-                <div class="mt-6 flex items-center gap-3">
+                <div class="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-stone-200/80 pt-8">
+                    <a href="{{ route('products.index') }}" class="text-sm font-semibold text-stone-600 hover:text-emerald-800">
+                        ← Kembali ke daftar
+                    </a>
                     <form method="POST" action="{{ route('partnerships.apply', $product) }}">
                         @csrf
-                        <x-primary-button>Ajukan Kerja Sama</x-primary-button>
+                        <x-primary-button class="w-full sm:w-auto justify-center">Ajukan kerja sama</x-primary-button>
                     </form>
-
-                    <a href="{{ route('products.index') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
-                        Kembali
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-

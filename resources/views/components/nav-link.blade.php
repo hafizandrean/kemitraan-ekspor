@@ -1,9 +1,15 @@
-@props(['active'])
+@props(['active', 'darkNav' => false])
 
 @php
-$classes = ($active ?? false)
-            ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 dark:border-indigo-600 text-sm font-medium leading-5 text-gray-900 dark:text-gray-100 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out';
+if ($darkNav ?? false) {
+    $classes = ($active ?? false)
+        ? 'inline-flex items-center px-3 py-2 rounded-lg text-sm font-semibold text-white bg-white/15 ring-1 ring-white/20'
+        : 'inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium text-emerald-100/90 hover:text-white hover:bg-white/10 transition duration-150 ease-out';
+} else {
+    $classes = ($active ?? false)
+        ? 'inline-flex items-center px-1 pt-1 border-b-2 border-emerald-500 text-sm font-semibold leading-5 text-emerald-800 focus:outline-none transition duration-150 ease-in-out'
+        : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-stone-500 hover:text-stone-800 hover:border-stone-300 focus:outline-none transition duration-150 ease-in-out';
+}
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
