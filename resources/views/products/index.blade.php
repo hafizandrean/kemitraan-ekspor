@@ -22,7 +22,7 @@
                         type="text"
                         name="q"
                         value="{{ $q }}"
-                        placeholder="Ketik nama produk…"
+                        placeholder="Ketik nama produk..."
                         class="w-full flex-1 rounded-xl border-stone-300 bg-white text-stone-900 shadow-sm placeholder:text-stone-400 focus:border-emerald-500 focus:ring-emerald-500"
                     />
                     <x-primary-button type="submit" class="shrink-0 justify-center sm:w-auto">Cari</x-primary-button>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <span class="shrink-0 text-sm font-semibold text-emerald-600 group-hover:text-emerald-700">
-                                Detail →
+                                Detail ->
                             </span>
                         </a>
                     @empty
@@ -55,3 +55,4 @@
         </div>
     </div>
 </x-app-layout>
+

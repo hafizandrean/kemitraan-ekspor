@@ -44,7 +44,8 @@
                 </header>
             @endif
 
-            <main class="flex-1">
+            <!-- Page Content -->
+            <main>
                 {{ $slot }}
             </main>
         </div>

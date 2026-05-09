@@ -37,27 +37,19 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:eksportir')
         ->name('partnerships.apply');
 
-    // Petani: produk milik sendiri + tambah produk
-    Route::get('/petani/products', [ProductController::class, 'myIndex'])
-        ->middleware('role:petani')
-        ->name('petani.products.index');
-    Route::get('/petani/products/create', [ProductController::class, 'create'])
-        ->middleware('role:petani')
-        ->name('petani.products.create');
-    Route::post('/petani/products', [ProductController::class, 'store'])
-        ->middleware('role:petani')
-        ->name('petani.products.store');
+    // Petani lihat request
+    Route::get('/requests', [PartnershipController::class, 'requests']);
 
-    // Petani: permintaan masuk
-    Route::get('/requests', [PartnershipController::class, 'requests'])
-        ->middleware('role:petani')
-        ->name('requests.index');
-    Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept'])
-        ->middleware('role:petani')
-        ->name('requests.accept');
-    Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject'])
-        ->middleware('role:petani')
-        ->name('requests.reject');
+    // Petani accept / reject
+    Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept']);
+    Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject']);
+
+    // halaman produk
+    Route::get('/products', function () {
+    $products = Product::all(); // ambil semua produk
+    return view('products', compact('products'));
+
+    });
 
 });
 
