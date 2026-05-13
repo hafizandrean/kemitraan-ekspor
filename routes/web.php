@@ -8,8 +8,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// routes/web.php
+
 Route::get('/', function () {
-    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
+    return view('landing');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/statistik', function () {
+    return view('statistik');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
