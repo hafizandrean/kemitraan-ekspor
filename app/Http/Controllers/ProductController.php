@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,7 +27,7 @@ class ProductController extends Controller
         ]);
     }
 
-    // Eksportir: detail produk
+    // Petani: form edit produk
     public function edit(Request $request, Product $product)
     {
         abort_unless($product->user_id === $request->user()->id, 403);
@@ -35,33 +37,25 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        abort_unless($product->user_id === $request->user()->id, 403);
-
-        $validated = $request->validate([
-            'nama_produk' => ['required', 'string', 'max:255'],
-            'jumlah' => ['required', 'integer', 'min:1'],
-            'lokasi' => ['required', 'string', 'max:255'],
-        ]);
-
-        $product->update($validated);
+        $product->update($request->validated());
 
         return redirect()
             ->route('petani.products.index')
             ->with('success', 'Produk berhasil diperbarui.');
     }
 
-public function destroy(Request $request, Product $product)
-{
-    abort_unless($product->user_id === $request->user()->id, 403);
+    public function destroy(Request $request, Product $product)
+    {
+        abort_unless($product->user_id === $request->user()->id, 403);
 
-    $product->delete();
+        $product->delete();
 
-    return redirect()
-        ->route('petani.products.index')
-        ->with('success', 'Produk berhasil dihapus.');
-}
+        return redirect()
+            ->route('petani.products.index')
+            ->with('success', 'Produk berhasil dihapus.');
+    }
 
     // Petani: list produk miliknya
     public function myIndex(Request $request)
@@ -83,13 +77,9 @@ public function destroy(Request $request, Product $product)
     }
 
     // Petani: simpan produk
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validated = $request->validate([
-            'nama_produk' => ['required', 'string', 'max:255'],
-            'jumlah' => ['required', 'integer', 'min:1'],
-            'lokasi' => ['required', 'string', 'max:255'],
-        ]);
+        $validated = $request->validated();
 
         Product::create([
             'nama_produk' => $validated['nama_produk'],
@@ -103,4 +93,3 @@ public function destroy(Request $request, Product $product)
             ->with('success', 'Produk berhasil ditambahkan.');
     }
 }
-

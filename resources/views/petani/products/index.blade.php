@@ -36,6 +36,9 @@
                                 <span class="text-stone-300">·</span>
                                 <span>Lokasi <strong class="text-stone-800">{{ $p->lokasi }}</strong></span>
                             </div>
+                            <a href="{{ route('petani.products.edit', $p) }}" class="mt-3 inline-block text-sm font-semibold text-emerald-700 hover:text-emerald-800">
+                                Edit produk →
+                            </a>
                         </div>
                     @empty
                         <div class="rounded-xl border border-dashed border-stone-300 bg-stone-50 px-6 py-14 text-center">

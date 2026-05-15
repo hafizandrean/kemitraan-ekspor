@@ -24,23 +24,23 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'nama_produk' => [
-                'sometimes',
+                'required',
                 'string',
                 'max:255',
                 'min:3',
-                'regex:/^[a-zA-Z0-9\s\-()]+$/'
+                'regex:/^[a-zA-Z0-9\s\-()]+$/',
             ],
             'jumlah' => [
-                'sometimes',
+                'required',
                 'integer',
                 'min:1',
-                'max:999999'
+                'max:999999',
             ],
             'lokasi' => [
-                'sometimes',
+                'required',
                 'string',
                 'max:255',
-                'min:3'
+                'min:3',
             ],
         ];
     }
@@ -53,15 +53,18 @@ class UpdateProductRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'nama_produk.required' => 'Nama produk harus diisi',
             'nama_produk.string' => 'Nama produk harus berupa teks',
             'nama_produk.max' => 'Nama produk maksimal 255 karakter',
             'nama_produk.min' => 'Nama produk minimal 3 karakter',
             'nama_produk.regex' => 'Nama produk hanya boleh mengandung huruf, angka, spasi, dan tanda hubung',
             
+            'jumlah.required' => 'Jumlah produk harus diisi',
             'jumlah.integer' => 'Jumlah produk harus berupa angka',
             'jumlah.min' => 'Jumlah produk minimal 1',
             'jumlah.max' => 'Jumlah produk maksimal 999.999',
             
+            'lokasi.required' => 'Lokasi produk harus diisi',
             'lokasi.string' => 'Lokasi harus berupa teks',
             'lokasi.max' => 'Lokasi maksimal 255 karakter',
             'lokasi.min' => 'Lokasi minimal 3 karakter',
