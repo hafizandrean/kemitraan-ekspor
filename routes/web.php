@@ -54,6 +54,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/petani/products', [ProductController::class, 'store'])
         ->middleware('role:petani')
         ->name('petani.products.store');
+    Route::get('/petani/products/{product}/edit', [ProductController::class, 'edit'])
+         ->middleware('role:petani')
+        ->name('petani.products.edit');
+    Route::patch('/petani/products/{product}', [ProductController::class, 'update'])
+        ->middleware('role:petani')
+        ->name('petani.products.update');
+    Route::delete('/petani/products/{product}', [ProductController::class, 'destroy'])
+        ->middleware('role:petani')
+        ->name('petani.products.destroy');
 
     // Petani: permintaan masuk
     Route::get('/requests', [PartnershipController::class, 'requests'])

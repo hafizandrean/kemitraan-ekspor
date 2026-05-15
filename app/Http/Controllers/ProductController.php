@@ -26,12 +26,42 @@ class ProductController extends Controller
     }
 
     // Eksportir: detail produk
-    public function show(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        return view('products.show', [
+        abort_unless($product->user_id === $request->user()->id, 403);
+
+        return view('petani.products.edit', [
             'product' => $product,
         ]);
     }
+
+    public function update(Request $request, Product $product)
+    {
+        abort_unless($product->user_id === $request->user()->id, 403);
+
+        $validated = $request->validate([
+            'nama_produk' => ['required', 'string', 'max:255'],
+            'jumlah' => ['required', 'integer', 'min:1'],
+            'lokasi' => ['required', 'string', 'max:255'],
+        ]);
+
+        $product->update($validated);
+
+        return redirect()
+            ->route('petani.products.index')
+            ->with('success', 'Produk berhasil diperbarui.');
+    }
+
+public function destroy(Request $request, Product $product)
+{
+    abort_unless($product->user_id === $request->user()->id, 403);
+
+    $product->delete();
+
+    return redirect()
+        ->route('petani.products.index')
+        ->with('success', 'Produk berhasil dihapus.');
+}
 
     // Petani: list produk miliknya
     public function myIndex(Request $request)
