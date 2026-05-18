@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kemitraan Ekspor</title>
+    <title>EXPORTANI</title>
 
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
                     <div>
 
                         <h1 class="text-white text-2xl font-bold heading-serif">
-                            Kemitraan Ekspor
+                            EXPORTANI
                         </h1>
 
                         <p class="text-emerald-100 text-sm">
@@ -139,7 +139,7 @@
                 <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
 
                 <span class="text-emerald-100 text-sm font-medium">
-                    Platform Digital Kemitraan Ekspor
+                    Platform Digital EXPORTANI
                 </span>
 
             </div>
@@ -475,7 +475,7 @@
                 Membuka Akses Pasar Global untuk Petani Lokal
             </h2>
             <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-                Exportani adalah platform digital yang didedikasikan untuk menghubungkan petani komoditas unggulan Indonesia langsung dengan para eksportir terpercaya. Kami memotong rantai pasok yang panjang, memastikan petani mendapatkan nilai yang adil, dan eksportir mendapatkan produk berkualitas secara efisien.
+                EXPORTANI adalah platform digital yang didedikasikan untuk menghubungkan petani komoditas unggulan Indonesia langsung dengan para eksportir terpercaya. Kami memotong rantai pasok yang panjang, memastikan petani mendapatkan nilai yang adil, dan eksportir mendapatkan produk berkualitas secara efisien.
             </p>
             <div class="mt-8 space-y-4">
                 <div class="flex items-center gap-4">
@@ -561,7 +561,7 @@
                     <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center">
                         <svg width="20" fill="white" viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z"/></svg>
                     </div>
-                    <h2 class="text-white text-xl font-bold heading-serif">Exportani</h2>
+                    <h2 class="text-white text-xl font-bold heading-serif">EXPORTANI</h2>
                 </div>
                 <p class="text-emerald-200/60 max-w-sm leading-relaxed">
                     Platform kemitraan B2B yang mendigitalkan proses pencarian produk pertanian lokal untuk dihubungkan dengan buyer eksportir global.
@@ -584,14 +584,14 @@
                     <li><span class="text-emerald-200/60">Panduan Petani</span></li>
                     <li><span class="text-emerald-200/60">Panduan Eksportir</span></li>
                     <li><span class="text-emerald-200/60">FAQ</span></li>
-                    <li><span class="text-emerald-200/60">Kontak: support@exportani.com</span></li>
+                    <li><span class="text-emerald-200/60">Kontak: support@EXPORTANI.com</span></li>
                 </ul>
             </div>
         </div>
         
         <div class="border-t border-emerald-800/50 pt-8 flex flex-col md:flex-row items-center justify-between">
             <p class="text-emerald-200/40 text-sm">
-                &copy; {{ date('Y') }} Exportani. Hak Cipta Dilindungi.
+                &copy; {{ date('Y') }} EXPORTANI. Hak Cipta Dilindungi.
             </p>
             <div class="flex items-center gap-4 mt-4 md:mt-0">
                 <span class="text-emerald-200/40 text-sm hover:text-white cursor-pointer transition">Kebijakan Privasi</span>

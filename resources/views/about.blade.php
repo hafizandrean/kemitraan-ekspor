@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>About - Kemitraan Ekspor</title>
+    <title>About - EXPORTANI</title>
 
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
                     <div>
 
                         <h1 class="text-white text-2xl font-bold heading-serif">
-                            Kemitraan Ekspor
+                            EXPORTANI
                         </h1>
 
                         <p class="text-emerald-100 text-sm">
@@ -146,7 +146,7 @@
             <h1 class="mt-10 heading-serif text-6xl leading-tight font-black text-white">
 
                 Platform Digital
-                Kemitraan Ekspor
+                EXPORTANI
                 Pertanian Indonesia.
 
             </h1>
@@ -154,7 +154,7 @@
             <!-- DESC -->
             <p class="mt-8 text-xl leading-relaxed text-emerald-100 max-w-3xl">
 
-                Kemitraan Ekspor hadir sebagai platform digital
+                EXPORTANI hadir sebagai platform digital
                 yang menghubungkan petani dan eksportir secara langsung
                 untuk membangun kerja sama yang lebih modern,
                 efisien, transparan, dan berkelanjutan.
@@ -390,7 +390,7 @@
             <div>
 
                 <h2 class="text-2xl text-white font-bold heading-serif">
-                    Kemitraan Ekspor
+                    EXPORTANI
                 </h2>
 
                 <p class="mt-2 text-emerald-100">
@@ -400,7 +400,7 @@
             </div>
 
             <div class="text-emerald-100 text-sm">
-                © 2026 Kemitraan Ekspor. All rights reserved.
+                © 2026 EXPORTANI. All rights reserved.
             </div>
 
         </div>

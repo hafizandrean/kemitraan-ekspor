@@ -112,7 +112,7 @@
                 <!-- ADMIN DASHBOARD -->
                 <div class="mb-8">
                     <h2 class="text-2xl font-bold text-stone-800">Admin Dashboard</h2>
-                    <p class="text-stone-500">Ringkasan statistik sistem Kemitraan Ekspor</p>
+                    <p class="text-stone-500">Ringkasan statistik sistem EXPORTANI</p>
                 </div>
 
                 <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

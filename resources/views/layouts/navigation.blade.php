@@ -5,7 +5,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5 group">
                         <x-application-logo class="h-9 w-9 shrink-0 drop-shadow" />
-                        <span class="hidden sm:inline font-display text-lg font-semibold text-white tracking-tight">Kemitraan Ekspor</span>
+                        <span class="hidden sm:inline font-display text-lg font-semibold text-white tracking-tight">EXPORTANI</span>
                     </a>
                 </div>
 

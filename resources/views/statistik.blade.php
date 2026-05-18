@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Statistik - Kemitraan Ekspor</title>
+    <title>Statistik - EXPORTANI</title>
 
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,7 +67,7 @@
                     <div>
 
                         <h1 class="text-white text-2xl font-bold heading-serif">
-                            Kemitraan Ekspor
+                            EXPORTANI
                         </h1>
 
                         <p class="text-emerald-100 text-sm">
@@ -134,7 +134,7 @@
         </h1>
 
         <p class="mt-4 text-lg text-gray-500">
-            Ringkasan aktivitas kemitraan ekspor pertanian.
+            Ringkasan aktivitas EXPORTANI pertanian.
         </p>
 
     </div>

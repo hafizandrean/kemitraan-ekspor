@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Kemitraan Ekspor') }}</title>
+        <title>{{ config('app.name', 'EXPORTANI') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|fraunces:600,700&display=swap" rel="stylesheet" />
@@ -41,7 +41,7 @@
                         <a href="{{ url('/') }}" class="inline-flex items-center gap-3 group">
                             <x-application-logo class="h-11 w-11 shrink-0 text-white drop-shadow-sm" />
                             <div>
-                                <span class="font-display text-xl sm:text-2xl font-semibold tracking-tight text-white leading-tight block">Kemitraan Ekspor</span>
+                                <span class="font-display text-xl sm:text-2xl font-semibold tracking-tight text-white leading-tight block">EXPORTANI</span>
                                 <span class="text-xs sm:text-sm text-emerald-200/90 font-medium">Petani · Produk · Kerja sama</span>
                             </div>
                         </a>
@@ -64,7 +64,7 @@
                         {{ $slot }}
                     </div>
                     <p class="mt-6 text-center lg:text-left text-xs text-stone-500">
-                        &copy; {{ date('Y') }} {{ config('app.name', 'Kemitraan Ekspor') }}
+                        &copy; {{ date('Y') }} {{ config('app.name', 'EXPORTANI') }}
                     </p>
                 </div>
             </main>
