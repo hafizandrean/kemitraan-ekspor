@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('partnerships', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('petani_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('eksportir_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('farmer_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('exporter_id')->constrained('users')->onDelete('cascade');
             $table->string('status')->default('pending'); // pending, accepted, rejected
             $table->timestamps();
         });

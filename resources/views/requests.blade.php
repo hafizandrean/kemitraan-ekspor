@@ -20,7 +20,7 @@
                                         {{ $r->product->nama_produk }}
                                     </div>
                                     <div class="mt-2 text-sm text-stone-600">
-                                        Eksportir: <span class="font-semibold text-stone-800">{{ $r->eksportir->name }}</span>
+                                        Eksportir: <span class="font-semibold text-stone-800">{{ $r->exporter->name }}</span>
                                     </div>
                                     <div class="mt-3">
                                         @if($r->status === 'pending')

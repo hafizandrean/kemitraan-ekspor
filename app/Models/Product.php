@@ -14,10 +14,19 @@ class Product extends Model
 
     protected $fillable = [
         'nama_produk',
+        'deskripsi',
+        'harga',
         'jumlah',
         'lokasi',
-        'user_id'
+        'gambar',
+        'user_id',
+        'kategori_id'
     ];
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'kategori_id');
+    }
 
     public function owner(): BelongsTo
     {

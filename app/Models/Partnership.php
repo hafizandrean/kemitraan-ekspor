@@ -13,8 +13,8 @@ class Partnership extends Model
 
     protected $fillable = [
         'product_id',
-        'petani_id',
-        'eksportir_id',
+        'farmer_id',
+        'exporter_id',
         'status'
     ];
 
@@ -24,15 +24,15 @@ class Partnership extends Model
         return $this->belongsTo(Product::class);
     }
 
-    // Relasi ke petani
-    public function petani()
+    // Relasi ke petani (farmer)
+    public function farmer()
     {
-        return $this->belongsTo(User::class, 'petani_id');
+        return $this->belongsTo(User::class, 'farmer_id');
     }
 
-    // Relasi ke eksportir
-    public function eksportir()
+    // Relasi ke eksportir (exporter)
+    public function exporter()
     {
-        return $this->belongsTo(User::class, 'eksportir_id');
+        return $this->belongsTo(User::class, 'exporter_id');
     }
 }

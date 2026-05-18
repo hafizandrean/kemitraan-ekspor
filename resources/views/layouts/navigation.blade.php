@@ -14,7 +14,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if (Auth::user()->role === 'petani')
+                    @if (Auth::user()->role === 'farmer')
                         <x-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')" dark-nav>
                             {{ __('Produk Saya') }}
                         </x-nav-link>
@@ -23,9 +23,12 @@
                         </x-nav-link>
                     @endif
 
-                    @if (Auth::user()->role === 'eksportir')
+                    @if (Auth::user()->role === 'exporter')
                         <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                             {{ __('Cari Produk') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.history')" dark-nav>
+                            {{ __('Riwayat Kerja Sama') }}
                         </x-nav-link>
                         <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
                             {{ __('Favorit') }}
@@ -46,7 +49,7 @@
                     @endif
                 </a>
                 <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-100 ring-1 ring-white/15">
-                    {{ Auth::user()->role === 'petani' ? 'Petani' : 'Eksportir' }}
+                    {{ ucfirst(Auth::user()->role) }}
                 </span>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -91,7 +94,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            @if (Auth::user()->role === 'petani')
+            @if (Auth::user()->role === 'farmer')
                 <x-responsive-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')" dark-nav>
                     {{ __('Produk Saya') }}
                 </x-responsive-nav-link>
@@ -100,9 +103,12 @@
                 </x-responsive-nav-link>
             @endif
 
-            @if (Auth::user()->role === 'eksportir')
+            @if (Auth::user()->role === 'exporter')
                 <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                     {{ __('Cari Produk') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.history')" dark-nav>
+                    {{ __('Riwayat Kerja Sama') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
                     {{ __('Favorit') }}

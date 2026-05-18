@@ -22,62 +22,74 @@ Route::get('/statistik', function () {
     return view('statistik');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+    Route::get('/dashboard/farmer', [DashboardController::class, 'farmer'])
+        ->middleware('role:farmer')
+        ->name('dashboard.farmer');
+    Route::get('/dashboard/exporter', [DashboardController::class, 'exporter'])
+        ->middleware('role:exporter')
+        ->name('dashboard.exporter');
     // Eksportir: produk + search + detail + apply
     Route::get('/products', [ProductController::class, 'index'])
-        ->middleware('role:eksportir')
+        ->middleware('role:exporter')
         ->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])
-        ->middleware('role:eksportir')
+        ->middleware('role:exporter')
         ->name('products.show');
     Route::post('/products/{product}/apply', [PartnershipController::class, 'apply'])
-        ->middleware('role:eksportir')
+        ->middleware('role:exporter')
         ->name('partnerships.apply');
+    Route::get('/partnerships/history', [PartnershipController::class, 'history'])
+        ->middleware('role:exporter')
+        ->name('partnerships.history');
     Route::post('/products/{product}/favorite', [FavoriteController::class, 'toggle'])
-        ->middleware('role:eksportir')
+        ->middleware('role:exporter')
         ->name('favorites.toggle');
     Route::get('/favorites', [FavoriteController::class, 'index'])
-        ->middleware('role:eksportir')
+        ->middleware('role:exporter')
         ->name('favorites.index');
 
     // Petani: produk milik sendiri + tambah produk
     Route::get('/petani/products', [ProductController::class, 'myIndex'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('petani.products.index');
     Route::get('/petani/products/create', [ProductController::class, 'create'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('petani.products.create');
     Route::post('/petani/products', [ProductController::class, 'store'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('petani.products.store');
     Route::get('/petani/products/{product}/edit', [ProductController::class, 'edit'])
-         ->middleware('role:petani')
+         ->middleware('role:farmer')
         ->name('petani.products.edit');
     Route::patch('/petani/products/{product}', [ProductController::class, 'update'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('petani.products.update');
     Route::delete('/petani/products/{product}', [ProductController::class, 'destroy'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('petani.products.destroy');
 
     // Petani: permintaan masuk
     Route::get('/requests', [PartnershipController::class, 'requests'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('requests.index');
     Route::post('/requests/{id}/accept', [PartnershipController::class, 'accept'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('requests.accept');
     Route::post('/requests/{id}/reject', [PartnershipController::class, 'reject'])
-        ->middleware('role:petani')
+        ->middleware('role:farmer')
         ->name('requests.reject');
 
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.read-all');
     Route::post('/notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+
+    // Admin Dashboard Basic
+    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+        ->middleware('role:admin')
+        ->name('admin.dashboard');
 });
 
 Route::middleware('auth')->group(function () {

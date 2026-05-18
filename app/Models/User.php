@@ -62,12 +62,12 @@ class User extends Authenticatable
      */
     public function partnerships(): HasMany
     {
-        return $this->hasMany(Partnership::class, 'eksportir_id');
+        return $this->hasMany(Partnership::class, 'exporter_id');
     }
 
     public function incomingPartnerships(): HasMany
     {
-        return $this->hasMany(Partnership::class, 'petani_id');
+        return $this->hasMany(Partnership::class, 'farmer_id');
     }
 
     public function systemNotifications(): HasMany
