@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'petani@exportani.com',
             'password' => Hash::make('password'),
             'role' => 'farmer',
+            'is_trusted_farmer' => true,
         ]);
 
         // 3. Exporter (Eksportir)
@@ -53,6 +54,8 @@ class DatabaseSeeder extends Seeder
             'jumlah' => 1000,
             'lokasi' => 'Aceh Tengah',
             'gambar' => null,
+            'is_recommended' => true,
+            'recommended_at' => now(),
         ]);
 
         $product2 = Product::create([

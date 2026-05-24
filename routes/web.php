@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ProductRecommendationController;
+use App\Http\Controllers\Admin\TrustedFarmerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PartnershipController;
 use App\Http\Controllers\ProductController;
@@ -10,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 // routes/web.php
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', LandingController::class);
 
 Route::get('/about', function () {
     return view('about');
@@ -90,6 +92,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
         ->middleware('role:admin')
         ->name('admin.dashboard');
+
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+        Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+        Route::patch('/categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+
+        Route::get('/recommendations', [ProductRecommendationController::class, 'index'])->name('recommendations.index');
+        Route::post('/products/{product}/recommend', [ProductRecommendationController::class, 'toggle'])->name('recommendations.toggle');
+
+        Route::get('/trusted-farmers', [TrustedFarmerController::class, 'index'])->name('trusted-farmers.index');
+        Route::post('/farmers/{user}/trust', [TrustedFarmerController::class, 'toggle'])->name('trusted-farmers.toggle');
+    });
 });
 
 Route::middleware('auth')->group(function () {

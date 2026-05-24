@@ -464,6 +464,73 @@
 
     </div>
 
+<!-- KATEGORI PRODUK -->
+@if(isset($categories) && $categories->isNotEmpty())
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="heading-serif text-4xl font-black text-gray-900">Kategori Produk</h2>
+            <p class="mt-4 text-lg text-gray-500">Komoditas unggulan yang tersedia di platform</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            @foreach($categories as $category)
+                <div class="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-5 text-center hover:border-emerald-300 transition">
+                    <p class="font-bold text-emerald-900">{{ $category->name }}</p>
+                    <p class="mt-1 text-xs text-emerald-700/70">{{ $category->products_count }} produk</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- REKOMENDASI PRODUK -->
+@if(isset($recommendedProducts) && $recommendedProducts->isNotEmpty())
+<section class="py-20 bg-[#f8faf9]">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-12">
+            <h2 class="heading-serif text-4xl font-black text-gray-900">Produk Rekomendasi</h2>
+            <p class="mt-4 text-lg text-gray-500">Pilihan terbaik dari admin untuk eksportir</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($recommendedProducts as $product)
+                <div class="rounded-3xl bg-white border border-gray-100 shadow-lg overflow-hidden">
+                    <div class="h-48 bg-emerald-100 flex items-center justify-center text-emerald-600 font-semibold">
+                        {{ $product->category?->name ?? 'Komoditas' }}
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800 mb-2">Rekomendasi</span>
+                        <h3 class="text-xl font-bold text-gray-900">{{ $product->nama_produk }}</h3>
+                        <p class="mt-1 text-emerald-600 font-bold">Rp{{ number_format($product->harga, 0, ',', '.') }}</p>
+                        <p class="mt-2 text-sm text-gray-500">{{ $product->lokasi }} · {{ $product->owner?->name }}</p>
+                        @if($product->owner?->is_trusted_farmer)
+                            <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">Trusted Farmer</span>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="mt-10 text-center">
+            <a href="/register" class="inline-flex items-center rounded-xl bg-emerald-600 px-6 py-3 text-white font-semibold hover:bg-emerald-700 transition">Daftar untuk melihat semua produk</a>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- TRUSTED FARMER -->
+@if(isset($trustedFarmerCount))
+<section class="py-16 bg-emerald-950 text-white">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+        <h2 class="heading-serif text-3xl font-black">Trusted Farmer System</h2>
+        <p class="mt-4 text-emerald-100 max-w-2xl mx-auto">
+            Petani terverifikasi oleh admin mendapat badge kepercayaan agar eksportir lebih yakin membangun kemitraan.
+        </p>
+        <p class="mt-8 text-5xl font-black text-emerald-300">{{ $trustedFarmerCount }}</p>
+        <p class="text-emerald-200/80 text-sm mt-1">petani terpercaya saat ini</p>
+    </div>
+</section>
+@endif
+
 <!-- ABOUT SECTION -->
 <section id="about" class="py-24 bg-[#f8faf9]">
     <div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">

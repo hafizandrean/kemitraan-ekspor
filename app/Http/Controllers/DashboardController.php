@@ -146,6 +146,9 @@ class DashboardController extends Controller
         $totalExporter = \App\Models\User::where('role', 'exporter')->count();
         $totalProduk = \App\Models\Product::count();
         $totalPartnership = \App\Models\Partnership::count();
+        $totalCategories = \App\Models\Category::count();
+        $recommendedProduk = \App\Models\Product::where('is_recommended', true)->count();
+        $trustedFarmers = \App\Models\User::where('role', 'farmer')->where('is_trusted_farmer', true)->count();
 
         return view('dashboard', [
             'dashboardType' => 'admin',
@@ -155,6 +158,9 @@ class DashboardController extends Controller
                 'total_exporter' => $totalExporter,
                 'total_produk' => $totalProduk,
                 'total_partnership' => $totalPartnership,
+                'total_categories' => $totalCategories,
+                'recommended_produk' => $recommendedProduk,
+                'trusted_farmers' => $trustedFarmers,
             ]
         ]);
     }

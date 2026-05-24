@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,10 +18,18 @@ class Product extends Model
         'deskripsi',
         'harga',
         'jumlah',
+        'satuan',
         'lokasi',
         'gambar',
         'user_id',
-        'kategori_id'
+        'kategori_id',
+        'is_recommended',
+        'recommended_at',
+    ];
+
+    protected $casts = [
+        'is_recommended' => 'boolean',
+        'recommended_at' => 'datetime',
     ];
 
     public function category(): BelongsTo
@@ -33,6 +42,11 @@ class Product extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
+    }
+
     public function partnerships(): HasMany
     {
         return $this->hasMany(Partnership::class);
@@ -42,5 +56,10 @@ class Product extends Model
     {
         return $this->belongsToMany(User::class, 'favorites')
             ->withTimestamps();
+    }
+
+    public function scopeRecommended(Builder $query): Builder
+    {
+        return $query->where('is_recommended', true)->orderByDesc('recommended_at');
     }
 }

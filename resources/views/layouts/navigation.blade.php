@@ -34,6 +34,18 @@
                             {{ __('Favorit') }}
                         </x-nav-link>
                     @endif
+
+                    @if (Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" dark-nav>
+                            Kategori
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.recommendations.index')" :active="request()->routeIs('admin.recommendations.*')" dark-nav>
+                            Rekomendasi
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
+                            Trusted Farmer
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -112,6 +124,18 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
                     {{ __('Favorit') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if (Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" dark-nav>
+                    Kategori
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.recommendations.index')" :active="request()->routeIs('admin.recommendations.*')" dark-nav>
+                    Rekomendasi
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
+                    Trusted Farmer
                 </x-responsive-nav-link>
             @endif
 

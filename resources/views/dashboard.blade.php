@@ -155,6 +155,30 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
+                        <p class="text-sm font-medium text-stone-500">Kategori Produk</p>
+                        <p class="text-2xl font-bold text-stone-800">{{ $stats['total_categories'] }}</p>
+                    </div>
+
+                    <div class="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
+                        <p class="text-sm font-medium text-stone-500">Produk Rekomendasi</p>
+                        <p class="text-2xl font-bold text-stone-800">{{ $stats['recommended_produk'] }}</p>
+                    </div>
+
+                    <div class="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
+                        <p class="text-sm font-medium text-stone-500">Trusted Farmer</p>
+                        <p class="text-2xl font-bold text-stone-800">{{ $stats['trusted_farmers'] }}</p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-stone-200 bg-white p-5">
+                    <p class="text-sm font-semibold text-stone-800 mb-3">Kelola Fitur</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('admin.categories.index') }}" class="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700">Kategori Produk</a>
+                        <a href="{{ route('admin.recommendations.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Rekomendasi Produk</a>
+                        <a href="{{ route('admin.trusted-farmers.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Trusted Farmer</a>
+                    </div>
                 </div>
             @endif
         </div>

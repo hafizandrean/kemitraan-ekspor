@@ -26,9 +26,15 @@
             <!-- Left: Image & Details -->
             <div class="lg:col-span-2 space-y-6">
                 <!-- Product Image -->
-                <div class="rounded-2xl border border-stone-200/80 bg-white overflow-hidden shadow-sm shadow-stone-900/5 aspect-w-16 aspect-h-9 md:aspect-h-7">
-                    @if($product->gambar)
-                        <img src="{{ Storage::url($product->gambar) }}" alt="{{ $product->nama_produk }}" class="h-full w-full object-cover">
+                <div class="rounded-2xl border border-stone-200/80 bg-white overflow-hidden shadow-sm shadow-stone-900/5">
+                    @if($product->images->isNotEmpty())
+                        <div class="grid grid-cols-1 gap-2 p-2 sm:grid-cols-2">
+                            @foreach($product->images as $image)
+                                <img src="{{ Storage::url($image->path) }}" alt="{{ $product->nama_produk }}" class="h-56 w-full rounded-xl object-cover">
+                            @endforeach
+                        </div>
+                    @elseif($product->gambar)
+                        <img src="{{ Storage::url($product->gambar) }}" alt="{{ $product->nama_produk }}" class="h-full min-h-[280px] w-full object-cover">
                     @else
                         <div class="flex h-full w-full items-center justify-center bg-stone-50 text-stone-400">
                             <svg class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,11 +48,16 @@
                 <div class="rounded-2xl border border-stone-200/80 bg-white p-6 sm:p-8 shadow-sm shadow-stone-900/5">
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                         <div>
-                            @if($product->category)
-                                <div class="mb-3 inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
-                                    {{ $product->category->name }}
-                                </div>
-                            @endif
+                            <div class="mb-3 flex flex-wrap gap-2">
+                                @if($product->category)
+                                    <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+                                        {{ $product->category->name }}
+                                    </span>
+                                @endif
+                                @if($product->is_recommended)
+                                    <span class="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">Rekomendasi</span>
+                                @endif
+                            </div>
                             <h1 class="font-display text-3xl font-bold text-stone-900">{{ $product->nama_produk }}</h1>
                             <p class="mt-2 text-2xl font-bold text-emerald-600">Rp{{ number_format($product->harga, 0, ',', '.') }}</p>
                         </div>
@@ -65,7 +76,7 @@
                     <div class="mt-8 grid grid-cols-2 gap-4 border-y border-stone-100 py-6">
                         <div>
                             <p class="text-sm text-stone-500">Stok / Kapasitas</p>
-                            <p class="mt-1 text-lg font-semibold text-stone-900">{{ number_format($product->jumlah, 0, ',', '.') }} kg</p>
+                            <p class="mt-1 text-lg font-semibold text-stone-900">{{ number_format($product->jumlah, 0, ',', '.') }} {{ $product->satuan ?? 'kg' }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-stone-500">Lokasi Penawaran</p>
