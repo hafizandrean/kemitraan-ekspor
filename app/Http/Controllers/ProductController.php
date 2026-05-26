@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\PremiumAccessService;
 use App\Services\ProductImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function __construct(
-        private readonly ProductImageService $imageService
+        private readonly ProductImageService $imageService,
+        private readonly PremiumAccessService $premiumAccess
     ) {}
 
     public function index(Request $request)
@@ -55,12 +57,16 @@ class ProductController extends Controller
             $query->where('lokasi', 'like', '%'.$location.'%');
         }
 
+        $query->leftJoin('users as owners', 'products.user_id', '=', 'owners.id')
+            ->select('products.*')
+            ->orderByRaw("CASE WHEN owners.account_tier = 'premium' AND (owners.premium_expires_at IS NULL OR owners.premium_expires_at > NOW()) THEN 0 ELSE 1 END");
+
         if ($sort === 'termurah') {
             $query->orderBy('harga', 'asc');
         } elseif ($sort === 'termahal') {
             $query->orderBy('harga', 'desc');
         } else {
-            $query->latest();
+            $query->latest('products.created_at');
         }
 
         $products = $query->paginate(12)->withQueryString();
@@ -106,15 +112,26 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $categories = Category::all();
+        $user = $request->user();
 
-        return view('petani.products.create', compact('categories'));
+        return view('petani.products.create', [
+            'categories' => $categories,
+            'canUpload' => $this->premiumAccess->canUploadProduct($user),
+            'remainingSlots' => $this->premiumAccess->remainingProductSlots($user),
+        ]);
     }
 
     public function store(StoreProductRequest $request)
     {
+        if (! $this->premiumAccess->canUploadProduct($request->user())) {
+            return redirect()
+                ->route('premium.upgrade')
+                ->with('error', 'Batas upload produk Free tercapai (maks. '.config('permissions.limits.free_farmer_max_products').' produk). Upgrade ke Premium untuk unlimited.');
+        }
+
         $validated = $request->safe()->except(['gambar']);
         $validated['user_id'] = $request->user()->id;
 

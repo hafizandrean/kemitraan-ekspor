@@ -33,7 +33,7 @@ class DashboardController extends Controller
 
         $incoming = Partnership::query()->where('farmer_id', $user->id);
         $totalIncoming = (clone $incoming)->count();
-        $accepted = (clone $incoming)->where('status', 'accepted')->count();
+        $accepted = (clone $incoming)->whereIn('status', ['active', 'completed'])->count();
         $rejected = (clone $incoming)->where('status', 'rejected')->count();
 
         $produkTerakhir = Product::query()->where('user_id', $user->id)->latest()->first();
@@ -86,7 +86,7 @@ class DashboardController extends Controller
 
         $allRequests = Partnership::query()->where('exporter_id', $user->id);
         $totalPengajuan = (clone $allRequests)->count();
-        $kerjaSamaAktif = (clone $allRequests)->where('status', 'accepted')->count();
+        $kerjaSamaAktif = (clone $allRequests)->whereIn('status', ['active', 'completed'])->count();
 
         $pengajuanTerbaru = Partnership::query()
             ->where('exporter_id', $user->id)

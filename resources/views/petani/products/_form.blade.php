@@ -39,7 +39,7 @@
         <x-product-form-card title="Harga & Logistik" icon="💰">
             <div class="space-y-4">
                 <div>
-                    <x-input-label for="harga_display" value="Harga per satuan" />
+                    <x-input-label for="harga_display" value="Harga per kg" />
                     <div class="relative mt-1.5">
                         <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-semibold text-stone-500">Rp</span>
                         <input

@@ -7,7 +7,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\Admin\PremiumVerificationController;
 use App\Http\Controllers\PartnershipController;
+use App\Http\Controllers\PartnershipDetailController;
+use App\Http\Controllers\PartnershipHistoryController;
+use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -43,9 +47,38 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product}/apply', [PartnershipController::class, 'apply'])
         ->middleware('role:exporter')
         ->name('partnerships.apply');
-    Route::get('/partnerships/history', [PartnershipController::class, 'history'])
-        ->middleware('role:exporter')
+    Route::get('/partnerships/history', [PartnershipHistoryController::class, 'index'])
+        ->middleware('role:farmer,exporter')
         ->name('partnerships.history');
+    Route::get('/partnerships/{partnership}', [PartnershipDetailController::class, 'show'])
+        ->middleware('role:farmer,exporter')
+        ->name('partnerships.show');
+    Route::post('/partnerships/{partnership}/advance', [PartnershipDetailController::class, 'advanceStage'])
+        ->middleware('role:farmer')
+        ->name('partnerships.advance');
+    Route::post('/partnerships/{partnership}/transactions', [PartnershipDetailController::class, 'storeTransaction'])
+        ->middleware('role:farmer,exporter')
+        ->name('partnerships.transactions.store');
+    Route::post('/partnerships/{partnership}/documents', [PartnershipDetailController::class, 'storeDocument'])
+        ->middleware('role:farmer,exporter')
+        ->name('partnerships.documents.store');
+    Route::get('/partnerships/{partnership}/documents/{document}', [PartnershipDetailController::class, 'downloadDocument'])
+        ->middleware('role:farmer,exporter')
+        ->name('partnerships.documents.download');
+    Route::post('/partnerships/{partnership}/review', [PartnershipDetailController::class, 'storeReview'])
+        ->middleware('role:exporter')
+        ->name('partnerships.review');
+    Route::patch('/partnerships/{partnership}/contract', [PartnershipDetailController::class, 'updateContract'])
+        ->middleware('role:farmer')
+        ->name('partnerships.contract.update');
+
+    Route::get('/premium/upgrade', [PremiumController::class, 'upgrade'])->name('premium.upgrade');
+    Route::post('/premium/verify', [PremiumController::class, 'submitVerification'])
+        ->middleware('role:farmer')
+        ->name('premium.verify');
+    Route::get('/premium/insight', fn () => view('premium.insight'))
+        ->middleware(['role:farmer,exporter', 'premium'])
+        ->name('premium.insight');
     Route::post('/products/{product}/favorite', [FavoriteController::class, 'toggle'])
         ->middleware('role:exporter')
         ->name('favorites.toggle');
@@ -104,6 +137,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/trusted-farmers', [TrustedFarmerController::class, 'index'])->name('trusted-farmers.index');
         Route::post('/farmers/{user}/trust', [TrustedFarmerController::class, 'toggle'])->name('trusted-farmers.toggle');
+
+        Route::get('/premium-verifications', [PremiumVerificationController::class, 'index'])->name('premium-verifications.index');
+        Route::post('/premium-verifications/{user}/approve', [PremiumVerificationController::class, 'approve'])->name('premium-verifications.approve');
+        Route::post('/premium-verifications/{user}/reject', [PremiumVerificationController::class, 'reject'])->name('premium-verifications.reject');
     });
 });
 

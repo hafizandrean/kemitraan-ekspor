@@ -15,11 +15,17 @@ class EnsureRole
     {
         $user = $request->user();
 
-        if (!$user) {
+        if (! $user) {
             abort(401);
         }
 
-        if (!in_array($user->role, $roles, true)) {
+        $allowed = collect($roles)
+            ->flatMap(fn (string $role) => explode(',', $role))
+            ->map(fn (string $role) => trim($role))
+            ->filter()
+            ->all();
+
+        if (! in_array($user->role, $allowed, true)) {
             abort(403);
         }
 

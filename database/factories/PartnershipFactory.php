@@ -18,10 +18,9 @@ class PartnershipFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'petani_id' => User::factory(),
-            'eksportir_id' => User::factory(),
+            'farmer_id' => User::factory()->state(['role' => 'farmer']),
+            'exporter_id' => User::factory()->state(['role' => 'exporter']),
             'status' => 'pending',
         ];
     }
 }
-

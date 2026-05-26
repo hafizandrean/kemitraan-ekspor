@@ -81,7 +81,9 @@ class DatabaseSeeder extends Seeder
             'product_id' => $product2->id,
             'farmer_id' => $farmer->id,
             'exporter_id' => $exporter->id,
-            'status' => 'accepted',
+            'status' => 'active',
+            'workflow_stage' => 'shipping',
+            'total_nilai_kontrak' => 120000000,
         ]);
 
         // 6. Notifications

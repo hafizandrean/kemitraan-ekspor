@@ -25,6 +25,10 @@ class User extends Authenticatable
         'password',
         'role',
         'account_tier',
+        'premium_expires_at',
+        'verification_status',
+        'verification_document_path',
+        'phone',
         'is_trusted_farmer',
     ];
 
@@ -47,6 +51,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'is_trusted_farmer' => 'boolean',
+        'premium_expires_at' => 'datetime',
     ];
 
     /**
@@ -83,6 +88,16 @@ class User extends Authenticatable
 
     public function isPremium(): bool
     {
-        return $this->account_tier === 'premium';
+        return app(\App\Services\PremiumAccessService::class)->isPremium($this);
+    }
+
+    public function premiumBadgeLabel(): string
+    {
+        if ($this->role === 'admin') {
+            return 'Admin';
+        }
+
+        return $this->isPremium() ? 'Premium' : 'Free';
     }
 }
+

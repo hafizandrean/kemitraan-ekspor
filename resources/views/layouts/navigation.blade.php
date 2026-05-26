@@ -21,6 +21,9 @@
                         <x-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.*')" dark-nav>
                             {{ __('Permintaan Masuk') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.*')" dark-nav>
+                            {{ __('Riwayat Kerja Sama') }}
+                        </x-nav-link>
                     @endif
 
                     @if (Auth::user()->role === 'exporter')
@@ -112,6 +115,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('requests.index')" :active="request()->routeIs('requests.*')" dark-nav>
                     {{ __('Permintaan Masuk') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.*')" dark-nav>
+                    {{ __('Riwayat Kerja Sama') }}
                 </x-responsive-nav-link>
             @endif
 

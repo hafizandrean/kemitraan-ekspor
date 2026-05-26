@@ -58,7 +58,8 @@
                         <p class="text-sm font-semibold text-stone-800">Shortcut</p>
                         <div class="mt-3 flex flex-wrap gap-2">
                             <a href="{{ route('petani.products.create') }}" class="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700">Tambah Produk</a>
-                            <a href="{{ route('requests.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Lihat Kerja Sama</a>
+                            <a href="{{ route('requests.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Permintaan Masuk</a>
+                            <a href="{{ route('partnerships.history') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Riwayat Kerja Sama</a>
                             <a href="{{ route('profile.edit') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Edit Profil</a>
                         </div>
                     </div>
@@ -95,9 +96,9 @@
                         <div class="mt-3 flex flex-wrap gap-2">
                             <a href="{{ route('products.index') }}" class="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700">Cari Produk</a>
                             <a href="{{ route('favorites.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Favorit Produk</a>
-                            @if(!($account['is_premium'] ?? false))
-                                <span class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800">Upgrade Premium (coming soon)</span>
-                            @endif
+                            <a href="{{ route('premium.upgrade') }}" class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800 hover:bg-amber-100">
+                                {{ ($account['is_premium'] ?? false) ? 'Kelola Premium' : 'Upgrade Premium' }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -178,6 +179,7 @@
                         <a href="{{ route('admin.categories.index') }}" class="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-700">Kategori Produk</a>
                         <a href="{{ route('admin.recommendations.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Rekomendasi Produk</a>
                         <a href="{{ route('admin.trusted-farmers.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Trusted Farmer</a>
+                        <a href="{{ route('admin.premium-verifications.index') }}" class="rounded-lg border border-stone-300 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50">Verifikasi Premium</a>
                     </div>
                 </div>
             @endif
