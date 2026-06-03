@@ -1,20 +1,21 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-emerald-900/20 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 shadow-lg shadow-emerald-950/20">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-emerald-900/10 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 shadow-md shadow-emerald-950/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex items-center gap-8">
+        <!-- Changed height from h-14 to h-12 for a tighter, denser Vercel/Stripe style navbar -->
+        <div class="flex justify-between h-12">
+            <div class="flex items-center gap-6">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2.5 group">
-                        <x-application-logo class="h-9 w-9 shrink-0 drop-shadow" />
-                        <span class="hidden sm:inline font-display text-lg font-semibold text-white tracking-tight">EXPORTANI</span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2 group">
+                        <x-application-logo class="h-7 w-7 shrink-0 drop-shadow" />
+                        <span class="hidden sm:inline font-display text-xs font-bold text-white tracking-tight">EXPORTANI</span>
                     </a>
                 </div>
 
-                <div class="hidden md:flex items-center gap-1">
+                <div class="hidden md:flex items-center gap-3.5">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" dark-nav>
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if (Auth::user()->role === 'farmer')
+                    @if (Auth::user()->role === 'petani')
                         <x-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')" dark-nav>
                             {{ __('Produk Saya') }}
                         </x-nav-link>
@@ -26,15 +27,12 @@
                         </x-nav-link>
                     @endif
 
-                    @if (Auth::user()->role === 'exporter')
+                    @if (Auth::user()->role === 'eksportir')
                         <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                             {{ __('Cari Produk') }}
                         </x-nav-link>
                         <x-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.history')" dark-nav>
                             {{ __('Riwayat Kerja Sama') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
-                            {{ __('Favorit') }}
                         </x-nav-link>
                     @endif
 
@@ -46,31 +44,45 @@
                             Rekomendasi
                         </x-nav-link>
                         <x-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
-                            Trusted Farmer
+                            Petani Tepercaya
                         </x-nav-link>
                     @endif
                 </div>
             </div>
 
             <div class="hidden md:flex md:items-center md:gap-3">
-                <a href="{{ route('notifications.index') }}" class="relative inline-flex items-center justify-center h-9 w-9 rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition">
-                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="{{ route('notifications.index') }}" class="relative inline-flex items-center justify-center h-7 w-7 rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2c0 .5-.2 1-.6 1.4L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9"/>
                     </svg>
                     @if(($unreadNotificationsCount ?? 0) > 0)
-                        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-5 h-5 rounded-full bg-red-500 px-1.5 text-[10px] font-bold text-white">
+                        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-4 h-4 rounded-full bg-red-500 px-1 text-[8px] font-bold text-white">
                             {{ $unreadNotificationsCount > 99 ? '99+' : $unreadNotificationsCount }}
                         </span>
                     @endif
                 </a>
-                <span class="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-100 ring-1 ring-white/15">
-                    {{ ucfirst(Auth::user()->role) }}
+                <!-- Reduced padding & badge sizes for a more compact SaaS layout -->
+                <span class="inline-flex items-center rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-100 ring-1 ring-white/15 uppercase tracking-wide">
+                    {{ Auth::user()->role === 'petani' ? 'Petani' : (Auth::user()->role === 'eksportir' ? 'Eksportir' : 'Admin') }}
                 </span>
+                @if(Auth::user()->isPremium())
+                    <span class="inline-flex items-center gap-0.5 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-bold text-amber-300 ring-1 ring-amber-500/20 uppercase tracking-wide">
+                        <svg class="h-2.5 w-2.5 text-amber-300 fill-current shrink-0" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        Premium
+                    </span>
+                @endif
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button type="button" class="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white bg-white/10 ring-1 ring-white/15 hover:bg-white/15 focus:outline-none transition">
-                            <span class="max-w-[140px] truncate">{{ Auth::user()->name }}</span>
-                            <svg class="h-4 w-4 shrink-0 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <button type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-semibold text-white bg-white/10 ring-1 ring-white/15 hover:bg-white/15 focus:outline-none transition">
+                            <span class="max-w-[120px] truncate">{{ Auth::user()->name }}</span>
+                            @if(Auth::user()->isPremium())
+                                <svg class="h-2.5 w-2.5 text-amber-300 fill-current shrink-0 animate-pulse" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                </svg>
+                            @endif
+                            <svg class="h-2.5 w-2.5 shrink-0 opacity-60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                             </svg>
                         </button>
@@ -79,6 +91,10 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('premium.index')">
+                            {{ __('Premium & Langganan') }}
                         </x-dropdown-link>
 
                         <form method="POST" action="{{ route('logout') }}">
@@ -109,7 +125,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            @if (Auth::user()->role === 'farmer')
+            @if (Auth::user()->role === 'petani')
                 <x-responsive-nav-link :href="route('petani.products.index')" :active="request()->routeIs('petani.products.*')" dark-nav>
                     {{ __('Produk Saya') }}
                 </x-responsive-nav-link>
@@ -121,15 +137,12 @@
                 </x-responsive-nav-link>
             @endif
 
-            @if (Auth::user()->role === 'exporter')
+            @if (Auth::user()->role === 'eksportir')
                 <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')" dark-nav>
                     {{ __('Cari Produk') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('partnerships.history')" :active="request()->routeIs('partnerships.history')" dark-nav>
                     {{ __('Riwayat Kerja Sama') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('favorites.index')" :active="request()->routeIs('favorites.*')" dark-nav>
-                    {{ __('Favorit') }}
                 </x-responsive-nav-link>
             @endif
 
@@ -141,7 +154,7 @@
                     Rekomendasi
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
-                    Trusted Farmer
+                    Petani Tepercaya
                 </x-responsive-nav-link>
             @endif
 
@@ -154,12 +167,21 @@
         </div>
 
         <div class="pt-3 pb-4 px-4 border-t border-white/10">
-            <div class="text-white font-medium">{{ Auth::user()->name }}</div>
-            <div class="text-sm text-emerald-200/80">{{ Auth::user()->email }}</div>
+            <div class="text-white font-medium flex items-center gap-1.5 text-xs">
+                {{ Auth::user()->name }}
+                @if(Auth::user()->isPremium())
+                    <span class="text-[9px] bg-amber-400 text-stone-900 font-extrabold px-1.5 py-0.5 rounded tracking-wider uppercase">PREMIUM</span>
+                @endif
+            </div>
+            <div class="text-xs text-emerald-200/80 mt-0.5">{{ Auth::user()->email }}</div>
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')" dark-nav>
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('premium.index')" dark-nav>
+                    {{ __('Premium & Langganan') }}
                 </x-responsive-nav-link>
 
                 <form method="POST" action="{{ route('logout') }}">

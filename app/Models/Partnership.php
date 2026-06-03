@@ -27,8 +27,8 @@ class Partnership extends Model
 
     protected $fillable = [
         'product_id',
-        'farmer_id',
-        'exporter_id',
+        'petani_id',
+        'eksportir_id',
         'status',
         'workflow_stage',
         'total_nilai_kontrak',
@@ -50,14 +50,14 @@ class Partnership extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function farmer(): BelongsTo
+    public function petani(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'farmer_id');
+        return $this->belongsTo(User::class, 'petani_id');
     }
 
-    public function exporter(): BelongsTo
+    public function eksportir(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'exporter_id');
+        return $this->belongsTo(User::class, 'eksportir_id');
     }
 
     public function timelineEvents(): HasMany
@@ -77,7 +77,7 @@ class Partnership extends Model
 
     public function isParticipant(User $user): bool
     {
-        return $this->farmer_id === $user->id || $this->exporter_id === $user->id;
+        return $this->petani_id === $user->id || $this->eksportir_id === $user->id;
     }
 
     public function workflowStageLabel(): string

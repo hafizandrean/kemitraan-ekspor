@@ -10,14 +10,14 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('account_tier')->default('free')->after('role');
-            $table->boolean('is_trusted_farmer')->default(false)->after('account_tier');
+            $table->boolean('is_trusted_petani')->default(false)->after('account_tier');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['account_tier', 'is_trusted_farmer']);
+            $table->dropColumn(['account_tier', 'is_trusted_petani']);
         });
     }
 };

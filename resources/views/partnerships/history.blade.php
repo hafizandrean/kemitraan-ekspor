@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div>
             <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">Riwayat Kerja Sama</h2>
-            <p class="mt-1 text-sm text-stone-600">Portofolio dan track record kemitraan {{ $role === 'farmer' ? 'dengan eksportir' : 'dengan petani' }}.</p>
+            <p class="mt-1 text-sm text-stone-600">Portofolio dan track record kemitraan {{ $role === 'petani' ? 'dengan eksportir' : 'dengan petani' }}.</p>
         </div>
     </x-slot>
 
@@ -44,7 +44,7 @@
                             <div>
                                 <h3 class="font-display text-lg font-semibold text-stone-900">{{ $h->product->nama_produk }}</h3>
                                 <p class="mt-1 text-sm text-stone-600">
-                                    Mitra: <span class="font-medium">{{ $role === 'farmer' ? $h->exporter->name : $h->farmer->name }}</span>
+                                    Mitra: <span class="font-medium">{{ $role === 'petani' ? $h->eksportir->name : $h->petani->name }}</span>
                                 </p>
                                 <p class="text-xs text-stone-500 mt-1">Diajukan {{ $h->created_at->format('d M Y') }}</p>
                             </div>

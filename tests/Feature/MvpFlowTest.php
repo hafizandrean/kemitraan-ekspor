@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\SystemNotification;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class MvpFlowTest extends TestCase
@@ -15,15 +16,32 @@ class MvpFlowTest extends TestCase
 
     public function test_petani_can_create_product_and_eksportir_can_search_apply_and_petani_can_accept(): void
     {
+        $this->seed(\Database\Seeders\CategorySeeder::class);
+
+        // Seed default subscription plans (required for applying premium limits check)
+        \App\Models\SubscriptionPlan::create([
+            'name' => 'Free',
+            'price' => 0,
+            'duration_days' => 0,
+            'description' => 'Free plan',
+            'features' => ['basic search'],
+        ]);
+
         $petani = User::factory()->create(['role' => 'petani']);
         $eksportir = User::factory()->create(['role' => 'eksportir']);
+        $category = \App\Models\Category::first();
 
         // Petani creates product
         $this->actingAs($petani)
             ->post(route('petani.products.store'), [
                 'nama_produk' => 'Kopi Arabika',
+                'deskripsi' => 'Kopi Arabika premium hasil panen Gayo',
+                'kategori_id' => $category->id,
+                'harga' => 120000,
                 'jumlah' => 100,
-                'lokasi' => 'Aceh',
+                'satuan' => 'kg',
+                'lokasi' => 'Kab. Aceh Tengah',
+                'gambar' => [UploadedFile::fake()->image('kopi.jpg')],
             ])
             ->assertRedirect(route('petani.products.index'));
 
@@ -42,6 +60,7 @@ class MvpFlowTest extends TestCase
 
         $partnership = Partnership::query()->where('product_id', $product->id)->firstOrFail();
         $petaniNotif = SystemNotification::query()->where('user_id', $petani->id)->latest()->first();
+        
         $this->assertSame('pending', $partnership->status);
         $this->assertSame($petani->id, $partnership->petani_id);
         $this->assertSame($eksportir->id, $partnership->eksportir_id);
@@ -62,21 +81,25 @@ class MvpFlowTest extends TestCase
 
         $partnership->refresh();
         $eksportirNotif = SystemNotification::query()->where('user_id', $eksportir->id)->latest()->first();
-        $this->assertSame('accepted', $partnership->status);
+        
+        $this->assertSame('active', $partnership->status);
         $this->assertNotNull($eksportirNotif);
         $this->assertStringContainsString('diterima', $eksportirNotif->message);
     }
 
     public function test_petani_cannot_apply_and_eksportir_cannot_accept_or_view_requests(): void
     {
+        $this->seed(\Database\Seeders\CategorySeeder::class);
         $petani = User::factory()->create(['role' => 'petani']);
         $eksportir = User::factory()->create(['role' => 'eksportir']);
+        $category = \App\Models\Category::first();
 
         $product = Product::factory()->create([
             'user_id' => $petani->id,
+            'kategori_id' => $category->id,
             'nama_produk' => 'Jagung',
             'jumlah' => 10,
-            'lokasi' => 'NTB',
+            'lokasi' => 'Kab. Lombok Tengah',
         ]);
 
         // Petani cannot apply
@@ -90,4 +113,3 @@ class MvpFlowTest extends TestCase
             ->assertStatus(403);
     }
 }
-

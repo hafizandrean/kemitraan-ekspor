@@ -1,25 +1,25 @@
 <?php
 
 return [
-    'roles' => ['admin', 'farmer', 'exporter'],
+    'roles' => ['admin', 'petani', 'eksportir'],
 
     'features' => [
-        'upload_product' => ['admin', 'farmer'],
-        'unlimited_products' => ['admin', 'farmer_premium'],
-        'partnership_history' => ['admin', 'farmer', 'exporter'],
-        'advance_partnership_stage' => ['admin', 'farmer'],
-        'upload_partnership_documents' => ['admin', 'farmer', 'exporter'],
-        'rate_farmer' => ['admin', 'exporter'],
-        'view_exporter_contact' => ['admin', 'farmer_premium', 'exporter'],
-        'priority_product_listing' => ['admin', 'farmer_premium'],
-        'market_insight' => ['admin', 'farmer_premium', 'exporter'],
-        'direct_chat' => ['admin', 'farmer_premium', 'exporter'],
+        'upload_product' => ['admin', 'petani'],
+        'unlimited_products' => ['admin', 'petani_premium'],
+        'partnership_history' => ['admin', 'petani', 'eksportir'],
+        'advance_partnership_stage' => ['admin', 'petani'],
+        'upload_partnership_documents' => ['admin', 'petani', 'eksportir'],
+        'rate_farmer' => ['admin', 'eksportir'],
+        'view_exporter_contact' => ['admin', 'petani_premium', 'eksportir'],
+        'priority_product_listing' => ['admin', 'petani_premium'],
+        'market_insight' => ['admin', 'petani_premium', 'eksportir'],
+        'direct_chat' => ['admin', 'petani_premium', 'eksportir'],
         'verify_premium_users' => ['admin'],
     ],
 
     'limits' => [
-        'free_farmer_max_products' => 5,
-        'free_exporter_daily_applications' => 3,
+        'free_petani_max_products' => 5,
+        'free_eksportir_daily_applications' => 3,
         'trusted_min_completed_partnerships' => 5,
         'trusted_min_rating' => 5,
     ],

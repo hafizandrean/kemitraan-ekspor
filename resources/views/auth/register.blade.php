@@ -39,8 +39,8 @@
         <div class="mt-4">
             <label for="role">Pilih Role</label>
             <select id="role" name="role" required class="block mt-1 w-full rounded-lg border-stone-300 bg-white text-stone-900 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
-                <option value="farmer" @selected(old('role', 'farmer') === 'farmer')>Petani</option>
-                <option value="exporter" @selected(old('role') === 'exporter')>Eksportir</option>
+                <option value="petani" @selected(old('role', 'petani') === 'petani')>Petani</option>
+                <option value="eksportir" @selected(old('role') === 'eksportir')>Eksportir</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>

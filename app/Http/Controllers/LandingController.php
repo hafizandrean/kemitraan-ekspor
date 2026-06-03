@@ -19,8 +19,8 @@ class LandingController extends Controller
             ->get();
 
         $categories = Category::withCount('products')->orderBy('name')->get();
-        $trustedFarmerCount = User::where('role', 'farmer')->where('is_trusted_farmer', true)->count();
+        $trustedPetaniCount = User::where('role', 'petani')->where('is_trusted_petani', true)->count();
 
-        return view('landing', compact('recommendedProducts', 'categories', 'trustedFarmerCount'));
+        return view('landing', compact('recommendedProducts', 'categories', 'trustedPetaniCount'));
     }
 }

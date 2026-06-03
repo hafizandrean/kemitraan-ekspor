@@ -7,7 +7,7 @@ use App\Models\PartnershipDocument;
 use App\Models\PartnershipTransaction;
 use App\Services\PartnershipWorkflowService;
 use App\Services\PremiumAccessService;
-use App\Services\TrustedFarmerEligibilityService;
+use App\Services\TrustedPetaniEligibilityService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +18,7 @@ class PartnershipDetailController extends Controller
     public function __construct(
         private readonly PartnershipWorkflowService $workflow,
         private readonly PremiumAccessService $premiumAccess,
-        private readonly TrustedFarmerEligibilityService $trustedFarmer
+        private readonly TrustedPetaniEligibilityService $trustedPetani
     ) {}
 
     public function show(Request $request, Partnership $partnership): View
@@ -27,8 +27,8 @@ class PartnershipDetailController extends Controller
 
         $partnership->load([
             'product.category',
-            'farmer',
-            'exporter',
+            'petani',
+            'eksportir',
             'timelineEvents.author',
             'transactions',
             'documents.uploader',
@@ -45,7 +45,7 @@ class PartnershipDetailController extends Controller
 
     public function advanceStage(Request $request, Partnership $partnership): RedirectResponse
     {
-        abort_unless($request->user()->role === 'farmer', 403);
+        abort_unless($request->user()->role === 'petani', 403);
         $this->authorizeParticipant($request, $partnership);
         abort_unless($partnership->status === 'active', 422);
 
@@ -105,8 +105,8 @@ class PartnershipDetailController extends Controller
 
     public function storeReview(Request $request, Partnership $partnership): RedirectResponse
     {
-        abort_unless($request->user()->role === 'exporter', 403);
-        abort_unless($partnership->exporter_id === $request->user()->id, 403);
+        abort_unless($request->user()->role === 'eksportir', 403);
+        abort_unless($partnership->eksportir_id === $request->user()->id, 403);
         abort_unless($partnership->status === 'completed', 422);
         abort_if($partnership->rating, 422, 'Partnership sudah dinilai.');
 
@@ -121,14 +121,14 @@ class PartnershipDetailController extends Controller
             'rated_at' => now(),
         ]);
 
-        $this->trustedFarmer->evaluate($partnership->farmer);
+        $this->trustedPetani->evaluate($partnership->petani);
 
         return back()->with('success', 'Rating dan testimoni berhasil dikirim.');
     }
 
     public function updateContract(Request $request, Partnership $partnership): RedirectResponse
     {
-        abort_unless($request->user()->role === 'farmer', 403);
+        abort_unless($request->user()->role === 'petani', 403);
         $this->authorizeParticipant($request, $partnership);
 
         $validated = $request->validate([

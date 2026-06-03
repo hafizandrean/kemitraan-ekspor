@@ -14,6 +14,7 @@ class DashboardTest extends TestCase
 
     public function test_petani_dashboard_shows_stats(): void
     {
+        $this->seed(\Database\Seeders\CategorySeeder::class);
         $petani = User::factory()->create(['role' => 'petani']);
         $eksportir = User::factory()->create(['role' => 'eksportir']);
         $product = Product::factory()->create(['user_id' => $petani->id, 'jumlah' => 12]);
@@ -25,6 +26,7 @@ class DashboardTest extends TestCase
         ]);
 
         $this->actingAs($petani)
+            ->followingRedirects()
             ->get(route('dashboard'))
             ->assertOk()
             ->assertSee('Dashboard Petani')
@@ -34,6 +36,7 @@ class DashboardTest extends TestCase
 
     public function test_eksportir_dashboard_shows_stats(): void
     {
+        $this->seed(\Database\Seeders\CategorySeeder::class);
         $petani = User::factory()->create(['role' => 'petani']);
         $eksportir = User::factory()->create(['role' => 'eksportir']);
         $product = Product::factory()->create(['user_id' => $petani->id]);
@@ -41,10 +44,11 @@ class DashboardTest extends TestCase
             'product_id' => $product->id,
             'petani_id' => $petani->id,
             'eksportir_id' => $eksportir->id,
-            'status' => 'accepted',
+            'status' => 'active',
         ]);
 
         $this->actingAs($eksportir)
+            ->followingRedirects()
             ->get(route('dashboard'))
             ->assertOk()
             ->assertSee('Dashboard Eksportir')
@@ -52,4 +56,3 @@ class DashboardTest extends TestCase
             ->assertSee('Kerja Sama Aktif');
     }
 }
-

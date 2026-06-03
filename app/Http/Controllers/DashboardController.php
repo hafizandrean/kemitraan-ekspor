@@ -12,10 +12,10 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
-        if ($user->role === 'farmer') {
-            return redirect()->route('dashboard.farmer');
-        } elseif ($user->role === 'exporter') {
-            return redirect()->route('dashboard.exporter');
+        if ($user->role === 'petani') {
+            return redirect()->route('dashboard.petani');
+        } elseif ($user->role === 'eksportir') {
+            return redirect()->route('dashboard.eksportir');
         } elseif ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
@@ -23,23 +23,23 @@ class DashboardController extends Controller
         abort(403, 'Unauthorized action.');
     }
 
-    public function farmer(Request $request)
+    public function petani(Request $request)
     {
         $user = $request->user();
-        abort_unless($user->role === 'farmer', 403);
+        abort_unless($user->role === 'petani', 403);
 
         $totalProduk = Product::query()->where('user_id', $user->id)->count();
         $produkAktif = Product::query()->where('user_id', $user->id)->where('jumlah', '>', 0)->count();
 
-        $incoming = Partnership::query()->where('farmer_id', $user->id);
+        $incoming = Partnership::query()->where('petani_id', $user->id);
         $totalIncoming = (clone $incoming)->count();
         $accepted = (clone $incoming)->whereIn('status', ['active', 'completed'])->count();
         $rejected = (clone $incoming)->where('status', 'rejected')->count();
 
         $produkTerakhir = Product::query()->where('user_id', $user->id)->latest()->first();
         $kerjaSamaTerbaru = Partnership::query()
-            ->where('farmer_id', $user->id)
-            ->with('product', 'exporter')
+            ->where('petani_id', $user->id)
+            ->with('product', 'eksportir')
             ->latest()
             ->first();
 
@@ -56,14 +56,14 @@ class DashboardController extends Controller
                     ->count();
             })->values()->toArray(),
             'partnerships' => $months->map(function ($month, $i) use ($user) {
-                return Partnership::where('farmer_id', $user->id)
+                return Partnership::where('petani_id', $user->id)
                     ->whereMonth('created_at', today()->subMonths(5 - $i)->month)
                     ->count();
             })->values()->toArray(),
         ];
 
         return view('dashboard', [
-            'dashboardType' => 'farmer',
+            'dashboardType' => 'petani',
             'stats' => [
                 'total_produk' => $totalProduk,
                 'produk_aktif' => $produkAktif,
@@ -79,29 +79,29 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function exporter(Request $request)
+    public function eksportir(Request $request)
     {
         $user = $request->user();
-        abort_unless($user->role === 'exporter', 403);
+        abort_unless($user->role === 'eksportir', 403);
 
-        $allRequests = Partnership::query()->where('exporter_id', $user->id);
+        $allRequests = Partnership::query()->where('eksportir_id', $user->id);
         $totalPengajuan = (clone $allRequests)->count();
         $kerjaSamaAktif = (clone $allRequests)->whereIn('status', ['active', 'completed'])->count();
 
         $pengajuanTerbaru = Partnership::query()
-            ->where('exporter_id', $user->id)
-            ->with('product', 'farmer')
+            ->where('eksportir_id', $user->id)
+            ->with('product', 'petani')
             ->latest()
             ->first();
 
         $favoritTerbaru = $user->favorites()->latest('favorites.created_at')->first();
 
-        $dailyLimit = $user->isPremium() ? null : 3;
-        $usedToday = Partnership::query()
-            ->where('exporter_id', $user->id)
-            ->whereDate('created_at', today())
+        $monthlyLimit = $user->hasPremiumAccess() ? null : 5;
+        $usedThisMonth = Partnership::query()
+            ->where('eksportir_id', $user->id)
+            ->where('created_at', '>=', now()->startOfMonth())
             ->count();
-        $remaining = $dailyLimit === null ? null : max(0, $dailyLimit - $usedToday);
+        $remaining = $monthlyLimit === null ? null : max(0, $monthlyLimit - $usedThisMonth);
 
         // Data for Chart.js (Last 6 months)
         $months = collect(range(5, 0))->map(function ($i) {
@@ -111,14 +111,14 @@ class DashboardController extends Controller
         $chartData = [
             'labels' => $months->values()->toArray(),
             'pengajuan' => $months->map(function ($month, $i) use ($user) {
-                return Partnership::where('exporter_id', $user->id)
+                return Partnership::where('eksportir_id', $user->id)
                     ->whereMonth('created_at', today()->subMonths(5 - $i)->month)
                     ->count();
             })->values()->toArray(),
         ];
 
         return view('dashboard', [
-            'dashboardType' => 'exporter',
+            'dashboardType' => 'eksportir',
             'stats' => [
                 'total_pengajuan' => $totalPengajuan,
                 'kerja_sama_aktif' => $kerjaSamaAktif,
@@ -142,13 +142,13 @@ class DashboardController extends Controller
         abort_unless($user->role === 'admin', 403);
 
         $totalUser = \App\Models\User::count();
-        $totalFarmer = \App\Models\User::where('role', 'farmer')->count();
-        $totalExporter = \App\Models\User::where('role', 'exporter')->count();
+        $totalFarmer = \App\Models\User::where('role', 'petani')->count();
+        $totalExporter = \App\Models\User::where('role', 'eksportir')->count();
         $totalProduk = \App\Models\Product::count();
         $totalPartnership = \App\Models\Partnership::count();
         $totalCategories = \App\Models\Category::count();
         $recommendedProduk = \App\Models\Product::where('is_recommended', true)->count();
-        $trustedFarmers = \App\Models\User::where('role', 'farmer')->where('is_trusted_farmer', true)->count();
+        $trustedFarmers = \App\Models\User::where('role', 'petani')->where('is_trusted_petani', true)->count();
 
         return view('dashboard', [
             'dashboardType' => 'admin',
@@ -165,4 +165,3 @@ class DashboardController extends Controller
         ]);
     }
 }
-

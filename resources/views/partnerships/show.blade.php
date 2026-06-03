@@ -40,7 +40,7 @@
                         @endforeach
                     </ol>
 
-                    @if(auth()->user()->role === 'farmer' && $partnership->status === 'active' && $partnership->workflow_stage !== 'completed')
+                    @if(auth()->user()->role === 'petani' && $partnership->status === 'active' && $partnership->workflow_stage !== 'completed')
                         <form method="POST" action="{{ route('partnerships.advance', $partnership) }}" class="mt-6">
                             @csrf
                             <x-primary-button type="submit">Lanjut ke Tahap Berikutnya</x-primary-button>
@@ -107,7 +107,7 @@
                         <div class="flex justify-between"><dt class="text-stone-500">Produk</dt><dd class="font-medium">{{ $partnership->product->nama_produk }}</dd></div>
                         <div class="flex justify-between"><dt class="text-stone-500">Nilai kontrak</dt><dd class="font-medium">Rp{{ number_format($partnership->total_nilai_kontrak ?? 0, 0, ',', '.') }}</dd></div>
                     </dl>
-                    @if(auth()->user()->role === 'farmer' && $partnership->status === 'active')
+                    @if(auth()->user()->role === 'petani' && $partnership->status === 'active')
                         <form method="POST" action="{{ route('partnerships.contract.update', $partnership) }}" class="mt-3">
                             @csrf
                             @method('PATCH')
@@ -119,12 +119,12 @@
 
                 <div class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
                     <h3 class="font-semibold text-stone-900">Mitra</h3>
-                    @if(auth()->user()->role === 'farmer')
-                        <p class="mt-2 font-medium">{{ $partnership->exporter->name }}</p>
+                    @if(auth()->user()->role === 'petani')
+                        <p class="mt-2 font-medium">{{ $partnership->eksportir->name }}</p>
                         @if($canViewExporterContact)
-                            <p class="text-sm text-stone-600 mt-1">{{ $partnership->exporter->email }}</p>
-                            @if($partnership->exporter->phone)
-                                <p class="text-sm text-stone-600">{{ $partnership->exporter->phone }}</p>
+                            <p class="text-sm text-stone-600 mt-1">{{ $partnership->eksportir->email }}</p>
+                            @if($partnership->eksportir->phone)
+                                <p class="text-sm text-stone-600">{{ $partnership->eksportir->phone }}</p>
                             @endif
                         @else
                             <div class="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900">
@@ -133,14 +133,14 @@
                             </div>
                         @endif
                     @else
-                        <p class="mt-2 font-medium">{{ $partnership->farmer->name }}</p>
-                        @if($partnership->farmer->is_trusted_farmer)
-                            <span class="mt-2 inline-flex rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">Trusted Farmer</span>
+                        <p class="mt-2 font-medium">{{ $partnership->petani->name }}</p>
+                        @if($partnership->petani->is_trusted_petani)
+                            <span class="mt-2 inline-flex rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">Petani Tepercaya</span>
                         @endif
                     @endif
                 </div>
 
-                @if($partnership->status === 'completed' && auth()->user()->role === 'exporter')
+                @if($partnership->status === 'completed' && auth()->user()->role === 'eksportir')
                     <div class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
                         <h3 class="font-semibold text-stone-900">Rating & Review</h3>
                         @if($partnership->rating)
@@ -161,7 +161,7 @@
                     </div>
                 @endif
 
-                @if($partnership->rating && auth()->user()->role === 'farmer')
+                @if($partnership->rating && auth()->user()->role === 'petani')
                     <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
                         <p class="text-sm font-semibold text-amber-900">Ulasan dari eksportir</p>
                         <p class="text-amber-500 mt-1">★ {{ $partnership->rating }}/5</p>

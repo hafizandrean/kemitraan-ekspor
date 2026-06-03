@@ -42,7 +42,7 @@ class ProductController extends Controller
             $query->where('kategori_id', $category_id);
         }
         if ($trusted_only) {
-            $query->whereHas('owner', fn ($q) => $q->where('is_trusted_farmer', true));
+            $query->whereHas('owner', fn ($q) => $q->where('is_trusted_petani', true));
         }
         if ($recommended_only) {
             $query->where('is_recommended', true);
@@ -57,9 +57,10 @@ class ProductController extends Controller
             $query->where('lokasi', 'like', '%'.$location.'%');
         }
 
+        $now = now()->toDateTimeString();
         $query->leftJoin('users as owners', 'products.user_id', '=', 'owners.id')
             ->select('products.*')
-            ->orderByRaw("CASE WHEN owners.account_tier = 'premium' AND (owners.premium_expires_at IS NULL OR owners.premium_expires_at > NOW()) THEN 0 ELSE 1 END");
+            ->orderByRaw("CASE WHEN owners.account_tier = 'premium' AND (owners.premium_expires_at IS NULL OR owners.premium_expires_at > ?) THEN 0 ELSE 1 END", [$now]);
 
         if ($sort === 'termurah') {
             $query->orderBy('harga', 'asc');
@@ -129,7 +130,7 @@ class ProductController extends Controller
         if (! $this->premiumAccess->canUploadProduct($request->user())) {
             return redirect()
                 ->route('premium.upgrade')
-                ->with('error', 'Batas upload produk Free tercapai (maks. '.config('permissions.limits.free_farmer_max_products').' produk). Upgrade ke Premium untuk unlimited.');
+                ->with('error', 'Batas upload produk Free tercapai (maks. '.config('permissions.limits.free_petani_max_products').' produk). Upgrade ke Premium untuk unlimited.');
         }
 
         $validated = $request->safe()->except(['gambar']);

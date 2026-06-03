@@ -26,10 +26,8 @@ class User extends Authenticatable
         'role',
         'account_tier',
         'premium_expires_at',
-        'verification_status',
-        'verification_document_path',
         'phone',
-        'is_trusted_farmer',
+        'is_trusted_petani',
     ];
 
     /**
@@ -50,7 +48,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'is_trusted_farmer' => 'boolean',
+        'is_trusted_petani' => 'boolean',
         'premium_expires_at' => 'datetime',
     ];
 
@@ -67,12 +65,12 @@ class User extends Authenticatable
      */
     public function partnerships(): HasMany
     {
-        return $this->hasMany(Partnership::class, 'exporter_id');
+        return $this->hasMany(Partnership::class, 'eksportir_id');
     }
 
     public function incomingPartnerships(): HasMany
     {
-        return $this->hasMany(Partnership::class, 'farmer_id');
+        return $this->hasMany(Partnership::class, 'petani_id');
     }
 
     public function systemNotifications(): HasMany
@@ -86,9 +84,19 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     public function isPremium(): bool
     {
         return app(\App\Services\PremiumAccessService::class)->isPremium($this);
+    }
+
+    public function hasPremiumAccess(): bool
+    {
+        return $this->isPremium();
     }
 
     public function premiumBadgeLabel(): string

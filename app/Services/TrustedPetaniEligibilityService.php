@@ -5,15 +5,15 @@ namespace App\Services;
 use App\Models\Partnership;
 use App\Models\User;
 
-class TrustedFarmerEligibilityService
+class TrustedPetaniEligibilityService
 {
     public function __construct(
         private readonly PremiumAccessService $premiumAccess
     ) {}
 
-    public function evaluate(User $farmer): void
+    public function evaluate(User $petani): void
     {
-        if ($farmer->role !== 'farmer') {
+        if ($petani->role !== 'petani') {
             return;
         }
 
@@ -21,18 +21,18 @@ class TrustedFarmerEligibilityService
         $minRating = (int) config('permissions.limits.trusted_min_rating', 5);
 
         $completedWithTopRating = Partnership::query()
-            ->where('farmer_id', $farmer->id)
+            ->where('petani_id', $petani->id)
             ->where('status', 'completed')
             ->where('rating', '>=', $minRating)
             ->count();
 
         if ($completedWithTopRating >= $minCompleted) {
-            $farmer->update(['is_trusted_farmer' => true]);
+            $petani->update(['is_trusted_petani' => true]);
         }
     }
 
-    public function qualifiesForPremiumDiscount(User $farmer): bool
+    public function qualifiesForPremiumDiscount(User $petani): bool
     {
-        return $farmer->is_trusted_farmer && ! $this->premiumAccess->isPremium($farmer);
+        return $petani->is_trusted_petani && ! $this->premiumAccess->isPremium($petani);
     }
 }

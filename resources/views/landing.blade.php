@@ -346,7 +346,7 @@
                             <div>
 
                                 <p class="font-semibold text-gray-800">
-                                    Trusted Farmer
+                                    Petani Tepercaya
                                 </p>
 
                                 <p class="text-sm text-gray-500">
@@ -401,10 +401,12 @@
         <div class="grid lg:grid-cols-3 gap-6 mt-16">
 
             <!-- ITEM -->
-            <div class="bg-[#f8faf9] border border-gray-100 rounded-[30px] p-8">
+            <div class="bg-[#f8faf9] border border-gray-150 rounded-[30px] p-8 hover:shadow-lg transition">
 
-                <div class="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                    🌾
+                <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                    <svg class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
                 </div>
 
                 <h3 class="mt-8 text-2xl font-bold text-gray-900">
@@ -421,10 +423,12 @@
             </div>
 
             <!-- ITEM -->
-            <div class="bg-[#f8faf9] border border-gray-100 rounded-[30px] p-8">
+            <div class="bg-[#f8faf9] border border-gray-150 rounded-[30px] p-8 hover:shadow-lg transition">
 
-                <div class="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                    🤝
+                <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                    <svg class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
                 </div>
 
                 <h3 class="mt-8 text-2xl font-bold text-gray-900">
@@ -441,10 +445,12 @@
             </div>
 
             <!-- ITEM -->
-            <div class="bg-[#f8faf9] border border-gray-100 rounded-[30px] p-8">
+            <div class="bg-[#f8faf9] border border-gray-150 rounded-[30px] p-8 hover:shadow-lg transition">
 
-                <div class="w-16 h-16 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                    🚢
+                <div class="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                    <svg class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V8a2 2 0 00-2-2h-.5A2.5 2.5 0 0113 3.5V2.055m-6 17A9 9 0 1022.945 12H18a2 2 0 01-2-2V8a2 2 0 00-2-2h-3V3.5a1 1 0 00-1-1z" />
+                    </svg>
                 </div>
 
                 <h3 class="mt-8 text-2xl font-bold text-gray-900">
@@ -503,8 +509,8 @@
                         <h3 class="text-xl font-bold text-gray-900">{{ $product->nama_produk }}</h3>
                         <p class="mt-1 text-emerald-600 font-bold">Rp{{ number_format($product->harga, 0, ',', '.') }}</p>
                         <p class="mt-2 text-sm text-gray-500">{{ $product->lokasi }} · {{ $product->owner?->name }}</p>
-                        @if($product->owner?->is_trusted_farmer)
-                            <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">Trusted Farmer</span>
+                        @if($product->owner?->is_trusted_petani)
+                            <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">Petani Tepercaya</span>
                         @endif
                     </div>
                 </div>
@@ -517,15 +523,15 @@
 </section>
 @endif
 
-<!-- TRUSTED FARMER -->
-@if(isset($trustedFarmerCount))
+<!-- PETANI TEPERCAYA -->
+@if(isset($trustedPetaniCount))
 <section class="py-16 bg-emerald-950 text-white">
     <div class="max-w-7xl mx-auto px-8 text-center">
-        <h2 class="heading-serif text-3xl font-black">Trusted Farmer System</h2>
+        <h2 class="heading-serif text-3xl font-black">Sistem Petani Tepercaya</h2>
         <p class="mt-4 text-emerald-100 max-w-2xl mx-auto">
             Petani terverifikasi oleh admin mendapat badge kepercayaan agar eksportir lebih yakin membangun kemitraan.
         </p>
-        <p class="mt-8 text-5xl font-black text-emerald-300">{{ $trustedFarmerCount }}</p>
+        <p class="mt-8 text-5xl font-black text-emerald-300">{{ $trustedPetaniCount }}</p>
         <p class="text-emerald-200/80 text-sm mt-1">petani terpercaya saat ini</p>
     </div>
 </section>

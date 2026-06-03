@@ -71,7 +71,7 @@
                         <div class="space-y-2 pt-1">
                             <label class="flex items-center gap-2 text-sm text-stone-700">
                                 <input type="checkbox" name="trusted_only" value="1" {{ $trusted_only ? 'checked' : '' }} class="rounded border-stone-300 text-emerald-600 focus:ring-emerald-500">
-                                Hanya Trusted Farmer
+                                Hanya Petani Tepercaya
                             </label>
                             <label class="flex items-center gap-2 text-sm text-stone-700">
                                 <input type="checkbox" name="recommended_only" value="1" {{ $recommended_only ? 'checked' : '' }} class="rounded border-stone-300 text-amber-500 focus:ring-amber-500">

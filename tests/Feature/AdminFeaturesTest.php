@@ -17,7 +17,7 @@ class AdminFeaturesTest extends TestCase
         $this->seed(\Database\Seeders\CategorySeeder::class);
 
         $admin = User::factory()->create(['role' => 'admin']);
-        $farmer = User::factory()->create(['role' => 'farmer']);
+        $farmer = User::factory()->create(['role' => 'petani']);
         $category = Category::first();
         $product = Product::factory()->create([
             'user_id' => $farmer->id,
@@ -42,15 +42,15 @@ class AdminFeaturesTest extends TestCase
             ->assertRedirect();
 
         $farmer->refresh();
-        $this->assertTrue($farmer->is_trusted_farmer);
+        $this->assertTrue($farmer->is_trusted_petani);
     }
 
     public function test_exporter_can_filter_trusted_and_recommended_products(): void
     {
         $this->seed(\Database\Seeders\CategorySeeder::class);
 
-        $exporter = User::factory()->create(['role' => 'exporter']);
-        $trustedFarmer = User::factory()->create(['role' => 'farmer', 'is_trusted_farmer' => true]);
+        $exporter = User::factory()->create(['role' => 'eksportir']);
+        $trustedFarmer = User::factory()->create(['role' => 'petani', 'is_trusted_petani' => true]);
         $category = Category::first();
 
         Product::factory()->create([

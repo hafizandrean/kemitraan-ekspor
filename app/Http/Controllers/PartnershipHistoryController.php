@@ -11,15 +11,15 @@ class PartnershipHistoryController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        abort_unless(in_array($user->role, ['farmer', 'exporter'], true), 403);
+        abort_unless(in_array($user->role, ['petani', 'eksportir'], true), 403);
 
         $query = Partnership::query()
-            ->with(['product', 'farmer', 'exporter']);
+            ->with(['product', 'petani', 'eksportir']);
 
-        if ($user->role === 'farmer') {
-            $query->where('farmer_id', $user->id);
+        if ($user->role === 'petani') {
+            $query->where('petani_id', $user->id);
         } else {
-            $query->where('exporter_id', $user->id);
+            $query->where('eksportir_id', $user->id);
         }
 
         if ($year = $request->query('year')) {
@@ -38,10 +38,10 @@ class PartnershipHistoryController extends Controller
 
         if ($partner = trim((string) $request->query('partner', ''))) {
             $query->where(function ($q) use ($partner, $user) {
-                if ($user->role === 'farmer') {
-                    $q->whereHas('exporter', fn ($e) => $e->where('name', 'like', "%{$partner}%"));
+                if ($user->role === 'petani') {
+                    $q->whereHas('eksportir', fn ($e) => $e->where('name', 'like', "%{$partner}%"));
                 } else {
-                    $q->whereHas('farmer', fn ($f) => $f->where('name', 'like', "%{$partner}%"));
+                    $q->whereHas('petani', fn ($f) => $f->where('name', 'like', "%{$partner}%"));
                 }
             });
         }
@@ -49,8 +49,8 @@ class PartnershipHistoryController extends Controller
         $history = $query->latest()->paginate(10)->withQueryString();
 
         $years = Partnership::query()
-            ->when($user->role === 'farmer', fn ($q) => $q->where('farmer_id', $user->id))
-            ->when($user->role === 'exporter', fn ($q) => $q->where('exporter_id', $user->id))
+            ->when($user->role === 'petani', fn ($q) => $q->where('petani_id', $user->id))
+            ->when($user->role === 'eksportir', fn ($q) => $q->where('eksportir_id', $user->id))
             ->selectRaw('YEAR(created_at) as year')
             ->distinct()
             ->orderByDesc('year')

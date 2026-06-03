@@ -50,8 +50,6 @@ return new class extends Migration
 
         Schema::table('users', function (Blueprint $table) {
             $table->timestamp('premium_expires_at')->nullable()->after('account_tier');
-            $table->string('verification_status')->default('none')->after('premium_expires_at');
-            $table->string('verification_document_path')->nullable()->after('verification_status');
             $table->string('phone')->nullable()->after('email');
         });
 
@@ -64,7 +62,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['premium_expires_at', 'verification_status', 'verification_document_path', 'phone']);
+            $table->dropColumn(['premium_expires_at', 'phone']);
         });
 
         Schema::dropIfExists('partnership_documents');

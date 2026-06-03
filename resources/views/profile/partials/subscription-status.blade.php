@@ -10,8 +10,8 @@
                 <p class="text-sm text-gray-500">Tier saat ini</p>
                 <p class="text-xl font-bold {{ $user->isPremium() ? 'text-emerald-600' : 'text-gray-800' }}">
                     {{ $user->premiumBadgeLabel() }}
-                    @if($user->is_trusted_farmer)
-                        <span class="ml-2 text-xs rounded-full bg-emerald-100 text-emerald-800 px-2 py-0.5">Trusted</span>
+                    @if($user->is_trusted_petani)
+                        <span class="ml-2 text-xs rounded-full bg-emerald-100 text-emerald-800 px-2 py-0.5">Tepercaya</span>
                     @endif
                 </p>
             </div>
@@ -22,8 +22,6 @@
         @if($user->premium_expires_at)
             <p class="mt-2 text-sm text-gray-600">Premium berlaku hingga <strong>{{ $user->premium_expires_at->format('d F Y') }}</strong></p>
         @endif
-        @if($user->role === 'farmer' && $user->verification_status !== 'none')
-            <p class="mt-2 text-sm text-gray-600">Verifikasi dokumen: <strong>{{ ucfirst($user->verification_status) }}</strong></p>
-        @endif
+
     </div>
 </section>

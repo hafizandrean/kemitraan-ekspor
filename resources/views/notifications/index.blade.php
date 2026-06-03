@@ -38,11 +38,11 @@
                             <p class="mt-2 text-xs text-stone-500">{{ $notification->created_at->diffForHumans() }}</p>
                         </div>
                         <div class="flex items-center gap-2 shrink-0 mt-3 sm:mt-0">
-                            @if(auth()->user()->role === 'farmer')
+                            @if(auth()->user()->role === 'petani')
                                 <a href="{{ route('requests.index') }}" class="inline-flex items-center justify-center rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-semibold text-stone-700 shadow-sm hover:bg-stone-50 hover:border-stone-300 transition">
                                     Lihat Detail
                                 </a>
-                            @elseif(auth()->user()->role === 'exporter')
+                            @elseif(auth()->user()->role === 'eksportir')
                                 <a href="{{ route('partnerships.history') }}" class="inline-flex items-center justify-center rounded-lg border border-stone-200 bg-white px-3 py-1.5 text-xs font-semibold text-stone-700 shadow-sm hover:bg-stone-50 hover:border-stone-300 transition">
                                     Lihat Detail
                                 </a>

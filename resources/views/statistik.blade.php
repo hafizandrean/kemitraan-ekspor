@@ -181,7 +181,7 @@
 
                 <div class="mt-5 inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl text-sm font-medium">
 
-                    Trusted Farmer
+                    Petani Tepercaya
 
                 </div>
 
@@ -379,7 +379,7 @@
                         <div class="flex justify-between mb-2">
 
                             <span class="text-gray-600">
-                                Trusted Farmer
+                                Petani Tepercaya
                             </span>
 
                             <span class="font-semibold">
@@ -401,7 +401,7 @@
                         <div class="flex justify-between mb-2">
 
                             <span class="text-gray-600">
-                                Premium Exporter
+                                Eksportir Premium
                             </span>
 
                             <span class="font-semibold">

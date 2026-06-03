@@ -15,9 +15,12 @@ class UpdateProductRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $harga = $this->input('harga');
+        $jumlah = $this->input('jumlah');
+
         $this->merge([
-            'harga' => preg_replace('/\D/', '', (string) $this->input('harga', '')),
-            'jumlah' => preg_replace('/\D/', '', (string) $this->input('jumlah', '')),
+            'harga' => is_string($harga) ? str_replace('.', '', $harga) : $harga,
+            'jumlah' => is_string($jumlah) ? str_replace('.', '', $jumlah) : $jumlah,
         ]);
     }
 

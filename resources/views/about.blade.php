@@ -214,68 +214,76 @@
                 <div class="grid grid-cols-2 gap-6">
 
                     <!-- CARD -->
-                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6">
+                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6 hover:shadow-md transition">
 
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                            🌾
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                            </svg>
                         </div>
 
                         <h3 class="mt-6 text-xl font-bold text-gray-900">
                             Petani
                         </h3>
 
-                        <p class="mt-3 text-gray-500 leading-relaxed">
+                        <p class="mt-3 text-gray-500 leading-relaxed text-xs">
                             Mengunggah hasil pertanian secara langsung.
                         </p>
 
                     </div>
 
                     <!-- CARD -->
-                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6">
+                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6 hover:shadow-md transition">
 
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                            🚢
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V8a2 2 0 00-2-2h-.5A2.5 2.5 0 0113 3.5V2.055m-6 17A9 9 0 1022.945 12H18a2 2 0 01-2-2V8a2 2 0 00-2-2h-3V3.5a1 1 0 00-1-1z" />
+                            </svg>
                         </div>
 
                         <h3 class="mt-6 text-xl font-bold text-gray-900">
                             Eksportir
                         </h3>
 
-                        <p class="mt-3 text-gray-500 leading-relaxed">
+                        <p class="mt-3 text-gray-500 leading-relaxed text-xs">
                             Mencari mitra pertanian untuk kebutuhan ekspor.
                         </p>
 
                     </div>
 
                     <!-- CARD -->
-                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6">
+                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6 hover:shadow-md transition">
 
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                            🤝
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
                         </div>
 
                         <h3 class="mt-6 text-xl font-bold text-gray-900">
                             Kerja Sama
                         </h3>
 
-                        <p class="mt-3 text-gray-500 leading-relaxed">
+                        <p class="mt-3 text-gray-500 leading-relaxed text-xs">
                             Pengajuan kemitraan dilakukan secara digital.
                         </p>
 
                     </div>
 
                     <!-- CARD -->
-                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6">
+                    <div class="bg-[#f8faf9] border border-gray-100 rounded-3xl p-6 hover:shadow-md transition">
 
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-3xl">
-                            📈
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-150 flex items-center justify-center text-emerald-650 shadow-sm">
+                            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
                         </div>
 
                         <h3 class="mt-6 text-xl font-bold text-gray-900">
                             Monitoring
                         </h3>
 
-                        <p class="mt-3 text-gray-500 leading-relaxed">
+                        <p class="mt-3 text-gray-500 leading-relaxed text-xs">
                             Aktivitas platform dapat dipantau realtime.
                         </p>
 

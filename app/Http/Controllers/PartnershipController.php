@@ -16,11 +16,21 @@ class PartnershipController extends Controller
 
     public function apply(Request $request, Product $product)
     {
-        abort_unless($request->user()?->role === 'exporter', 403);
+        abort_unless($request->user()?->role === 'eksportir', 403);
+
+        if (!$request->user()->hasPremiumAccess()) {
+            $countThisMonth = Partnership::where('eksportir_id', $request->user()->id)
+                ->where('created_at', '>=', now()->startOfMonth())
+                ->count();
+            if ($countThisMonth >= 5) {
+                return redirect()->route('premium.index')
+                    ->with('error', 'Batas pengajuan kemitraan Free tercapai (maks. 5 pengajuan per bulan). Upgrade ke Premium untuk unlimited.');
+            }
+        }
 
         $exists = Partnership::query()
             ->where('product_id', $product->id)
-            ->where('exporter_id', $request->user()->id)
+            ->where('eksportir_id', $request->user()->id)
             ->whereIn('status', ['pending', 'active', 'completed'])
             ->exists();
 
@@ -30,8 +40,8 @@ class PartnershipController extends Controller
 
         $partnership = Partnership::create([
             'product_id' => $product->id,
-            'farmer_id' => $product->user_id,
-            'exporter_id' => $request->user()->id,
+            'petani_id' => $product->user_id,
+            'eksportir_id' => $request->user()->id,
             'status' => 'pending',
         ]);
 
@@ -49,12 +59,12 @@ class PartnershipController extends Controller
 
     public function requests()
     {
-        abort_unless(request()->user()?->role === 'farmer', 403);
+        abort_unless(request()->user()?->role === 'petani', 403);
 
         $requests = Partnership::query()
-            ->where('farmer_id', auth()->id())
+            ->where('petani_id', auth()->id())
             ->where('status', 'pending')
-            ->with(['product', 'exporter'])
+            ->with(['product', 'eksportir'])
             ->latest()
             ->get();
 
@@ -64,14 +74,14 @@ class PartnershipController extends Controller
     public function accept($id)
     {
         $p = Partnership::findOrFail($id);
-        abort_unless(request()->user()?->role === 'farmer', 403);
-        abort_unless($p->farmer_id === auth()->id(), 403);
+        abort_unless(request()->user()?->role === 'petani', 403);
+        abort_unless($p->petani_id === auth()->id(), 403);
         abort_unless($p->status === 'pending', 422);
 
         $this->workflow->startActivePartnership($p, request()->user());
 
         SystemNotification::create([
-            'user_id' => $p->exporter_id,
+            'user_id' => $p->eksportir_id,
             'title' => 'Pengajuan diterima',
             'message' => 'Pengajuan kerja sama kamu untuk produk '.$p->product->nama_produk.' telah diterima.',
             'is_read' => false,
@@ -83,15 +93,15 @@ class PartnershipController extends Controller
     public function reject($id)
     {
         $p = Partnership::findOrFail($id);
-        abort_unless(request()->user()?->role === 'farmer', 403);
-        abort_unless($p->farmer_id === auth()->id(), 403);
+        abort_unless(request()->user()?->role === 'petani', 403);
+        abort_unless($p->petani_id === auth()->id(), 403);
         abort_unless($p->status === 'pending', 422);
 
         $p->update(['status' => 'rejected']);
         $this->workflow->logStage($p, 'rejected', request()->user(), 'Pengajuan ditolak.');
 
         SystemNotification::create([
-            'user_id' => $p->exporter_id,
+            'user_id' => $p->eksportir_id,
             'title' => 'Pengajuan ditolak',
             'message' => 'Pengajuan kerja sama kamu untuk produk '.$p->product->nama_produk.' ditolak.',
             'is_read' => false,
