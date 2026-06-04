@@ -28,6 +28,7 @@ class User extends Authenticatable
         'premium_expires_at',
         'phone',
         'is_trusted_petani',
+        'status',
     ];
 
     /**
@@ -106,6 +107,44 @@ class User extends Authenticatable
         }
 
         return $this->isPremium() ? 'Premium' : 'Free';
+    }
+
+    public function farmerConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'farmer_id');
+    }
+
+    public function exporterConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'exporter_id');
+    }
+
+    public function conversations()
+    {
+        if ($this->role === 'petani') {
+            return $this->farmerConversations();
+        }
+        return $this->exporterConversations();
+    }
+
+    public function reportsSubmitted(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reporter_id');
+    }
+
+    public function reportsAgainst(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reported_user_id');
+    }
+
+    public function isSuspended(): bool
+    {
+        return $this->status === 'suspended';
+    }
+
+    public function isBanned(): bool
+    {
+        return $this->status === 'banned';
     }
 }
 

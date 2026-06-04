@@ -30,7 +30,7 @@ Route::get('/statistik', function () {
 
 Route::post('/payment/callback', [App\Http\Controllers\SubscriptionController::class, 'callback'])->name('payment.callback');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'not_suspended'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
     Route::get('/dashboard/petani', [DashboardController::class, 'petani'])
@@ -47,8 +47,17 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:eksportir')
         ->name('products.show');
     Route::post('/products/{product}/apply', [PartnershipController::class, 'apply'])
-        ->middleware('role:eksportir')
+        ->middleware(['role:eksportir', 'not_suspended'])
         ->name('partnerships.apply');
+
+    Route::middleware('not_suspended')->group(function () {
+        Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
+        Route::post('/chat/start', [App\Http\Controllers\ChatController::class, 'start'])->name('chat.start');
+        Route::post('/chat/report', [App\Http\Controllers\ChatReportController::class, 'store'])->name('chat.report');
+        Route::get('/chat/{conversation}', [App\Http\Controllers\ChatController::class, 'show'])->name('chat.show');
+        Route::post('/chat/{conversation}', [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
+    });
+
     Route::get('/partnerships/history', [PartnershipHistoryController::class, 'index'])
         ->middleware('role:petani,eksportir')
         ->name('partnerships.history');
@@ -144,6 +153,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/petani/{user}/trust', [TrustedPetaniController::class, 'toggle'])->name('trusted-farmers.toggle');
 
         Route::get('/premium-verifications', [SubscriptionAdminController::class, 'index'])->name('premium-verifications.index');
+
+        Route::get('/chat-moderation', [App\Http\Controllers\Admin\AdminChatController::class, 'dashboard'])->name('chat.dashboard');
+        Route::get('/chat-moderation/reports/{report}', [App\Http\Controllers\Admin\AdminChatController::class, 'showReport'])->name('chat.report.show');
+        Route::post('/chat-moderation/reports/{report}/resolve', [App\Http\Controllers\Admin\AdminChatController::class, 'resolveReport'])->name('chat.report.resolve');
+        Route::post('/users/{user}/status', [App\Http\Controllers\Admin\AdminChatController::class, 'toggleUserStatus'])->name('users.status.update');
     });
 });
 
