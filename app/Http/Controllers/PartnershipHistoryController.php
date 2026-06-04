@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Partnership;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class PartnershipHistoryController extends Controller
 {
@@ -48,10 +49,15 @@ class PartnershipHistoryController extends Controller
 
         $history = $query->latest()->paginate(10)->withQueryString();
 
+        $driver = DB::connection()->getDriverName();
+        $yearExpression = $driver === 'sqlite' 
+            ? 'strftime("%Y", created_at) as year' 
+            : 'YEAR(created_at) as year';
+
         $years = Partnership::query()
             ->when($user->role === 'petani', fn ($q) => $q->where('petani_id', $user->id))
             ->when($user->role === 'eksportir', fn ($q) => $q->where('eksportir_id', $user->id))
-            ->selectRaw('YEAR(created_at) as year')
+            ->selectRaw($yearExpression)
             ->distinct()
             ->orderByDesc('year')
             ->pluck('year');
