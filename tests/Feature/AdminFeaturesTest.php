@@ -65,4 +65,75 @@ class AdminFeaturesTest extends TestCase
             ->assertOk()
             ->assertSee('Filter Pencarian');
     }
+
+    public function test_admin_can_access_chat_moderation_dashboard_and_resolve_report(): void
+    {
+        $this->seed(\Database\Seeders\CategorySeeder::class);
+
+        $admin = User::factory()->create(['role' => 'admin']);
+        $farmer = User::factory()->create(['role' => 'petani']);
+        $exporter = User::factory()->create(['role' => 'eksportir', 'account_tier' => 'premium']);
+        
+        $conversation = \App\Models\Conversation::create([
+            'farmer_id' => $farmer->id,
+            'exporter_id' => $exporter->id,
+            'last_message_at' => now(),
+        ]);
+
+        $message = \App\Models\Message::create([
+            'conversation_id' => $conversation->id,
+            'sender_id' => $exporter->id,
+            'message' => 'Halo, ini pesan mencurigakan.',
+        ]);
+
+        $report = \App\Models\Report::create([
+            'reporter_id' => $farmer->id,
+            'reported_user_id' => $exporter->id,
+            'conversation_id' => $conversation->id,
+            'reason' => 'fraud',
+            'description' => 'Eksportir ini mencoba melakukan penipuan.',
+            'status' => 'pending',
+        ]);
+
+        // 1. Admin accesses moderation dashboard
+        $response = $this->actingAs($admin)
+            ->get(route('admin.chat.dashboard'));
+        $response->assertOk();
+        $response->assertSee('Moderasi Chat');
+        $response->assertSee('Eksportir ini mencoba melakukan penipuan.');
+
+        // 2. Admin views report details and transcript
+        $response = $this->actingAs($admin)
+            ->get(route('admin.chat.report.show', $report));
+        $response->assertOk();
+        $response->assertSee('Halo, ini pesan mencurigakan.');
+        $response->assertSee('Eksportir ini mencoba melakukan penipuan.');
+
+        // 3. Admin resolves the report
+        $response = $this->actingAs($admin)
+            ->post(route('admin.chat.report.resolve', $report), [
+                'action' => 'resolve',
+            ]);
+        $response->assertRedirect(route('admin.chat.dashboard'));
+        $this->assertEquals('resolved', $report->fresh()->status);
+
+        // 4. Admin toggles user status to suspended
+        $response = $this->actingAs($admin)
+            ->post(route('admin.users.status.update', $exporter), [
+                'status' => 'suspended',
+            ]);
+        $response->assertRedirect();
+        $this->assertEquals('suspended', $exporter->fresh()->status);
+    }
+
+    public function test_non_admin_cannot_access_chat_moderation(): void
+    {
+        $exporter = User::factory()->create(['role' => 'eksportir']);
+
+        $response = $this->actingAs($exporter)
+            ->get(route('admin.chat.dashboard'));
+        
+        $response->assertStatus(403);
+    }
 }
+

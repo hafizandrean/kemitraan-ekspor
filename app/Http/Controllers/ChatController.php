@@ -123,12 +123,9 @@ class ChatController extends Controller
             return redirect()->route('chat.show', $conversation);
         }
 
-        // Apply Premium Limit: Free Exporter is limited to 1 active conversation
+        // Apply Premium Check: Exporter must be premium to start a chat
         if (!$exporter->isPremium()) {
-            $existingCount = Conversation::where('exporter_id', $exporter->id)->count();
-            if ($existingCount >= 1) {
-                return redirect()->route('premium.index')->with('error', 'Akun Free Eksportir terbatas pada maksimal 1 percakapan aktif. Silakan upgrade ke Premium untuk memulai percakapan baru tanpa batas.');
-            }
+            return redirect()->route('premium.index')->with('error', 'Upgrade ke Premium untuk memulai percakapan baru.');
         }
 
         // Create new conversation

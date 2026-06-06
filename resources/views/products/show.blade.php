@@ -107,17 +107,29 @@
                         </button>
                     </form>
 
-                    <form method="POST" action="{{ route('chat.start') }}" class="mt-3">
-                        @csrf
-                        <input type="hidden" name="farmer_id" value="{{ $product->owner->id }}">
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <button type="submit" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-semibold text-stone-700 shadow-sm hover:bg-stone-50 transition-colors flex items-center justify-center gap-2">
-                            <svg class="h-4 w-4 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    @if (Auth::user()->role === 'eksportir' && !Auth::user()->isPremium())
+                        <!-- Locked Chat Button for Free Exporters -->
+                        <a href="{{ route('premium.index') }}" class="mt-3 w-full rounded-xl border border-stone-200 bg-stone-50/50 text-stone-400 px-4 py-3.5 text-sm font-semibold shadow-sm hover:bg-stone-50 transition-colors flex items-center justify-center gap-2 group relative">
+                            <svg class="h-4 w-4 text-stone-450" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
-                            Chat Petani
-                        </button>
-                    </form>
+                            <span>Chat Petani</span>
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 bg-amber-500 text-white text-[8px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded shadow-sm">Premium</span>
+                        </a>
+                    @else
+                        <!-- Active Chat Form -->
+                        <form method="POST" action="{{ route('chat.start') }}" class="mt-3">
+                            @csrf
+                            <input type="hidden" name="farmer_id" value="{{ $product->owner->id }}">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button type="submit" class="w-full rounded-xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-semibold text-stone-700 shadow-sm hover:bg-stone-50 transition-colors flex items-center justify-center gap-2">
+                                <svg class="h-4 w-4 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                Chat Petani
+                            </button>
+                        </form>
+                    @endif
                     
                     <p class="mt-4 text-center text-xs text-stone-500">
                         Anda akan dialihkan ke halaman monitoring status jika pengajuan berhasil.

@@ -50,7 +50,7 @@ Route::middleware(['auth', 'not_suspended'])->group(function () {
         ->middleware(['role:eksportir', 'not_suspended'])
         ->name('partnerships.apply');
 
-    Route::middleware('not_suspended')->group(function () {
+    Route::middleware(['not_suspended', 'premium_exporter'])->group(function () {
         Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
         Route::post('/chat/start', [App\Http\Controllers\ChatController::class, 'start'])->name('chat.start');
         Route::post('/chat/report', [App\Http\Controllers\ChatReportController::class, 'store'])->name('chat.report');
