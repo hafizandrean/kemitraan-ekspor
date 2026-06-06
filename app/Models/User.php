@@ -29,6 +29,7 @@ class User extends Authenticatable
         'phone',
         'is_trusted_petani',
         'status',
+        'avatar',
     ];
 
     /**
@@ -145,6 +146,34 @@ class User extends Authenticatable
     public function isBanned(): bool
     {
         return $this->status === 'banned';
+    }
+
+    /**
+     * Get the user's avatar URL or null if not set.
+     */
+    public function getAvatarUrl(): ?string
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+        return null;
+    }
+
+    /**
+     * Get the initials of the user's name.
+     */
+    public function getInitials(): string
+    {
+        $words = preg_split("/\s+/", trim($this->name));
+        $initials = '';
+        if (count($words) >= 2) {
+            $initials = strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
+        } elseif (count($words) === 1 && !empty($words[0])) {
+            $initials = strtoupper(substr($words[0], 0, 2));
+        } else {
+            $initials = 'US';
+        }
+        return $initials;
     }
 }
 
