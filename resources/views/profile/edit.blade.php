@@ -118,6 +118,93 @@
                 </div>
             </div>
 
+            <!-- Account Overview Section -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Stat Card 1 -->
+                <div class="bg-white dark:bg-gray-800 shadow-sm border border-emerald-100/50 dark:border-gray-700/50 sm:rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
+                    <div class="flex-shrink-0 bg-emerald-50 dark:bg-emerald-950/45 text-emerald-600 dark:text-emerald-400 p-3.5 rounded-2xl">
+                        @if ($user->role === 'eksportir')
+                            <!-- Heart Icon for Exporter Favorites -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        @else
+                            <!-- Box Icon for Products -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-gray-900 dark:text-white font-sans leading-tight">
+                            {{ $totalProducts }}
+                        </p>
+                        <p class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-0.5">
+                            @if ($user->role === 'petani')
+                                Total Produk
+                            @elseif ($user->role === 'eksportir')
+                                Produk Favorit
+                            @else
+                                Produk Sistem
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="bg-white dark:bg-gray-800 shadow-sm border border-emerald-100/50 dark:border-gray-700/50 sm:rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
+                    <div class="flex-shrink-0 bg-blue-50 dark:bg-blue-950/45 text-blue-600 dark:text-blue-400 p-3.5 rounded-2xl">
+                        <!-- Briefcase / Users Icon for Partnership -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-gray-900 dark:text-white font-sans leading-tight">
+                            {{ $totalPartnerships }}
+                        </p>
+                        <p class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-0.5">
+                            @if ($user->role === 'petani')
+                                Kemitraan Masuk
+                            @elseif ($user->role === 'eksportir')
+                                Kemitraan Diajukan
+                            @else
+                                Total Kemitraan
+                            @endif
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="bg-white dark:bg-gray-800 shadow-sm border border-emerald-100/50 dark:border-gray-700/50 sm:rounded-2xl p-5 flex items-center gap-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-md">
+                    <div class="flex-shrink-0 bg-amber-50 dark:bg-amber-950/45 text-amber-600 dark:text-amber-400 p-3.5 rounded-2xl">
+                        @if ($user->role === 'admin')
+                            <!-- Users Icon for Admin -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        @else
+                            <!-- Chat Bubble Icon for Conversation -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                            </svg>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-2xl font-black text-gray-900 dark:text-white font-sans leading-tight">
+                            {{ $totalConversations }}
+                        </p>
+                        <p class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-0.5">
+                            @if ($user->role === 'admin')
+                                Total Pengguna
+                            @else
+                                Total Percakapan
+                            @endif
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.subscription-status', ['user' => $user])

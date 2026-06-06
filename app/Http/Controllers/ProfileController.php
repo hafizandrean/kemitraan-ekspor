@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use App\Models\Product;
+use App\Models\Partnership;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -17,8 +20,28 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+
+        if ($user->role === 'petani') {
+            $totalProducts = $user->products()->count();
+            $totalPartnerships = $user->incomingPartnerships()->count();
+            $totalConversations = $user->conversations()->count();
+        } elseif ($user->role === 'eksportir') {
+            $totalProducts = $user->favorites()->count(); // Favorit
+            $totalPartnerships = $user->partnerships()->count();
+            $totalConversations = $user->conversations()->count();
+        } else {
+            // Admin or other role
+            $totalProducts = Product::count();
+            $totalPartnerships = Partnership::count();
+            $totalConversations = User::count(); // Total users
+        }
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'totalProducts' => $totalProducts,
+            'totalPartnerships' => $totalPartnerships,
+            'totalConversations' => $totalConversations,
         ]);
     }
 
