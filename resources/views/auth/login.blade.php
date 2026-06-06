@@ -26,14 +26,14 @@
 
         <div class="flex items-center">
             <label for="remember_me" class="inline-flex items-center gap-2 cursor-pointer">
-                <input id="remember_me" type="checkbox" class="rounded border-stone-300 text-emerald-600 shadow-sm focus:ring-emerald-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-stone-300 text-exportani-primary shadow-sm focus:ring-exportani-primary" name="remember">
                 <span class="text-sm text-stone-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
             @if (Route::has('password.request'))
-                <a class="text-sm font-medium text-emerald-700 hover:text-emerald-800" href="{{ route('password.request') }}">
+                <a class="text-sm font-medium text-exportani-primary hover:text-exportani-dark" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @else
@@ -47,7 +47,7 @@
 
         <p class="text-center text-sm text-stone-600 pt-2">
             Belum punya akun?
-            <a href="{{ route('register') }}" class="font-semibold text-emerald-700 hover:text-emerald-800">Daftar</a>
+            <a href="{{ route('register') }}" class="font-semibold text-exportani-primary hover:text-exportani-dark">Daftar</a>
         </p>
     </form>
 </x-guest-layout>

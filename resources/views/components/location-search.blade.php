@@ -18,7 +18,7 @@
         placeholder="Ketik untuk mencari kota/kabupaten..."
         value="{{ $value }}"
         data-location-input
-        class="mt-1.5 block w-full rounded-lg border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+        class="mt-1.5 block w-full rounded-lg border-stone-300 shadow-sm focus:border-exportani-primary focus:ring-exportani-primary"
         required
     >
     <input type="hidden" name="{{ $name }}" value="{{ $value }}" data-location-hidden>
@@ -47,7 +47,7 @@
         }
         matches.forEach((loc) => {
             const li = document.createElement('li');
-            li.className = 'cursor-pointer px-3 py-2 text-sm text-stone-700 hover:bg-emerald-50 hover:text-emerald-800';
+            li.className = 'cursor-pointer px-3 py-2 text-sm text-stone-700 hover:bg-exportani-mint/10 hover:text-exportani-primary';
             li.textContent = loc;
             li.addEventListener('mousedown', (e) => {
                 e.preventDefault();

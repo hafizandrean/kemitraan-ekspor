@@ -70,13 +70,21 @@ class ProductController extends Controller
             $query->latest('products.created_at');
         }
 
-        $products = $query->paginate(12)->withQueryString();
-        $categories = Category::all();
-
         $recommendedProducts = Product::recommended()
             ->with(['category', 'owner'])
             ->limit(6)
             ->get();
+
+        $showRecommendation = $recommendedProducts->isNotEmpty()
+            && !$recommended_only
+            && !($q !== '' || $category_id || $trusted_only || $min_price || $max_price || $location);
+
+        if ($showRecommendation) {
+            $query->whereNotIn('products.id', $recommendedProducts->pluck('id'));
+        }
+
+        $products = $query->paginate(12)->withQueryString();
+        $categories = Category::all();
 
         return view('products.index', compact(
             'products',

@@ -1,19 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">
-                {{ __('Permintaan masuk') }}
+            <h2 class="font-display text-2xl font-semibold text-exportani-text tracking-tight">
+                {{ __('Permintaan Masuk') }}
             </h2>
-            <p class="mt-1 text-sm text-stone-600">Pengajuan kerja sama dari eksportir untuk produkmu.</p>
+            <p class="mt-1 text-sm text-exportani-secondaryText">Pengajuan kerja sama dari eksportir untuk produkmu.</p>
         </div>
     </x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto">
-            <div class="rounded-2xl border border-stone-200/80 bg-white/90 p-6 sm:p-8 shadow-sm shadow-stone-900/5">
+            <div class="rounded-2xl border border-exportani-border bg-white p-6 sm:p-8 shadow-sm shadow-stone-900/5">
                 <div class="space-y-4">
                     @forelse($requests as $r)
-                        <div class="rounded-xl border border-stone-200/80 bg-stone-50/40 p-5 sm:p-6">
+                        <div class="rounded-2xl border border-exportani-border bg-stone-50/40 p-5 sm:p-6">
                             <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                                 <div class="min-w-0">
                                     <div class="font-display text-lg font-semibold text-stone-900">
@@ -26,7 +26,7 @@
                                         @if($r->status === 'pending')
                                             <span class="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-900 ring-1 ring-amber-200/80">pending</span>
                                         @elseif($r->status === 'active')
-                                            <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900 ring-1 ring-emerald-200/80">Aktif</span>
+                                            <span class="inline-flex items-center rounded-full bg-exportani-mint/15 px-3 py-1 text-xs font-semibold text-exportani-accent border border-exportani-mint/20">Aktif</span>
                                         @else
                                             <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-900 ring-1 ring-red-200/80">rejected</span>
                                         @endif

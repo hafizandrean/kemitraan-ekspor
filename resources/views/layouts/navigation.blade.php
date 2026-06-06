@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-emerald-900/10 bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 shadow-md shadow-emerald-950/10">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-exportani-dark/10 bg-exportani-dark shadow-md shadow-exportani-dark/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Changed height from h-14 to h-12 for a tighter, denser Vercel/Stripe style navbar -->
         <div class="flex justify-between h-12">
@@ -75,26 +75,13 @@
                     @endif
                 </a>
                 <!-- Reduced padding & badge sizes for a more compact SaaS layout -->
-                <span class="inline-flex items-center rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-emerald-100 ring-1 ring-white/15 uppercase tracking-wide">
+                <span class="inline-flex items-center rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-white/90 ring-1 ring-white/15 uppercase tracking-wide">
                     {{ Auth::user()->role === 'petani' ? 'Petani' : (Auth::user()->role === 'eksportir' ? 'Eksportir' : 'Admin') }}
                 </span>
-                @if(Auth::user()->isPremium())
-                    <span class="inline-flex items-center gap-0.5 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[9px] font-bold text-amber-300 ring-1 ring-amber-500/20 uppercase tracking-wide">
-                        <svg class="h-2.5 w-2.5 text-amber-300 fill-current shrink-0" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                        </svg>
-                        Premium
-                    </span>
-                @endif
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-semibold text-white bg-white/10 ring-1 ring-white/15 hover:bg-white/15 focus:outline-none transition">
                             <span class="max-w-[120px] truncate">{{ Auth::user()->name }}</span>
-                            @if(Auth::user()->isPremium())
-                                <svg class="h-2.5 w-2.5 text-amber-300 fill-current shrink-0 animate-pulse" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                </svg>
-                            @endif
                             <svg class="h-2.5 w-2.5 shrink-0 opacity-60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                             </svg>
@@ -122,7 +109,7 @@
             </div>
 
             <div class="flex items-center md:hidden">
-                <button @click="open = ! open" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-emerald-100 hover:bg-white/10 focus:outline-none transition">
+                <button @click="open = ! open" type="button" class="inline-flex items-center justify-center rounded-lg p-2 text-white/90 hover:bg-white/10 focus:outline-none transition">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -132,7 +119,7 @@
         </div>
     </div>
 
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden border-t border-white/10 bg-emerald-950/95 backdrop-blur">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden border-t border-white/10 bg-exportani-dark/95 backdrop-blur">
         <div class="pt-2 pb-3 space-y-0.5 px-2">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" dark-nav>
                 {{ __('Dashboard') }}
@@ -201,11 +188,8 @@
         <div class="pt-3 pb-4 px-4 border-t border-white/10">
             <div class="text-white font-medium flex items-center gap-1.5 text-xs">
                 {{ Auth::user()->name }}
-                @if(Auth::user()->isPremium())
-                    <span class="text-[9px] bg-amber-400 text-stone-900 font-extrabold px-1.5 py-0.5 rounded tracking-wider uppercase">PREMIUM</span>
-                @endif
             </div>
-            <div class="text-xs text-emerald-200/80 mt-0.5">{{ Auth::user()->email }}</div>
+            <div class="text-xs text-white/70 mt-0.5">{{ Auth::user()->email }}</div>
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')" dark-nav>

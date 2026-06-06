@@ -10,13 +10,13 @@
 <div class="space-y-2" id="{{ $uploadId }}">
     <label
         for="gambar"
-        class="upload-zone mt-1.5 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-stone-300 bg-stone-50 px-6 py-8 transition-colors hover:border-emerald-500 hover:bg-emerald-50/30"
+        class="upload-zone mt-1.5 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-stone-300 bg-stone-50 px-6 py-8 transition-colors hover:border-exportani-primary hover:bg-exportani-mint/10"
     >
         <div class="upload-placeholder text-center {{ $existingUrl ? 'hidden' : '' }}">
             <svg class="mx-auto h-12 w-12 text-stone-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
             </svg>
-            <p class="mt-3 text-sm font-semibold text-emerald-700">Klik di sini untuk pilih foto dari folder</p>
+            <p class="mt-3 text-sm font-semibold text-exportani-primary">Klik di sini untuk pilih foto dari folder</p>
             <p class="mt-1 text-xs text-stone-500">JPG, PNG, WEBP — maks. 5 MB</p>
             <p class="mt-1 text-xs text-amber-700">Foto iPhone (HEIC)? Ekspor/simpan sebagai JPG dulu.</p>
         </div>
@@ -98,16 +98,16 @@
 
     zone.addEventListener('dragover', (e) => {
         e.preventDefault();
-        zone.classList.add('border-emerald-500', 'bg-emerald-50');
+        zone.classList.add('border-exportani-primary', 'bg-exportani-mint/10');
     });
 
     zone.addEventListener('dragleave', () => {
-        zone.classList.remove('border-emerald-500', 'bg-emerald-50');
+        zone.classList.remove('border-exportani-primary', 'bg-exportani-mint/10');
     });
 
     zone.addEventListener('drop', (e) => {
         e.preventDefault();
-        zone.classList.remove('border-emerald-500', 'bg-emerald-50');
+        zone.classList.remove('border-exportani-primary', 'bg-exportani-mint/10');
         const file = e.dataTransfer?.files?.[0];
         if (!file) return;
 

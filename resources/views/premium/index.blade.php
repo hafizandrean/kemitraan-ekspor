@@ -2,12 +2,12 @@
     <x-slot name="header">
         <div class="flex items-center justify-between gap-4">
             <div>
-                <h2 class="font-display text-lg font-bold text-stone-900 dark:text-white tracking-tight">Exportani Premium</h2>
-                <p class="mt-0.5 text-xs text-stone-500 dark:text-stone-400">Kelola keanggotaan premium Anda untuk akses pasar global.</p>
+                <h2 class="font-display text-lg font-bold text-exportani-text tracking-tight">EXPORTANI Premium</h2>
+                <p class="mt-0.5 text-xs text-exportani-secondaryText">Value & keanggotaan premium Anda untuk perluas pasar global.</p>
             </div>
             <div class="shrink-0">
-                <a href="{{ route('subscription.history') }}" class="inline-flex items-center gap-1.5 rounded-lg border border-stone-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-1.5 text-xs font-semibold text-stone-600 dark:text-gray-300 hover:bg-stone-50 dark:hover:bg-gray-750 hover:text-emerald-700 dark:hover:text-emerald-400 transition duration-155 shadow-sm">
-                    <svg class="h-3.5 w-3.5 text-stone-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <a href="{{ route('subscription.history') }}" class="inline-flex items-center gap-1.5 rounded-lg border border-exportani-border bg-white px-3 py-1.5 text-xs font-semibold text-exportani-secondaryText hover:bg-exportani-background hover:text-exportani-primary transition duration-150 shadow-sm">
+                    <svg class="h-3.5 w-3.5 text-exportani-secondaryText" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Riwayat Langganan
@@ -16,13 +16,12 @@
         </div>
     </x-slot>
 
-    <!-- Main Container: max-w-4xl with space-y-12 for consistent enterprise visual rhythm -->
-    <div class="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
+    <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
         
         <!-- Notification Alerts -->
         @if(session('success'))
-            <div class="rounded-xl border border-emerald-150 bg-emerald-50/60 p-4 text-xs text-emerald-900 shadow-sm flex items-start gap-2.5">
-                <svg class="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="rounded-xl border border-exportani-mint/30 bg-exportani-mint/10 p-4 text-xs text-exportani-accent shadow-sm flex items-start gap-2.5">
+                <svg class="h-4 w-4 text-exportani-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
@@ -31,7 +30,7 @@
             </div>
         @endif
         @if(session('error'))
-            <div class="rounded-xl border border-rose-150 bg-rose-50/60 p-4 text-xs text-rose-900 shadow-sm flex items-start gap-2.5">
+            <div class="rounded-xl border border-rose-200 bg-rose-50/60 p-4 text-xs text-rose-900 shadow-sm flex items-start gap-2.5">
                 <svg class="h-4 w-4 text-rose-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
@@ -53,250 +52,163 @@
             }
         @endphp
 
-        <!-- 1. HERO PREMIUM (MATCHES THE NEW PROFILE CARD STYLE) -->
-        <div class="relative overflow-hidden bg-white dark:bg-gray-800 shadow-sm border border-emerald-100/50 dark:border-gray-700/50 rounded-2xl py-8 px-8 transition duration-300">
+        <!-- 1. HERO PREMIUM (100% WIDTH) -->
+        <div class="relative overflow-hidden bg-white shadow-sm border border-exportani-border rounded-2xl py-8 px-8 transition duration-300">
             <!-- Top Gradient Bar -->
-            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600"></div>
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-exportani-teal via-exportani-mint to-exportani-primary"></div>
 
-            <div class="relative z-10 space-y-6">
-                <div class="space-y-1.5 text-center sm:text-left">
-                    <span class="inline-flex items-center rounded-full bg-emerald-100 dark:bg-emerald-950/45 text-emerald-800 dark:text-emerald-300 border border-emerald-500/15 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider">
-                        Premium Membership
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div class="space-y-2 text-center sm:text-left max-w-xl">
+                    <span class="inline-flex items-center gap-1 rounded-full badge-premium px-2.5 py-0.5 text-[9px] uppercase tracking-wider">
+                        <svg class="h-2.5 w-2.5 text-[#5B3D00] fill-current shrink-0" viewBox="0 0 24 24">
+                            <path d="M12 2l2.8 7.2 7.2 2.8-7.2 2.8-2.8 7.2-2.8-7.2-7.2-2.8 7.2-2.8L12 2z"/>
+                        </svg>
+                        EXPORTANI Premium
                     </span>
-                    <h1 class="text-xl md:text-2xl font-black text-gray-900 dark:text-white leading-tight font-display mt-2">
-                        Exportani Premium
+                    <h1 class="text-xl md:text-2xl font-black text-exportani-text leading-tight font-display mt-1">
+                        Akses Penuh Tanpa Batas
                     </h1>
-                    <p class="text-gray-500 dark:text-gray-400 text-xs font-medium leading-relaxed max-w-lg mx-auto sm:mx-0">
-                        Akses fitur premium untuk memperluas peluang kemitraan ekspor global Anda.
+                    <p class="text-exportani-secondaryText text-xs font-medium leading-relaxed">
+                        Perluas peluang ekspor dengan akses kemitraan tanpa batas, analisis pasar komoditas, dan komunikasi langsung dengan mitra potensial.
                     </p>
                 </div>
 
-                <!-- Integrated Compact Membership Status -->
-                @if($isPremium && $activeSubscription)
-                    <!-- Active Status Box -->
-                    <div class="rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-6 py-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div class="space-y-0.5">
-                            <div class="flex items-center gap-1.5 justify-center sm:justify-start">
-                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                <span class="text-[9px] font-bold text-emerald-600 dark:text-emerald-300 uppercase tracking-wider">Premium Aktif</span>
-                            </div>
-                            <p class="text-xs text-emerald-900 dark:text-emerald-200 text-center sm:text-left">
-                                Paket <strong class="text-emerald-950 dark:text-white">{{ $activeSubscription->plan->name }}</strong> s/d <strong class="text-emerald-950 dark:text-white">{{ $activeSubscription->end_date->format('d M Y') }}</strong>.
-                            </p>
-                        </div>
-                        <div class="shrink-0 flex justify-center">
-                            <a href="{{ route('premium.insight') }}" class="inline-flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-700 px-4 py-2 text-xs font-semibold text-white shadow-sm transition duration-150">
-                                Buka Analisis Pasar
-                            </a>
-                        </div>
-                    </div>
-                @elseif($pendingSubscription)
-                    <!-- Pending Payment Box -->
-                    <div class="rounded-xl border border-amber-200 dark:border-amber-900/40 bg-amber-50/50 dark:bg-amber-950/20 px-6 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
-                        <div class="space-y-1 text-center sm:text-left w-full sm:w-auto">
-                            <div class="flex items-center gap-1.5 justify-center sm:justify-start">
-                                <svg class="h-4 w-4 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <!-- Live Status Meta Indicator (Right Panel of Hero) -->
+                <div class="shrink-0 flex justify-center md:justify-end text-center md:text-right">
+                    @if($isPremium && $activeSubscription)
+                        <div class="bg-gradient-to-br from-amber-500/5 to-transparent border border-amber-200/60 rounded-xl px-5 py-4 min-w-[200px]">
+                            <span class="inline-flex items-center gap-1.5 rounded-full badge-premium px-2 py-0.5 text-[9px] uppercase tracking-wider">
+                                <svg class="h-2.5 w-2.5 text-[#5B3D00] fill-current shrink-0" viewBox="0 0 24 24">
+                                    <path d="M12 2l2.8 7.2 7.2 2.8-7.2 2.8-2.8 7.2-2.8-7.2-7.2-2.8 7.2-2.8L12 2z"/>
                                 </svg>
-                                <span class="text-[9px] font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider">Pembayaran Pending</span>
-                            </div>
-                            <p class="text-xs text-amber-800 dark:text-amber-400 mt-1">
-                                Selesaikan pembayaran untuk mengaktifkan fitur premium.
-                            </p>
-                            <div class="flex justify-center sm:justify-start mt-2">
-                                <div class="inline-flex items-center gap-2.5 rounded-lg bg-white dark:bg-gray-800 px-4 py-2 border border-amber-200/60 dark:border-amber-900/30">
-                                    <span class="text-gray-500 dark:text-gray-400 text-xs font-medium">Tagihan:</span>
-                                    <strong class="text-amber-600 dark:text-amber-400 text-sm font-black">Rp{{ number_format($pendingSubscription->gross_amount, 0, ',', '.') }}</strong>
-                                </div>
-                            </div>
-                            <p class="text-[9px] text-gray-400 dark:text-gray-500 font-mono mt-1.5">ID Transaksi: {{ $pendingSubscription->transaction_id }}</p>
+                                Premium Aktif
+                            </span>
+                            <p class="text-[10px] text-exportani-secondaryText mt-2 font-medium">Aktif hingga</p>
+                            <p class="text-xs font-bold text-exportani-text mt-0.5">{{ $activeSubscription->end_date->format('d M Y') }}</p>
                         </div>
-                        <div class="shrink-0 flex items-center justify-center gap-4 w-full sm:w-auto">
-                            <a href="{{ route('premium.checkout', $pendingSubscription->plan_id) }}" class="inline-flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-700 px-5 py-2.5 text-xs font-bold text-white shadow-md hover:shadow-lg transition duration-200">
-                                Lanjutkan Pembayaran
-                            </a>
-                            <a href="{{ route('subscription.history') }}" class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 underline transition duration-150">
-                                Riwayat
-                            </a>
-                        </div>
-                    </div>
-                @elseif($user->premium_expires_at && $user->premium_expires_at->isPast())
-                    <!-- Expired Status Box -->
-                    <div class="rounded-xl border border-rose-200 dark:border-rose-900/40 bg-rose-50/50 dark:bg-rose-950/20 px-6 py-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div class="space-y-0.5 text-center sm:text-left">
-                            <div class="flex items-center gap-1.5 justify-center sm:justify-start">
-                                <span class="h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse"></span>
-                                <span class="text-[9px] font-bold text-rose-700 dark:text-rose-300 uppercase tracking-wider">Premium Kedaluwarsa</span>
-                            </div>
-                            <p class="text-xs text-rose-800 dark:text-rose-400">
-                                Masa aktif berakhir pada {{ $user->premium_expires_at->format('d M Y') }}.
-                            </p>
-                        </div>
-                        <div class="shrink-0 flex justify-center">
-                            <a href="#premium-plan-card" class="inline-flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-700 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition duration-150">
-                                Perpanjang Langganan
-                            </a>
-                        </div>
-                    </div>
-                @else
-                    <!-- Free Status Box -->
-                    <div class="rounded-xl border border-stone-200 dark:border-gray-700 bg-stone-50 dark:bg-gray-800/60 px-6 py-4.5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div class="space-y-0.5 text-center sm:text-left">
-                            <span class="inline-flex items-center rounded-full bg-stone-200 dark:bg-slate-700 text-stone-700 dark:text-slate-300 px-2 py-0.5 text-[9px] font-semibold">
+                    @else
+                        <div class="bg-exportani-background border border-exportani-border rounded-xl px-5 py-4 min-w-[200px]">
+                            <span class="inline-flex items-center rounded-full bg-exportani-border text-exportani-secondaryText px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">
                                 Akun Free
                             </span>
-                            <p class="text-xs text-stone-600 dark:text-stone-400">
-                                Anda menggunakan Free Plan dengan fitur kemitraan terbatas.
-                            </p>
+                            <p class="text-[10px] text-exportani-secondaryText mt-2 font-medium">Status Fitur</p>
+                            <p class="text-xs font-bold text-exportani-text mt-0.5">Kemitraan Terbatas</p>
                         </div>
-                        <div class="shrink-0 flex justify-center">
-                            <a href="#premium-plan-card" class="inline-flex items-center justify-center rounded-lg bg-emerald-600 hover:bg-emerald-700 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm transition duration-150">
-                                Upgrade Ke Premium
-                            </a>
-                        </div>
-                    </div>
-                @endif
-
-                @if($trustedDiscount && !$isPremium)
-                    <div class="flex items-center justify-center sm:justify-start gap-1.5 text-[9px] text-emerald-600 dark:text-emerald-400 pt-0.5">
-                        <svg class="h-3.5 w-3.5 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>Loyalty Discount: Diskon 20% khusus Petani Tepercaya akan diterapkan otomatis saat checkout.</span>
-                    </div>
-                @endif
-            </div>
-        </div>
-
-        <!-- 2. PLAN CARDS SECTION (SIDE-BY-SIDE HORIZONTAL GRID) -->
-        <div id="premium-plan-card" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Free Tier Card -->
-            <div class="rounded-2xl border border-stone-200 dark:border-gray-700/60 bg-white dark:bg-gray-800 p-8 shadow-sm flex flex-col justify-between transition duration-300 relative {{ !$isPremium ? 'ring-2 ring-stone-100 dark:ring-slate-700/30' : '' }}">
-                <div class="space-y-6">
-                    <div>
-                        <span class="text-[9px] font-bold uppercase tracking-wider text-stone-400 dark:text-stone-505 font-sans">Free Plan</span>
-                        <h3 class="text-xl font-bold text-stone-900 dark:text-white mt-1">Free Tier</h3>
-                        
-                        <div class="mt-4 flex items-baseline text-stone-900 dark:text-white gap-1">
-                            <span class="text-3xl font-black font-sans tracking-tight">Rp0</span>
-                            <span class="text-xs text-stone-400 dark:text-stone-500">/ selamanya</span>
-                        </div>
-                    </div>
-
-                    <!-- Benefit List -->
-                    <ul class="space-y-4 text-xs leading-loose border-t border-stone-100 dark:border-gray-700 pt-6">
-                        <li class="flex items-center gap-3">
-                            <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span class="text-stone-700 dark:text-gray-250 font-bold">Batas Kemitraan: 5/bulan</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span class="text-stone-700 dark:text-gray-250 font-bold">Batas Unggah: 5 produk</span>
-                        </li>
-                        <li class="flex items-center gap-3 opacity-40">
-                            <svg class="h-4 w-4 text-stone-400 dark:text-gray-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                            <span class="text-stone-400 dark:text-stone-500 font-bold">Tanpa Prioritas Pencarian</span>
-                        </li>
-                        <li class="flex items-center gap-3 opacity-40">
-                            <svg class="h-4 w-4 text-stone-400 dark:text-gray-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                            <span class="text-stone-400 dark:text-stone-505 font-bold">Tanpa Lencana Premium</span>
-                        </li>
-                        <li class="flex items-center gap-3 opacity-40">
-                            <svg class="h-4 w-4 text-stone-400 dark:text-gray-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                            <span class="text-stone-400 dark:text-stone-505 font-bold">Tanpa Akses Chat Petani</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="pt-8 text-center">
-                    @if(!$isPremium)
-                        <button disabled class="w-full rounded-xl bg-stone-100 dark:bg-gray-700 py-3.5 text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-gray-500 text-center cursor-not-allowed border border-stone-200 dark:border-gray-600">
-                            Paket Aktif Anda
-                        </button>
-                    @else
-                        <button disabled class="w-full rounded-xl bg-stone-50 dark:bg-gray-800/40 py-3.5 text-xs font-bold uppercase tracking-wider text-stone-300 dark:text-gray-600 text-center cursor-not-allowed border border-stone-150 dark:border-gray-750">
-                            Basic Tier
-                        </button>
                     @endif
                 </div>
             </div>
+        </div>
 
-            <!-- Premium Plan Card -->
+        <!-- 2. STATUS + PRICING (50/50 SPLIT GRID) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left: Membership Management -->
+            <div class="rounded-2xl border border-exportani-border bg-white p-8 shadow-sm flex flex-col justify-between hover:shadow-md transition-all duration-300">
+                <div class="space-y-6">
+                    <div>
+                        <span class="text-[9px] font-extrabold uppercase tracking-wider text-exportani-secondaryText font-sans">Kelola Keanggotaan</span>
+                        <h3 class="text-lg font-bold text-exportani-text mt-1">Status Keanggotaan</h3>
+                        <p class="text-xs text-exportani-secondaryText mt-1.5 leading-relaxed">Kelola subscription otomatis dan simpan tagihan transaksi Anda secara transparan.</p>
+                    </div>
+
+                    @if($isPremium && $activeSubscription)
+                        <div class="rounded-xl border border-emerald-100 bg-emerald-50/20 px-5 py-4 space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Premium Member</span>
+                            </div>
+                            <div class="text-xs text-stone-700 space-y-1">
+                                <p>Paket Langganan: <strong class="text-stone-900 font-bold">{{ $activeSubscription->plan->name }}</strong></p>
+                                <p>Masa aktif: <span class="font-medium text-stone-900">s/d {{ $activeSubscription->end_date->format('d M Y') }}</span></p>
+                            </div>
+                            <a href="{{ route('premium.insight') }}" class="w-full inline-flex justify-center items-center py-2 px-3 rounded-lg bg-exportani-primary hover:bg-exportani-dark text-white font-bold text-xs shadow-sm transition">
+                                Buka Analisis Pasar &rarr;
+                            </a>
+                        </div>
+                    @elseif($pendingSubscription)
+                        <div class="rounded-xl border border-amber-200 bg-amber-50/50 px-5 py-4 space-y-3">
+                            <div class="flex items-center gap-1.5 text-amber-700">
+                                <svg class="h-4 w-4 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="text-xs font-bold uppercase tracking-wider">Pembayaran Pending</span>
+                            </div>
+                            <p class="text-xs text-amber-800 leading-relaxed">Selesaikan pembayaran transaksi untuk mengaktifkan keanggotaan Premium.</p>
+                            <div class="flex items-center justify-between text-xs border-t border-amber-200/50 pt-2.5">
+                                <span class="text-exportani-secondaryText">Total Tagihan:</span>
+                                <strong class="text-amber-600 font-black">Rp{{ number_format($pendingSubscription->gross_amount, 0, ',', '.') }}</strong>
+                            </div>
+                        </div>
+                    @elseif($user->premium_expires_at && $user->premium_expires_at->isPast())
+                        <div class="rounded-xl border border-rose-100 bg-rose-50/20 px-5 py-4 space-y-2">
+                            <div class="flex items-center gap-2 text-rose-700">
+                                <span class="h-2 w-2 rounded-full bg-rose-500"></span>
+                                <span class="text-xs font-bold uppercase tracking-wider">Premium Kedaluwarsa</span>
+                            </div>
+                            <p class="text-xs text-rose-800">Masa aktif langganan Anda telah berakhir pada {{ $user->premium_expires_at->format('d M Y') }}.</p>
+                        </div>
+                    @else
+                        <div class="rounded-xl border border-exportani-border bg-exportani-background px-5 py-4">
+                            <span class="inline-flex items-center rounded-full bg-exportani-border text-exportani-secondaryText px-2 py-0.5 text-[9px] font-semibold">
+                                Akun Free Tier
+                            </span>
+                            <p class="text-xs text-exportani-secondaryText mt-2 leading-relaxed">Anda saat ini memiliki batas pengiriman proposal dan posting katalog produk.</p>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="pt-6 border-t border-exportani-border mt-6 flex justify-between items-center">
+                    <span class="text-xs text-exportani-secondaryText font-medium">Riwayat transaksi langganan</span>
+                    <a href="{{ route('subscription.history') }}" class="text-xs font-bold text-exportani-primary hover:text-exportani-dark hover:underline transition">
+                        Lihat Invoice &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right: Premium Plan Card -->
             @if($premiumPlan)
-                <div class="rounded-2xl border-2 border-emerald-500 dark:border-emerald-500/80 bg-white dark:bg-gray-800 p-8 shadow-[0_10px_30px_-5px_rgba(16,185,129,0.15)] flex flex-col justify-between transition duration-300 relative {{ $isPremium ? 'ring-2 ring-emerald-500/20' : '' }}">
-                    <div class="absolute -top-3.5 left-6 bg-emerald-600 text-white text-[9px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm border border-emerald-500 z-10">
+                <div class="rounded-2xl bg-white p-8 flex flex-col justify-between relative {{ $isPremium ? 'ring-2 ring-exportani-primary/20' : '' }} card-premium-recommended">
+                    <div class="absolute -top-3.5 left-6 badge-premium text-[9px] font-bold px-3.5 py-1 rounded-full uppercase tracking-wider shadow-sm z-10">
                         Recommended Plan
                     </div>
 
                     <div class="space-y-6">
                         <div>
-                            <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-sans">Premium Upgrade</span>
-                            <h3 class="text-xl font-bold text-stone-900 dark:text-white mt-1">{{ $premiumPlan->name }}</h3>
+                            <span class="text-[9px] font-bold uppercase tracking-wider text-amber-700 font-sans">Premium Member</span>
+                            <h3 class="text-xl font-bold text-exportani-text mt-1">{{ $premiumPlan->name }}</h3>
                             
-                            <div class="mt-4 flex items-baseline text-stone-900 dark:text-white gap-1">
+                            <div class="mt-4 flex items-baseline text-exportani-text gap-1">
                                 <span class="text-3xl font-black font-sans tracking-tight">
                                     Rp{{ number_format($priceDisplay, 0, ',', '.') }}
                                 </span>
-                                <span class="text-xs text-stone-400 dark:text-stone-500">/ 30 hari</span>
+                                <span class="text-xs text-exportani-secondaryText font-medium">/ bulan</span>
                             </div>
                         </div>
 
-                        <!-- Benefit List -->
-                        <ul class="space-y-4 text-xs leading-loose border-t border-stone-100 dark:border-gray-700 pt-6">
-                            <li class="flex items-center gap-3">
-                                <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        <p class="text-xs text-exportani-secondaryText leading-relaxed">
+                            Membuka seluruh batasan platform. Ideal untuk petani tepercaya & eksportir skala nasional yang aktif mencari peluang kemitraan ekspor global.
+                        </p>
+
+                        @if($trustedDiscount && !$isPremium)
+                            <div class="flex items-center gap-1.5 text-[10px] text-exportani-primary font-bold">
+                                <svg class="h-3.5 w-3.5 text-exportani-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span class="text-stone-700 dark:text-gray-200 font-bold">Kemitraan Tanpa Batas</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span class="text-stone-700 dark:text-gray-200 font-bold font-sans">Unggah Produk Tanpa Batas</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span class="text-stone-700 dark:text-gray-200 font-bold">Prioritas Hasil Pencarian</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span class="text-stone-700 dark:text-gray-200 font-bold">Badge Premium Terverifikasi</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg class="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span class="text-stone-700 dark:text-gray-200 font-bold">Akses Chat Petani Langsung</span>
-                            </li>
-                        </ul>
+                                <span>Potongan 20% otomatis sebagai Petani Tepercaya.</span>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="pt-8 text-center">
                         @if($isPremium)
-                            <button disabled class="w-full rounded-xl bg-stone-100 dark:bg-gray-750 py-3.5 text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-gray-500 text-center cursor-not-allowed border border-stone-200 dark:border-gray-700">
-                                Premium Aktif
+                            <button disabled class="w-full rounded-xl bg-emerald-600 py-3.5 text-xs font-bold uppercase tracking-wider text-white text-center shadow-sm">
+                                Aktif
                             </button>
                         @elseif($pendingSubscription)
-                            <a href="{{ route('premium.checkout', $pendingSubscription->plan_id) }}" class="block w-full rounded-xl bg-emerald-600 hover:bg-emerald-700 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:shadow-md transition duration-200 text-center">
+                            <a href="{{ route('premium.checkout', $pendingSubscription->plan_id) }}" class="block w-full rounded-xl bg-exportani-primary hover:bg-exportani-dark py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:shadow-md transition duration-200 text-center">
                                 Lanjutkan Pembayaran
                             </a>
                         @else
-                            <a href="{{ route('premium.checkout', $premiumPlan) }}" class="block w-full rounded-xl bg-emerald-600 hover:bg-emerald-700 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:shadow-md transition duration-200 text-center">
+                            <a href="{{ route('premium.checkout', $premiumPlan) }}" class="block w-full rounded-xl bg-exportani-primary hover:bg-exportani-dark py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:shadow-md transition duration-200 text-center">
                                 Upgrade ke Premium
                             </a>
                         @endif
@@ -305,82 +217,207 @@
             @endif
         </div>
 
-        <!-- 3. COMPACT FEATURE COMPARISON (Table Comparison - max-w-3xl) -->
+        <!-- 3. BENEFIT CARDS (4 COLUMNS HORIZONTAL) -->
+        <div class="space-y-4 pt-4">
+            <h3 class="font-sans text-[10px] font-bold text-exportani-secondaryText uppercase tracking-widest text-center">
+                Benefit Utama Premium
+            </h3>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white border border-exportani-border rounded-xl p-4 flex flex-col items-center text-center space-y-2 hover:shadow-sm transition">
+                    <span class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-bold text-exportani-text">Insight Pasar Ekspor</span>
+                </div>
+                <div class="bg-white border border-exportani-border rounded-xl p-4 flex flex-col items-center text-center space-y-2 hover:shadow-sm transition">
+                    <span class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-bold text-exportani-text">Chat Langsung</span>
+                </div>
+                <div class="bg-white border border-exportani-border rounded-xl p-4 flex flex-col items-center text-center space-y-2 hover:shadow-sm transition">
+                    <span class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-bold text-exportani-text">Prioritas Hasil Pencarian</span>
+                </div>
+                <div class="bg-white border border-exportani-border rounded-xl p-4 flex flex-col items-center text-center space-y-2 hover:shadow-sm transition">
+                    <span class="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                        </svg>
+                    </span>
+                    <span class="text-xs font-bold text-exportani-text">Kemitraan Tanpa Batas</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. FEATURE HIGHLIGHTS (2x2 GRID) -->
         <div class="space-y-6 pt-4">
             <div class="text-center">
-                <h3 class="font-sans text-[10px] font-bold text-stone-400 dark:text-stone-505 uppercase tracking-widest">
-                    Perbandingan Fitur Paket
+                <h3 class="font-sans text-[10px] font-bold text-exportani-secondaryText uppercase tracking-widest">
+                    Fitur Premium Unggulan
+                </h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white border border-exportani-border rounded-2xl p-6 hover:shadow-md transition duration-350 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-exportani-mint/10 text-exportani-accent rounded-lg border border-exportani-mint/20">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-exportani-text text-sm uppercase tracking-wide">Insight Pasar Ekspor</h4>
+                    </div>
+                    <p class="text-xs text-exportani-secondaryText leading-relaxed">
+                        Pantau tren harga dan peluang komoditas ekspor secara berkala. Dapatkan analisis supply & demand pasar ekspor global.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white border border-exportani-border rounded-2xl p-6 hover:shadow-md transition duration-350 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-exportani-mint/10 text-exportani-accent rounded-lg border border-exportani-mint/20">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-exportani-text text-sm uppercase tracking-wide">Chat Langsung</h4>
+                    </div>
+                    <p class="text-xs text-exportani-secondaryText leading-relaxed">
+                        Komunikasi lebih cepat dengan petani dan eksportir potensial secara langsung untuk mempercepat negosiasi kontrak kerja sama.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white border border-exportani-border rounded-2xl p-6 hover:shadow-md transition duration-350 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-exportani-mint/10 text-exportani-accent rounded-lg border border-exportani-mint/20">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-exportani-text text-sm uppercase tracking-wide">Prioritas Pencarian</h4>
+                    </div>
+                    <p class="text-xs text-exportani-secondaryText leading-relaxed">
+                        Produk dan profil premium akan tampil lebih menonjol di halaman hasil pencarian, meningkatkan peluang dihubungi pembeli potensial.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white border border-exportani-border rounded-2xl p-6 hover:shadow-md transition duration-350 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-exportani-mint/10 text-exportani-accent rounded-lg border border-exportani-mint/20">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-exportani-text text-sm uppercase tracking-wide">Kemitraan Tanpa Batas</h4>
+                    </div>
+                    <p class="text-xs text-exportani-secondaryText leading-relaxed">
+                        Bangun kolaborasi dan ajukan proposal kerja sama kemitraan ekspor sebanyak-banyaknya tanpa batasan kuota proposal bulanan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. COMPACT FEATURE COMPARISON -->
+        <div class="space-y-6 pt-4">
+            <div class="text-center">
+                <h3 class="font-sans text-[10px] font-bold text-exportani-secondaryText uppercase tracking-widest">
+                    Perbandingan Fitur Detail
                 </h3>
             </div>
             
-            <div class="max-w-3xl mx-auto border border-stone-200 dark:border-gray-700/50 bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm">
+            <div class="border border-exportani-border bg-white rounded-2xl overflow-hidden shadow-sm">
                 <table class="w-full text-left text-xs border-collapse">
                     <thead>
-                        <tr class="bg-stone-50 dark:bg-gray-900/50 border-b border-stone-200 dark:border-gray-700/50 text-[10px] font-bold text-stone-500 dark:text-gray-400 uppercase tracking-wider">
-                            <th class="py-4 px-6 font-bold text-stone-700 dark:text-gray-200">Fitur & Layanan</th>
-                            <th class="py-4 px-6 font-bold text-stone-500 dark:text-gray-400 text-center w-36">Free Tier</th>
-                            <th class="py-4 px-6 font-bold text-emerald-800 dark:text-emerald-300 text-center w-36 bg-emerald-500/5 dark:bg-emerald-950/10">Premium Plan</th>
+                        <tr class="bg-[#F8FAFC] border-b border-exportani-border text-[10px] font-bold text-exportani-secondaryText uppercase tracking-wider">
+                            <th class="py-4 px-6 font-bold text-exportani-text">Fitur & Layanan</th>
+                            <th class="py-4 px-6 font-bold text-exportani-secondaryText text-center w-36">Free Tier</th>
+                            <th class="py-4 px-6 font-bold text-exportani-primary text-center w-36 bg-exportani-primary/5">Premium Plan</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-stone-200 dark:divide-gray-700/50 text-stone-600 dark:text-gray-300">
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Batas Pengajuan Kemitraan</td>
-                            <td class="py-4 px-6 text-center text-stone-400 dark:text-gray-500">5 / bulan</td>
-                            <td class="py-4 px-6 text-center font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-950/10">Tanpa Batas</td>
+                    <tbody class="divide-y divide-exportani-border text-exportani-text">
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Kemitraan per Bulan</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText">5 proposal</td>
+                            <td class="py-4 px-6 text-center font-bold text-exportani-primary bg-exportani-primary/5">Tanpa Batas</td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Batas Unggah Produk</td>
-                            <td class="py-4 px-6 text-center text-stone-400 dark:text-gray-500">5 produk</td>
-                            <td class="py-4 px-6 text-center font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-950/10">Tanpa Batas</td>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Upload Produk</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText">5 produk</td>
+                            <td class="py-4 px-6 text-center font-bold text-exportani-primary bg-exportani-primary/5">Tanpa Batas</td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Akses Chat Petani (Eksklusif)</td>
-                            <td class="py-4 px-6 text-center text-stone-300 dark:text-gray-650">
-                                <svg class="h-4 w-4 mx-auto text-stone-400 dark:text-gray-650" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                                </svg>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Chat Langsung</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
                             </td>
-                            <td class="py-4 px-6 text-center bg-emerald-500/5 dark:bg-emerald-950/10">
-                                <svg class="h-4 w-4 mx-auto text-emerald-600 dark:text-emerald-400 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Prioritas Hasil Pencarian</td>
-                            <td class="py-4 px-6 text-center text-stone-300 dark:text-gray-650">
-                                <svg class="h-4 w-4 mx-auto text-stone-400 dark:text-gray-650" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                                </svg>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Prioritas Pencarian</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
                             </td>
-                            <td class="py-4 px-6 text-center bg-emerald-500/5 dark:bg-emerald-950/10">
-                                <svg class="h-4 w-4 mx-auto text-emerald-600 dark:text-emerald-400 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Badge Premium Terverifikasi</td>
-                            <td class="py-4 px-6 text-center text-stone-300 dark:text-gray-650">
-                                <svg class="h-4 w-4 mx-auto text-stone-400 dark:text-gray-650" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                                </svg>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Badge Terverifikasi</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
                             </td>
-                            <td class="py-4 px-6 text-center bg-emerald-500/5 dark:bg-emerald-950/10">
-                                <svg class="h-4 w-4 mx-auto text-emerald-600 dark:text-emerald-400 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </td>
                         </tr>
-                        <tr class="hover:bg-stone-50/50 dark:hover:bg-gray-700/30 transition">
-                            <td class="py-4 px-6 font-bold text-stone-850 dark:text-gray-100">Analisis Pasar Komoditas</td>
-                            <td class="py-4 px-6 text-center text-stone-300 dark:text-gray-650">
-                                <svg class="h-4 w-4 mx-auto text-stone-400 dark:text-gray-650" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Insight Pasar Ekspor</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
+                            </td>
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </td>
-                            <td class="py-4 px-6 text-center bg-emerald-500/5 dark:bg-emerald-950/10">
-                                <svg class="h-4 w-4 mx-auto text-emerald-600 dark:text-emerald-400 font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                        </tr>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Analisis Tren Komoditas</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
+                            </td>
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-exportani-primary/5 transition">
+                            <td class="py-4 px-6 font-bold">Dukungan Prioritas</td>
+                            <td class="py-4 px-6 text-center text-exportani-secondaryText/40">
+                                <span class="text-exportani-secondaryText/40 font-bold text-sm select-none">—</span>
+                            </td>
+                            <td class="py-4 px-6 text-center bg-exportani-primary/5">
+                                <svg class="h-4 w-4 mx-auto text-exportani-primary font-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </td>

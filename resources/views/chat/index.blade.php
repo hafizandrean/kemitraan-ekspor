@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="h-[calc(100vh-3rem)] flex overflow-hidden bg-stone-50" x-data="{ reportModalOpen: false }">
+    <div class="h-[calc(100vh-3rem)] flex overflow-hidden bg-exportani-background" x-data="{ reportModalOpen: false }">
         
         <!-- Chat Sidebar -->
         <div class="w-full md:w-80 lg:w-96 border-r border-stone-200 bg-white flex flex-col shrink-0 {{ isset($conversation) ? 'hidden md:flex' : 'flex' }}">
@@ -21,9 +21,9 @@
                         $latestMsg = $conv->latestMessage();
                         $unreadCount = $conv->unreadMessagesCountFor(Auth::user());
                     @endphp
-                    <a href="{{ route('chat.show', $conv) }}" class="flex items-start gap-3 p-4 text-left transition hover:bg-stone-50/80 {{ $isActive ? 'bg-emerald-50/70 border-l-4 border-emerald-600' : '' }}">
+                    <a href="{{ route('chat.show', $conv) }}" class="flex items-start gap-3 p-4 text-left transition hover:bg-stone-50/80 {{ $isActive ? 'bg-exportani-mint/10 border-l-4 border-exportani-primary' : '' }}">
                         <!-- Avatar -->
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 font-bold text-emerald-800 text-sm">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-exportani-mint/15 font-bold text-exportani-accent text-sm">
                             {{ substr($opponent->name, 0, 1) }}
                         </div>
                         
@@ -38,7 +38,7 @@
                             
                             <div class="flex items-center gap-1.5 mb-1.5">
                                 @if($opponent->role === 'petani')
-                                    <span class="inline-flex items-center rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/10">Petani</span>
+                                    <span class="inline-flex items-center rounded bg-exportani-mint/15 px-1.5 py-0.5 text-[10px] font-bold text-exportani-accent border border-exportani-mint/20">Petani</span>
                                 @else
                                     <span class="inline-flex items-center rounded bg-sky-50 px-1.5 py-0.5 text-[10px] font-medium text-sky-700 ring-1 ring-inset ring-sky-600/10">Eksportir</span>
                                 @endif
@@ -78,7 +78,7 @@
         </div>
 
         <!-- Chat Room -->
-        <div class="flex-1 flex flex-col bg-stone-100/30 {{ !isset($conversation) ? 'hidden md:flex' : 'flex' }}">
+        <div class="flex-1 flex flex-col bg-exportani-background/30 {{ !isset($conversation) ? 'hidden md:flex' : 'flex' }}">
             @if(isset($conversation))
                 @php
                     $opponent = Auth::id() === $conversation->farmer_id ? $conversation->exporter : $conversation->farmer;
@@ -101,7 +101,7 @@
                                 </span>
                                 @if($conversation->product)
                                     <span class="text-xs text-stone-300">•</span>
-                                    <a href="{{ route('products.show', $conversation->product) }}" class="text-xs text-emerald-600 hover:underline inline-flex items-center gap-0.5">
+                                    <a href="{{ route('products.show', $conversation->product) }}" class="text-xs text-exportani-primary hover:underline inline-flex items-center gap-0.5">
                                         Percakapan terkait: {{ $conversation->product->nama_produk }}
                                     </a>
                                 @endif
@@ -128,13 +128,13 @@
                         @endphp
                         <div class="flex {{ $isMe ? 'justify-end' : 'justify-start' }}">
                             <div class="max-w-[70%] flex flex-col {{ $isMe ? 'items-end' : 'items-start' }}">
-                                <div class="rounded-2xl px-4 py-2.5 text-sm shadow-sm {{ $isMe ? 'bg-emerald-600 text-white rounded-tr-none' : 'bg-white text-stone-800 border border-stone-200/80 rounded-tl-none' }}">
+                                <div class="rounded-2xl px-4 py-2.5 text-sm shadow-sm {{ $isMe ? 'bg-exportani-primary text-white rounded-tr-none' : 'bg-white text-exportani-text border border-exportani-border rounded-tl-none' }}">
                                     <p class="whitespace-pre-wrap leading-relaxed">{{ $msg->message }}</p>
                                 </div>
                                 <span class="text-[10px] text-stone-400 mt-1 px-1">
                                     {{ $msg->created_at->format('H:i') }}
                                     @if($isMe)
-                                        <span class="ml-1 text-emerald-600 font-semibold">{{ $msg->is_read ? 'Dibaca' : 'Terkirim' }}</span>
+                                        <span class="ml-1 text-exportani-primary font-semibold">{{ $msg->is_read ? 'Dibaca' : 'Terkirim' }}</span>
                                     @endif
                                 </span>
                             </div>
@@ -155,8 +155,8 @@
                     @else
                         <form method="POST" action="{{ route('chat.store', $conversation) }}" class="flex items-center gap-2">
                             @csrf
-                            <input type="text" name="message" required placeholder="Tulis pesan Anda..." autocomplete="off" class="flex-1 rounded-xl border border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500">
-                            <button type="submit" class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 shadow transition-colors shrink-0">
+                            <input type="text" name="message" required placeholder="Tulis pesan Anda..." autocomplete="off" class="flex-1 rounded-xl border border-stone-200 px-4 py-2.5 text-sm text-stone-800 focus:outline-none focus:ring-1 focus:ring-exportani-primary focus:border-exportani-primary">
+                            <button type="submit" class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-exportani-primary text-white hover:bg-exportani-dark shadow transition-colors shrink-0">
                                 <svg class="h-5 w-5 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                                 </svg>
@@ -186,7 +186,7 @@
                             
                             <div>
                                 <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">Alasan Pelaporan</label>
-                                <select name="reason" required class="w-full rounded-lg border border-stone-200 text-sm text-stone-800 py-2.5 px-3 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500">
+                                <select name="reason" required class="w-full rounded-lg border border-stone-200 text-sm text-stone-800 py-2.5 px-3 focus:outline-none focus:ring-1 focus:ring-exportani-primary focus:border-exportani-primary">
                                     <option value="spam">Spam / Pesan Bertubi-tubi</option>
                                     <option value="fraud">Penipuan / Fraud</option>
                                     <option value="harassment">Pelecehan / Kata-kata Tidak Layak</option>
@@ -197,7 +197,7 @@
                             
                             <div>
                                 <label class="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">Deskripsi Masalah</label>
-                                <textarea name="description" required rows="4" minlength="10" placeholder="Jelaskan detail pelanggaran agar admin dapat mengevaluasi..." class="w-full rounded-lg border border-stone-200 text-sm text-stone-800 py-2 px-3 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"></textarea>
+                                <textarea name="description" required rows="4" minlength="10" placeholder="Jelaskan detail pelanggaran agar admin dapat mengevaluasi..." class="w-full rounded-lg border border-stone-200 text-sm text-stone-800 py-2 px-3 focus:outline-none focus:ring-1 focus:ring-exportani-primary focus:border-exportani-primary"></textarea>
                             </div>
                             
                             <div class="flex items-center justify-end gap-3 pt-2">

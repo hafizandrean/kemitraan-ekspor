@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">Rekomendasi Produk</h2>
-            <p class="mt-1 text-sm text-stone-600">Pilih produk yang ditampilkan di halaman utama dan bagian rekomendasi eksportir.</p>
+            <h2 class="font-display text-2xl font-semibold text-exportani-text tracking-tight">Rekomendasi Produk</h2>
+            <p class="mt-1 text-sm text-exportani-secondaryText">Pilih produk yang ditampilkan di halaman utama dan bagian rekomendasi eksportir.</p>
         </div>
     </x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-6">
         @if (session('success'))
-            <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">{{ session('success') }}</div>
+            <div class="rounded-xl border border-exportani-mint/30 bg-exportani-mint/10 px-4 py-3 text-sm font-medium text-exportani-accent shadow-sm">{{ session('success') }}</div>
         @endif
 
         <div class="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
@@ -20,7 +20,7 @@
             <x-primary-button type="submit">Cari</x-primary-button>
         </form>
 
-        <div class="rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm divide-y divide-stone-100">
+        <div class="rounded-2xl border border-exportani-border bg-white overflow-hidden shadow-sm divide-y divide-stone-100">
             @forelse ($products as $product)
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5">
                     <div>

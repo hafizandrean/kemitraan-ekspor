@@ -38,7 +38,7 @@
 
         <div class="mt-4">
             <label for="role">Pilih Role</label>
-            <select id="role" name="role" required class="block mt-1 w-full rounded-lg border-stone-300 bg-white text-stone-900 shadow-sm focus:border-emerald-500 focus:ring-emerald-500">
+            <select id="role" name="role" required class="block mt-1 w-full rounded-lg border-stone-300 bg-white text-stone-900 shadow-sm focus:border-exportani-primary focus:ring-exportani-primary">
                 <option value="petani" @selected(old('role', 'petani') === 'petani')>Petani</option>
                 <option value="eksportir" @selected(old('role') === 'eksportir')>Eksportir</option>
             </select>

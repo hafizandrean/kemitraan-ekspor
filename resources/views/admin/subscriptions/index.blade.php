@@ -2,16 +2,16 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">Monitoring Transaksi & Langganan</h2>
-                <p class="mt-1 text-sm text-stone-600">Audit real-time transaksi otomatis Payment Gateway Midtrans dan status Premium pengguna.</p>
+                <h2 class="font-display text-2xl font-semibold text-exportani-text tracking-tight">Monitoring Transaksi & Langganan</h2>
+                <p class="mt-1 text-sm text-exportani-secondaryText">Audit real-time transaksi otomatis Payment Gateway Midtrans dan status Premium pengguna.</p>
             </div>
         </div>
     </x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
         @if(session('success'))
-            <div class="rounded-xl border border-emerald-250 bg-emerald-50/60 p-4 text-xs text-emerald-900 shadow-sm flex items-start gap-2.5">
-                <svg class="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="rounded-xl border border-exportani-mint/30 bg-exportani-mint/10 p-4 text-xs text-exportani-accent shadow-sm flex items-start gap-2.5">
+                <svg class="h-4 w-4 text-exportani-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div class="font-medium">{{ session('success') }}</div>
@@ -29,13 +29,13 @@
                         Log Transaksi Midtrans Sandbox
                     </h3>
                 </div>
-                <span class="text-xs font-semibold bg-emerald-50 border border-emerald-200 text-emerald-800 px-3 py-1 rounded-full flex items-center gap-1.5">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-semibold bg-exportani-mint/15 border border-exportani-mint/20 text-exportani-accent px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span class="h-2 w-2 rounded-full bg-exportani-primary animate-pulse"></span>
                     Sistem Otomatis Aktif
                 </span>
             </div>
             
-            <div class="rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm">
+            <div class="rounded-2xl border border-exportani-border bg-white overflow-hidden shadow-sm">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -95,7 +95,7 @@
                                     <td class="p-4">
                                         @php
                                             $color = match($sub->status) {
-                                                'active' => 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                                                'active' => 'bg-exportani-mint/15 text-exportani-accent border-exportani-mint/20',
                                                 'paid' => 'bg-sky-50 text-sky-800 border-sky-200',
                                                 'pending' => 'bg-amber-50 text-amber-800 border-amber-200 animate-pulse',
                                                 'failed' => 'bg-red-50 text-red-800 border-red-200',

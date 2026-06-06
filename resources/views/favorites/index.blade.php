@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <h2 class="font-display text-2xl font-semibold text-stone-900 tracking-tight">
+            <h2 class="font-display text-2xl font-semibold text-exportani-text tracking-tight">
                 Produk Favorit
             </h2>
-            <p class="mt-1 text-sm text-stone-600">
+            <p class="mt-1 text-sm text-exportani-secondaryText">
                 Daftar produk yang kamu simpan.
             </p>
         </div>
@@ -14,14 +14,14 @@
         <div class="max-w-4xl mx-auto space-y-4">
 
             @if (session('success'))
-                <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+                <div class="rounded-xl border border-exportani-mint/30 bg-exportani-mint/10 px-4 py-3 text-sm font-medium text-exportani-accent shadow-sm">
                     {{ session('success') }}
                 </div>
             @endif
 
             @forelse($products as $product)
 
-                <div class="rounded-xl border border-stone-200 bg-white p-5 shadow-sm hover:shadow-md transition">
+                <div class="rounded-2xl border border-exportani-border bg-white p-5 shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300">
 
                     <a href="{{ route('products.show', $product) }}" class="block">
 
@@ -37,7 +37,7 @@
                             Lokasi: {{ $product->lokasi }}
                         </p>
 
-                        <p class="mt-2 text-lg font-bold text-emerald-600">
+                        <p class="mt-2 text-lg font-bold text-exportani-primary">
                             Rp {{ number_format($product->harga, 0, ',', '.') }}
                         </p>
 

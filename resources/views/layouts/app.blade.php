@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'EXPORTANI') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|fraunces:600,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&display=swap" rel="stylesheet" />
 
         @php
             $hasViteAssets = file_exists(public_path('hot')) || file_exists(public_path('build/manifest.json'));
@@ -19,11 +19,29 @@
             <script src="https://cdn.tailwindcss.com"></script>
             <script>
                 tailwind.config = {
+                    darkMode: 'class',
                     theme: {
                         extend: {
                             fontFamily: {
-                                sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                                display: ['Fraunces', 'Georgia', 'serif'],
+                                sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                                display: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                            },
+                            colors: {
+                                exportani: {
+                                    dark: '#005700',
+                                    primary: '#2F7226',
+                                    mint: '#74C690',
+                                    teal: '#3AA68B',
+                                    accent: '#1F6F63',
+                                    background: '#F4F6F5',
+                                    text: '#1F2937',
+                                    secondaryText: '#6B7280',
+                                    border: '#E5E7EB',
+                                },
+                            },
+                            borderRadius: {
+                                'xl': '12px',
+                                '2xl': '16px',
                             },
                         },
                     },
@@ -32,12 +50,12 @@
             <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         @endif
     </head>
-    <body class="font-sans antialiased text-stone-800 min-h-screen bg-gradient-to-b from-stone-50 via-emerald-50/30 to-stone-100">
+    <body class="font-sans antialiased text-exportani-text bg-exportani-background min-h-screen">
         <div class="min-h-screen flex flex-col">
             @include('layouts.navigation')
 
             @if (isset($header))
-                <header class="border-b border-emerald-100/80 bg-white/75 backdrop-blur-md">
+                <header class="border-b border-exportani-border bg-white/75 backdrop-blur-md">
                     <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

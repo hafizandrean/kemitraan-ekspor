@@ -20,12 +20,12 @@
                     <x-input-label for="nama_produk" value="Nama produk" />
                     <x-text-input id="nama_produk" name="nama_produk" type="text" class="mt-1.5 block w-full"
                         :value="old('nama_produk', $product?->nama_produk)" required minlength="3" maxlength="255" />
-                    <p class="mt-1 text-xs text-stone-500">Min 3 karakter. Huruf, angka, spasi, tanda hubung.</p>
+                    <p class="mt-1 text-xs text-exportani-secondaryText">Min 3 karakter. Huruf, angka, spasi, tanda hubung.</p>
                     <x-input-error class="mt-2" :messages="$errors->get('nama_produk')" />
                 </div>
                 <div>
                     <x-input-label for="kategori_id" value="Kategori" />
-                    <select id="kategori_id" name="kategori_id" class="mt-1.5 block w-full rounded-lg border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" required>
+                    <select id="kategori_id" name="kategori_id" class="mt-1.5 block w-full rounded-lg border-exportani-border shadow-sm focus:border-exportani-primary focus:ring-exportani-primary bg-white text-exportani-text text-sm" required>
                         <option value="" disabled @selected(!old('kategori_id', $product?->kategori_id))>Pilih kategori...</option>
                         @foreach($categories as $kategori)
                             <option value="{{ $kategori->id }}" @selected(old('kategori_id', $product?->kategori_id) == $kategori->id)>{{ $kategori->name }}</option>
@@ -41,7 +41,7 @@
                 <div>
                     <x-input-label for="harga_display" value="Harga per kg" />
                     <div class="relative mt-1.5">
-                        <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-semibold text-stone-500">Rp</span>
+                        <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-sm font-semibold text-exportani-secondaryText">Rp</span>
                         <input
                             id="harga_display"
                             type="text"
@@ -49,7 +49,7 @@
                             data-format-ribuan
                             data-target-name="harga"
                             value="{{ $hargaDisplay }}"
-                            class="block w-full rounded-lg border-stone-300 pl-10 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+                            class="block w-full rounded-lg border-exportani-border pl-10 shadow-sm focus:border-exportani-primary focus:ring-exportani-primary bg-white text-exportani-text text-sm"
                             placeholder="0"
                             required
                         >
@@ -68,12 +68,12 @@
                             data-format-ribuan
                             data-target-name="jumlah"
                             value="{{ $jumlahDisplay }}"
-                            class="block w-full rounded-l-lg border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
+                            class="block w-full rounded-l-lg border-exportani-border shadow-sm focus:border-exportani-primary focus:ring-exportani-primary bg-white text-exportani-text text-sm"
                             placeholder="0"
                             required
                         >
                         <input type="hidden" name="jumlah" id="jumlah" value="{{ old('jumlah', $product?->jumlah) }}">
-                        <select name="satuan" class="rounded-r-lg border border-l-0 border-stone-300 bg-stone-50 px-3 text-sm font-medium text-stone-700 focus:border-emerald-500 focus:ring-emerald-500">
+                        <select name="satuan" class="rounded-r-lg border border-l-0 border-exportani-border bg-exportani-background px-3 text-sm font-medium text-exportani-text focus:border-exportani-primary focus:ring-exportani-primary">
                             <option value="kg" @selected($satuan === 'kg')>Kg</option>
                             <option value="ton" @selected($satuan === 'ton')>Ton</option>
                         </select>
@@ -107,27 +107,39 @@
         <x-product-form-card title="Deskripsi" icon="📄">
             <div>
                 <x-input-label for="deskripsi" value="Deskripsi produk" />
-                <textarea id="deskripsi" name="deskripsi" rows="6" class="mt-1.5 block w-full rounded-lg border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500" required placeholder="Varietas, kualitas, kapasitas bulanan, sertifikasi, dll.">{{ old('deskripsi', $product?->deskripsi) }}</textarea>
+                <textarea id="deskripsi" name="deskripsi" rows="6" class="mt-1.5 block w-full rounded-lg border-exportani-border shadow-sm focus:border-exportani-primary focus:ring-exportani-primary bg-white text-exportani-text text-sm" required placeholder="Varietas, kualitas, kapasitas bulanan, sertifikasi, dll.">{{ old('deskripsi', $product?->deskripsi) }}</textarea>
                 <x-input-error class="mt-2" :messages="$errors->get('deskripsi')" />
             </div>
         </x-product-form-card>
 
-        <div class="rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm text-amber-950">
-            <p class="font-semibold">💡 Tips jualan ekspor</p>
-            <ul class="mt-2 list-disc space-y-1 pl-5 text-amber-900/90">
-                <li>Gunakan foto terang: produk, kemasan, dan area sortir/gudang.</li>
-                <li>Deskripsikan varietas (mis. Cabe Merah Keriting grade A).</li>
-                <li>Foto iPhone (HEIC) otomatis dikonversi — tidak perlu edit manual.</li>
+        <div class="rounded-2xl border border-amber-200 bg-amber-50/40 p-6 text-sm text-amber-800 shadow-sm">
+            <p class="font-semibold text-amber-900 flex items-center gap-1.5">
+                <span class="text-base">💡</span>
+                <span>Tips jualan ekspor</span>
+            </p>
+            <ul class="mt-3 space-y-2.5 text-xs leading-relaxed text-amber-800/95 pl-1">
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5 select-none">•</span>
+                    <span>Gunakan foto terang: produk, kemasan, dan area sortir/gudang.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5 select-none">•</span>
+                    <span>Deskripsikan varietas (mis. Cabe Merah Keriting grade A).</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-amber-500 mt-0.5 select-none">•</span>
+                    <span>Foto iPhone (HEIC) otomatis dikonversi — tidak perlu edit manual.</span>
+                </li>
             </ul>
         </div>
     </div>
 </div>
 
-<div class="mt-8 flex flex-col-reverse items-center gap-3 border-t border-stone-200 pt-6 sm:flex-row sm:justify-end">
-    <a href="{{ route('petani.products.index') }}" class="inline-flex w-full items-center justify-center rounded-lg border border-stone-300 px-5 py-2.5 text-sm font-semibold text-stone-700 transition hover:bg-stone-50 sm:w-auto sm:mr-auto">
+<div class="mt-8 flex flex-col-reverse items-center gap-3 border-t border-exportani-border pt-6 sm:flex-row sm:justify-end">
+    <a href="{{ route('petani.products.index') }}" class="inline-flex w-full items-center justify-center rounded-lg border border-exportani-border bg-white px-5 py-2.5 text-xs font-semibold text-exportani-secondaryText hover:bg-exportani-background hover:text-exportani-primary transition sm:w-auto">
         Batal
     </a>
-    <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 active:scale-[0.98] sm:w-auto">
+    <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg bg-exportani-primary px-6 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-exportani-dark focus:outline-none focus:ring-2 focus:ring-exportani-primary focus:ring-offset-2 active:scale-[0.98] sm:w-auto">
         {{ $isEdit ? 'Simpan perubahan' : 'Simpan produk' }}
     </button>
 </div>
