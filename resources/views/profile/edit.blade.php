@@ -120,11 +120,33 @@
                 </div>
             </div>
 
+            @php
+                $card1Url = '#';
+                if ($user->role === 'petani') {
+                    $card1Url = route('petani.products.index');
+                } elseif ($user->role === 'eksportir') {
+                    $card1Url = route('favorites.index');
+                }
+
+                $card2Url = '#';
+                if ($user->role === 'petani') {
+                    $card2Url = route('requests.index');
+                } elseif ($user->role === 'eksportir') {
+                    $card2Url = route('partnerships.history');
+                }
+
+                $card3Url = '#';
+                if ($user->role !== 'admin') {
+                    $card3Url = route('chat.index');
+                }
+            @endphp
+
             <!-- Account Overview Section -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <!-- Stat Card 1 -->
-                <div class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 transition duration-150 hover:shadow-md">
-                    <div class="flex-shrink-0 bg-exportani-mint/15 text-exportani-accent p-3.5 rounded-2xl">
+                <a href="{{ $card1Url !== '#' ? $card1Url : 'javascript:void(0)' }}" 
+                   class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 {{ $card1Url !== '#' ? 'transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-exportani-primary/40 group' : 'cursor-default' }}">
+                    <div class="flex-shrink-0 bg-exportani-mint/15 text-exportani-accent p-3.5 rounded-2xl {{ $card1Url !== '#' ? 'transition-transform duration-300 group-hover:scale-110' : '' }}">
                         @if ($user->role === 'eksportir')
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
@@ -149,11 +171,12 @@
                             @endif
                         </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Stat Card 2 -->
-                <div class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 transition duration-150 hover:shadow-md">
-                    <div class="flex-shrink-0 bg-sky-50 text-sky-850 p-3.5 rounded-2xl">
+                <a href="{{ $card2Url !== '#' ? $card2Url : 'javascript:void(0)' }}" 
+                   class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 {{ $card2Url !== '#' ? 'transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-exportani-primary/40 group' : 'cursor-default' }}">
+                    <div class="flex-shrink-0 bg-sky-50 text-sky-850 p-3.5 rounded-2xl {{ $card2Url !== '#' ? 'transition-transform duration-300 group-hover:scale-110' : '' }}">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
@@ -172,11 +195,12 @@
                             @endif
                         </p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Stat Card 3 -->
-                <div class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 transition duration-150 hover:shadow-md">
-                    <div class="flex-shrink-0 bg-amber-50 text-amber-705 p-3.5 rounded-2xl">
+                <a href="{{ $card3Url !== '#' ? $card3Url : 'javascript:void(0)' }}" 
+                   class="bg-white shadow-sm border border-exportani-border border-l-4 border-l-exportani-mint sm:rounded-2xl p-5 flex items-center gap-4 {{ $card3Url !== '#' ? 'transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-exportani-primary/40 group' : 'cursor-default' }}">
+                    <div class="flex-shrink-0 bg-amber-50 text-amber-705 p-3.5 rounded-2xl {{ $card3Url !== '#' ? 'transition-transform duration-300 group-hover:scale-110' : '' }}">
                         @if ($user->role === 'admin')
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -199,7 +223,7 @@
                             @endif
                         </p>
                     </div>
-                </div>
+                </a>
             </div>
 
             {{-- Status Langganan - Full Width untuk 12-kolom grid internal --}}

@@ -11,6 +11,7 @@ class FavoriteController extends Controller
     {
         $products = $request->user()
             ->favorites()
+            ->with(['category', 'owner'])
             ->latest('favorites.created_at')
             ->get();
 

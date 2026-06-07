@@ -39,14 +39,16 @@
                     </div>
 
                     <!-- Right: Info/Call-to-Action (Fills empty banner space) -->
-                    <div class="hidden sm:block text-right border-l border-white/10 pl-6 py-1 max-w-[260px]">
-                        @if(auth()->user()->isPremium())
-                            <span class="text-[10px] font-extrabold text-[#F4D06F] uppercase tracking-widest block">Premium Member</span>
+                    @if(auth()->user()->isPremium())
+                        <a href="{{ route('premium.index') }}" class="hidden sm:block text-right border-l border-white/10 pl-6 py-1 max-w-[260px] hover:opacity-85 transition-all duration-200 group">
+                            <span class="text-[10px] font-extrabold text-[#F4D06F] uppercase tracking-widest block group-hover:underline">Premium Member</span>
                             <p class="text-sm text-white mt-1.5 font-semibold leading-relaxed">Akses Fitur Tanpa Batas</p>
                             @if(auth()->user()->premium_expires_at)
                                 <p class="text-xs text-white/80 mt-0.5">Aktif hingga <span class="font-semibold text-white/95">{{ auth()->user()->premium_expires_at->format('d M Y') }}</span></p>
                             @endif
-                        @else
+                        </a>
+                    @else
+                        <div class="hidden sm:block text-right border-l border-white/10 pl-6 py-1 max-w-[260px]">
                             <span class="text-[9px] font-extrabold text-white/50 uppercase tracking-widest block">Free Tier</span>
                             <p class="text-xs text-white/90 mt-1.5 font-semibold leading-normal">Upgrade ke Premium untuk membuka semua limit ekspor.</p>
                             <a href="{{ route('premium.index') }}" class="inline-flex items-center gap-1 mt-2 text-[10px] font-extrabold text-[#F4D06F] hover:text-[#E6B85C] transition">
@@ -55,51 +57,51 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                                 </svg>
                             </a>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
             @if($dashboardType === 'petani')
                 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                     <!-- Total Produk -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('petani.products.index') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Total Produk</p>
                             <p class="mt-2 text-3xl font-black text-exportani-text">{{ $stats['total_produk'] }}</p>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                     <!-- Produk Aktif -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('petani.products.index') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Produk Kategori Aktif</p>
                             <p class="mt-2 text-3xl font-black text-exportani-text">{{ $stats['produk_aktif'] }}</p>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                     <!-- Pengajuan Masuk -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('requests.index') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Permintaan Kerja Sama</p>
                             <p class="mt-2 text-3xl font-black text-exportani-text">{{ $stats['incoming_total'] }}</p>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                     <!-- Accepted / Rejected -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('partnerships.history') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Diterima / Ditolak</p>
                             <div class="mt-2 flex items-baseline gap-2">
@@ -108,12 +110,12 @@
                                 <span class="text-xl font-bold text-rose-500">{{ $stats['incoming_rejected'] }}</span>
                             </div>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="grid gap-6 lg:grid-cols-2">
@@ -123,13 +125,23 @@
                             <ul class="mt-4 space-y-3 text-sm text-exportani-secondaryText">
                                 <li class="flex justify-between border-b border-exportani-border pb-2">
                                     <span>Produk Terakhir:</span>
-                                    <span class="font-semibold text-exportani-text">{{ $latest['produk']->nama_produk ?? '-' }}</span>
+                                    @if(isset($latest['produk']))
+                                        <a href="{{ route('petani.products.edit', $latest['produk']) }}" class="font-semibold text-exportani-primary hover:text-exportani-dark hover:underline transition-colors">
+                                            {{ $latest['produk']->nama_produk }}
+                                        </a>
+                                    @else
+                                        <span class="font-semibold text-exportani-text">-</span>
+                                    @endif
                                 </li>
                                 <li class="flex justify-between">
                                     <span>Kerja Sama Terbaru:</span>
-                                    <span class="font-semibold text-exportani-text">
-                                        {{ $latest['kerja_sama']?->product?->nama_produk ?? '-' }}
-                                    </span>
+                                    @if(isset($latest['kerja_sama']))
+                                        <a href="{{ route('partnerships.show', $latest['kerja_sama']) }}" class="font-semibold text-exportani-primary hover:text-exportani-dark hover:underline transition-colors">
+                                            {{ $latest['kerja_sama']->product->nama_produk ?? '-' }}
+                                        </a>
+                                    @else
+                                        <span class="font-semibold text-exportani-text">-</span>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -137,11 +149,11 @@
                     <div class="rounded-2xl border border-exportani-border bg-white p-5 shadow-sm flex flex-col justify-between">
                         <div>
                             <p class="text-sm font-semibold text-exportani-text">Akses Cepat</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <a href="{{ route('petani.products.create') }}" class="rounded-lg bg-exportani-primary px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-exportani-dark transition">Tambah Produk</a>
-                                <a href="{{ route('requests.index') }}" class="rounded-lg border border-exportani-border px-3 py-2 text-xs font-semibold text-exportani-text hover:bg-exportani-background transition">Permintaan Masuk</a>
-                                <a href="{{ route('partnerships.history') }}" class="rounded-lg border border-exportani-border px-3 py-2 text-xs font-semibold text-exportani-text hover:bg-exportani-background transition">Riwayat Kerja Sama</a>
-                                <a href="{{ route('premium.index') }}" class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 hover:bg-amber-100 transition">
+                            <div class="mt-4 grid grid-cols-2 gap-3">
+                                <a href="{{ route('petani.products.create') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Tambah Produk</a>
+                                <a href="{{ route('requests.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Permintaan Masuk</a>
+                                <a href="{{ route('partnerships.history') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Riwayat Kerja Sama</a>
+                                <a href="{{ route('premium.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">
                                     {{ auth()->user()->isPremium() ? 'Kelola Premium' : 'Upgrade Premium' }}
                                 </a>
                             </div>
@@ -158,43 +170,43 @@
             @elseif($dashboardType === 'eksportir')
                 <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     <!-- Jumlah Pengajuan -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('partnerships.history') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Jumlah Pengajuan</p>
                             <p class="mt-2 text-3xl font-black text-exportani-text">{{ $stats['total_pengajuan'] }}</p>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                     <!-- Kerja Sama Aktif -->
-                    <div class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('partnerships.history') }}" class="rounded-2xl border-l-4 border-l-exportani-mint border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Kerja Sama Aktif</p>
                             <p class="mt-2 text-3xl font-black text-exportani-text">{{ $stats['kerja_sama_aktif'] }}</p>
                         </div>
-                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent">
+                        <div class="p-3 bg-exportani-mint/15 rounded-xl text-exportani-accent transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                     <!-- Limit Free User -->
-                    <div class="rounded-2xl border-l-4 border-l-amber-300 border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md transition duration-200">
+                    <a href="{{ route('premium.index') }}" class="rounded-2xl border-l-4 border-l-amber-300 border-y border-r border-exportani-border bg-white p-5 shadow-sm flex items-center justify-between hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group">
                         <div>
                             <p class="text-xs font-semibold text-exportani-secondaryText uppercase tracking-wide">Limit Free User</p>
                             <p class="mt-2 text-base font-bold text-exportani-text">
                                 {{ is_null($account['remaining_limit'] ?? null) ? 'Akses Premium Unlimited' : 'Sisa '.$account['remaining_limit'].' Pengajuan' }}
                             </p>
                         </div>
-                        <div class="p-3 bg-amber-50 rounded-xl text-amber-600">
+                        <div class="p-3 bg-amber-50 rounded-xl text-amber-600 transition-transform duration-300 group-hover:scale-110">
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="grid gap-6 lg:grid-cols-2">
@@ -204,11 +216,23 @@
                             <ul class="mt-4 space-y-3 text-sm text-exportani-secondaryText">
                                 <li class="flex justify-between border-b border-exportani-border pb-2">
                                     <span>Pengajuan Terbaru:</span>
-                                    <span class="font-semibold text-exportani-text">{{ $latest['pengajuan']?->product?->nama_produk ?? '-' }}</span>
+                                    @if(isset($latest['pengajuan']))
+                                        <a href="{{ route('partnerships.show', $latest['pengajuan']) }}" class="font-semibold text-exportani-primary hover:text-exportani-dark hover:underline transition-colors">
+                                            {{ $latest['pengajuan']->product->nama_produk ?? '-' }}
+                                        </a>
+                                    @else
+                                        <span class="font-semibold text-exportani-text">-</span>
+                                    @endif
                                 </li>
                                 <li class="flex justify-between">
                                     <span>Favorit Terbaru:</span>
-                                    <span class="font-semibold text-exportani-text">{{ $latest['favorit']?->nama_produk ?? '-' }}</span>
+                                    @if(isset($latest['favorit']))
+                                        <a href="{{ route('products.show', $latest['favorit']) }}" class="font-semibold text-exportani-primary hover:text-exportani-dark hover:underline transition-colors">
+                                            {{ $latest['favorit']->nama_produk }}
+                                        </a>
+                                    @else
+                                        <span class="font-semibold text-exportani-text">-</span>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -216,9 +240,9 @@
                     <div class="rounded-2xl border border-exportani-border bg-white p-5 shadow-sm flex flex-col justify-between">
                         <div>
                             <p class="text-sm font-semibold text-exportani-text">Akses Cepat</p>
-                            <div class="mt-4 flex flex-wrap gap-2">
-                                <a href="{{ route('products.index') }}" class="rounded-lg bg-exportani-primary px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-exportani-dark transition">Cari Produk</a>
-                                <a href="{{ route('premium.index') }}" class="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 hover:bg-amber-100 transition">
+                            <div class="mt-4 grid grid-cols-2 gap-3">
+                                <a href="{{ route('products.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Cari Produk</a>
+                                <a href="{{ route('premium.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">
                                     {{ auth()->user()->isPremium() ? 'Kelola Premium' : 'Upgrade Premium' }}
                                 </a>
                             </div>
@@ -294,11 +318,11 @@
 
                 <div class="rounded-2xl border border-exportani-border bg-white p-5 shadow-sm mt-4">
                     <p class="text-sm font-semibold text-exportani-text mb-4">Kelola Fitur</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="{{ route('admin.categories.index') }}" class="rounded-lg bg-exportani-primary px-3.5 py-2 text-xs font-semibold text-white hover:bg-exportani-dark transition">Kategori Produk</a>
-                        <a href="{{ route('admin.recommendations.index') }}" class="rounded-lg border border-exportani-border px-3.5 py-2 text-xs font-semibold text-exportani-text hover:bg-exportani-background transition">Rekomendasi Produk</a>
-                        <a href="{{ route('admin.trusted-farmers.index') }}" class="rounded-lg border border-exportani-border px-3.5 py-2 text-xs font-semibold text-exportani-text hover:bg-exportani-background transition">Petani Tepercaya</a>
-                        <a href="{{ route('admin.premium-verifications.index') }}" class="rounded-lg border border-exportani-border px-3.5 py-2 text-xs font-semibold text-exportani-text hover:bg-exportani-background transition">Monitor Transaksi</a>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <a href="{{ route('admin.categories.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3.5 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Kategori Produk</a>
+                        <a href="{{ route('admin.recommendations.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3.5 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Rekomendasi Produk</a>
+                        <a href="{{ route('admin.trusted-farmers.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3.5 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Petani Tepercaya</a>
+                        <a href="{{ route('admin.premium-verifications.index') }}" class="flex items-center justify-center rounded-xl bg-exportani-primary px-3.5 py-2.5 text-center text-xs font-semibold text-white hover:bg-exportani-dark transition-all duration-200 shadow-sm hover:shadow">Monitor Transaksi</a>
                     </div>
                 </div>
             @endif

@@ -11,7 +11,7 @@
     </x-slot>
 
     <div class="py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto space-y-4">
+        <div class="max-w-7xl mx-auto space-y-6">
 
             @if (session('success'))
                 <div class="rounded-xl border border-exportani-mint/30 bg-exportani-mint/10 px-4 py-3 text-sm font-medium text-exportani-accent shadow-sm">
@@ -19,51 +19,19 @@
                 </div>
             @endif
 
-            @forelse($products as $product)
-
-                <div class="rounded-2xl border border-exportani-border bg-white p-5 shadow-sm hover:shadow-md hover:scale-[1.01] transition-all duration-300">
-
-                    <a href="{{ route('products.show', $product) }}" class="block">
-
-                        <h3 class="text-lg font-semibold text-stone-900">
-                            {{ $product->nama_produk }}
-                        </h3>
-
-                        <p class="mt-2 text-sm text-stone-600">
-                            Jumlah: {{ $product->jumlah }}
-                        </p>
-
-                        <p class="text-sm text-stone-600">
-                            Lokasi: {{ $product->lokasi }}
-                        </p>
-
-                        <p class="mt-2 text-lg font-bold text-exportani-primary">
-                            Rp {{ number_format($product->harga, 0, ',', '.') }}
-                        </p>
-
-                    </a>
-
-                    <form action="{{ route('favorites.toggle', $product) }}" method="POST" class="mt-4">
-                        @csrf
-
-                        <button
-                            type="submit"
-                            class="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition">
-                            Hapus dari Favorit
-                        </button>
-                    </form>
-
-                </div>
-
-            @empty
-
+            @if($products->isEmpty())
                 <div class="rounded-xl border border-dashed border-stone-300 bg-stone-50 p-10 text-center">
                     <p class="text-stone-600">
                         Belum ada produk favorit.
                     </p>
                 </div>
-
-            @endforelse
+            @else
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    @foreach($products as $product)
+                        <x-product-card :product="$product" />
+                    @endforeach
+                </div>
+            @endif
 
         </div>
     </div>

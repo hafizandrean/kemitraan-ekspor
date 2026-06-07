@@ -74,10 +74,6 @@
                         </span>
                     @endif
                 </a>
-                <!-- Reduced padding & badge sizes for a more compact SaaS layout -->
-                <span class="inline-flex items-center rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-white/90 ring-1 ring-white/15 uppercase tracking-wide">
-                    {{ Auth::user()->role === 'petani' ? 'Petani' : (Auth::user()->role === 'eksportir' ? 'Eksportir' : 'Admin') }}
-                </span>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button type="button" class="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-xs font-semibold text-white bg-white/10 ring-1 ring-white/15 hover:bg-white/15 focus:outline-none transition">
