@@ -56,7 +56,11 @@
             <div class="hidden md:flex md:items-center md:gap-3">
                 <a href="{{ route('chat.index') }}" class="relative inline-flex items-center justify-center h-7 w-7 rounded-lg bg-white/10 ring-1 ring-white/15 text-white hover:bg-white/15 transition" title="Chat">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+<<<<<<< Updated upstream
                         <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+=======
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+>>>>>>> Stashed changes
                     </svg>
                     @if(($unreadMessagesCount ?? 0) > 0)
                         <span class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-4 h-4 rounded-full bg-amber-500 px-1 text-[8px] font-bold text-stone-900">
@@ -134,7 +138,11 @@
                 <x-responsive-nav-link :href="route('chat.index')" :active="request()->routeIs('chat.*')" dark-nav>
                     {{ __('Chat') }}
                     @if(($unreadMessagesCount ?? 0) > 0)
+<<<<<<< Updated upstream
                         <span class="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-stone-900 leading-none">
+=======
+                        <span class="ml-1 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-amber-500 text-stone-900 leading-none">
+>>>>>>> Stashed changes
                             {{ $unreadMessagesCount }}
                         </span>
                     @endif
@@ -151,7 +159,11 @@
                 <x-responsive-nav-link :href="route('chat.index')" :active="request()->routeIs('chat.*')" dark-nav>
                     {{ __('Chat') }}
                     @if(($unreadMessagesCount ?? 0) > 0)
+<<<<<<< Updated upstream
                         <span class="ml-1 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-stone-900 leading-none">
+=======
+                        <span class="ml-1 px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-amber-500 text-stone-900 leading-none">
+>>>>>>> Stashed changes
                             {{ $unreadMessagesCount }}
                         </span>
                     @endif

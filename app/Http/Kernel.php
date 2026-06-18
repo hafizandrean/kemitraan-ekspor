@@ -63,7 +63,10 @@ class Kernel extends HttpKernel
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
         'role' => \App\Http\Middleware\EnsureRole::class,
         'premium' => \App\Http\Middleware\PremiumMiddleware::class,
+<<<<<<< Updated upstream
         'premium_exporter' => \App\Http\Middleware\EnsurePremiumExporter::class,
+=======
+>>>>>>> Stashed changes
         'not_suspended' => \App\Http\Middleware\EnsureNotSuspended::class,
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,

@@ -16,6 +16,10 @@ class Conversation extends Model
         'exporter_id',
         'product_id',
         'last_message_at',
+<<<<<<< Updated upstream
+=======
+        'status', // active, closed
+>>>>>>> Stashed changes
     ];
 
     protected $casts = [
@@ -82,6 +86,7 @@ class Conversation extends Model
     }
 
     /**
+<<<<<<< Updated upstream
      * Get the latest message in this conversation.
      */
     public function latestMessage(): ?Message
@@ -89,3 +94,12 @@ class Conversation extends Model
         return $this->messages()->latest()->first();
     }
 }
+=======
+     * Get the latest message.
+     */
+    public function latestMessage()
+    {
+        return $this->messages()->latest()->first();
+    }
+}
+>>>>>>> Stashed changes

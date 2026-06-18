@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreignId('exporter_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->timestamp('last_message_at')->nullable();
+<<<<<<< Updated upstream
+=======
+            $table->string('status')->default('active'); // active, closed
+>>>>>>> Stashed changes
             $table->timestamps();
         });
 
@@ -34,8 +38,13 @@ return new class extends Migration
             $table->foreignId('reporter_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('reported_user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('conversation_id')->nullable()->constrained('conversations')->nullOnDelete();
+<<<<<<< Updated upstream
             $table->string('reason'); // e.g. spam, fraud, harassment, inappropriate, other
             $table->text('description');
+=======
+            $table->string('reason'); // spam, fraud, harassment, inappropriate, other
+            $table->text('description')->nullable();
+>>>>>>> Stashed changes
             $table->string('status')->default('pending'); // pending, dismissed, resolved
             $table->timestamps();
         });
@@ -50,4 +59,8 @@ return new class extends Migration
         Schema::dropIfExists('messages');
         Schema::dropIfExists('conversations');
     }
+<<<<<<< Updated upstream
 };
+=======
+};
+>>>>>>> Stashed changes
