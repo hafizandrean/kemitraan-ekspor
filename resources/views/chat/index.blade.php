@@ -1,17 +1,9 @@
 <x-app-layout>
-<<<<<<< Updated upstream
     <div class="h-[calc(100vh-3rem)] flex overflow-hidden bg-exportani-background" x-data="{ reportModalOpen: false }">
         
         <!-- Chat Sidebar -->
         <div class="w-full md:w-80 lg:w-96 border-r border-stone-200 bg-white flex flex-col shrink-0 {{ isset($conversation) ? 'hidden md:flex' : 'flex' }}">
             <div class="p-4 border-b border-stone-100 flex items-center justify-between bg-stone-50/50">
-=======
-    <div class="h-[calc(100vh-3rem)] flex overflow-hidden bg-stone-50" x-data="{ reportModalOpen: false }">
-        
-        <!-- Chat Sidebar -->
-        <div class="w-full md:w-80 lg:w-96 border-r border-stone-200 bg-white flex flex-col shrink-0 {{ isset($conversation) ? 'hidden md:flex' : '' }}">
-            <div class="p-4 border-b border-stone-100 flex items-center justify-between">
->>>>>>> Stashed changes
                 <h2 class="font-display text-lg font-bold text-stone-900 tracking-tight">Daftar Chat</h2>
                 @if(($unreadMessagesCount ?? 0) > 0)
                     <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">
@@ -29,36 +21,22 @@
                         $latestMsg = $conv->latestMessage();
                         $unreadCount = $conv->unreadMessagesCountFor(Auth::user());
                     @endphp
-<<<<<<< Updated upstream
                     <a href="{{ route('chat.show', $conv) }}" class="flex items-start gap-3 p-4 text-left transition hover:bg-stone-50/80 {{ $isActive ? 'bg-exportani-mint/10 border-l-4 border-exportani-primary' : '' }}">
                         <!-- Avatar -->
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-exportani-mint/15 font-bold text-exportani-accent text-sm">
-=======
-                    <a href="{{ route('chat.show', $conv) }}" class="flex items-start gap-3 p-4 text-left transition hover:bg-stone-50/80 {{ $isActive ? 'bg-emerald-50/70 border-l-4 border-emerald-600' : '' }}">
-                        <!-- Avatar -->
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 font-bold text-emerald-800 text-sm">
->>>>>>> Stashed changes
                             {{ substr($opponent->name, 0, 1) }}
                         </div>
                         
                         <!-- Details -->
                         <div class="flex-1 min-w-0">
-<<<<<<< Updated upstream
                             <div class="flex items-center justify-between mb-1">
                                 <span class="font-semibold text-stone-900 text-sm truncate pr-2">{{ $opponent->name }}</span>
                                 <span class="text-[10px] text-stone-400 shrink-0">
                                     {{ $conv->last_message_at ? $conv->last_message_at->diffForHumans() : $conv->updated_at->diffForHumans() }}
-=======
-                            <div class="flex items-center justify-between gap-1 mb-1">
-                                <h4 class="font-medium text-xs text-stone-900 truncate">{{ $opponent->name }}</h4>
-                                <span class="text-[10px] text-stone-400 whitespace-nowrap">
-                                    {{ $conv->last_message_at ? $conv->last_message_at->diffForHumans(null, true) : $conv->updated_at->diffForHumans(null, true) }}
->>>>>>> Stashed changes
                                 </span>
                             </div>
                             
                             <div class="flex items-center gap-1.5 mb-1.5">
-<<<<<<< Updated upstream
                                 @if($opponent->role === 'petani')
                                     <span class="inline-flex items-center rounded bg-exportani-mint/15 px-1.5 py-0.5 text-[10px] font-bold text-exportani-accent border border-exportani-mint/20">Petani</span>
                                 @else
@@ -67,16 +45,6 @@
                                 
                                 @if($conv->product)
                                     <span class="inline-flex items-center rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 ring-1 ring-inset ring-amber-600/10 truncate max-w-[120px]">
-=======
-                                <span class="inline-flex items-center rounded bg-stone-100 px-1 py-0.2 text-[9px] font-medium text-stone-600 uppercase tracking-wide">
-                                    {{ $opponent->role === 'petani' ? 'Petani' : 'Eksportir' }}
-                                </span>
-                                @if($opponent->isPremium())
-                                    <span class="inline-flex items-center text-[9px] font-bold text-amber-500 uppercase tracking-wide">Premium</span>
-                                @endif
-                                @if($conv->product)
-                                    <span class="inline-flex items-center rounded bg-emerald-100/50 px-1 py-0.2 text-[9px] font-medium text-emerald-800 truncate max-w-[120px]">
->>>>>>> Stashed changes
                                         {{ $conv->product->nama_produk }}
                                     </span>
                                 @endif
@@ -86,7 +54,6 @@
                                 @if($latestMsg)
                                     {{ $latestMsg->sender_id === Auth::id() ? 'Anda: ' : '' }}{{ $latestMsg->message }}
                                 @else
-<<<<<<< Updated upstream
                                     <i>Belum ada pesan</i>
                                 @endif
                             </p>
@@ -95,67 +62,36 @@
                         <!-- Unread dot -->
                         @if($unreadCount > 0)
                             <div class="mt-1 shrink-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-[10px] font-bold text-stone-900">
-=======
-                                    <span class="italic">Belum ada pesan</span>
-                                @endif
-                            </p>
-                        </div>
-
-                        <!-- Unread Count -->
-                        @if($unreadCount > 0)
-                            <div class="shrink-0 flex items-center justify-center min-w-4 h-4 rounded-full bg-amber-500 px-1 text-[9px] font-bold text-stone-900">
->>>>>>> Stashed changes
                                 {{ $unreadCount }}
                             </div>
                         @endif
                     </a>
                 @empty
-<<<<<<< Updated upstream
                     <div class="p-8 text-center text-stone-500 text-sm">
                         <svg class="mx-auto h-8 w-8 text-stone-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
                         Belum ada percakapan.
-=======
-                    <div class="p-8 text-center text-stone-500">
-                        <svg class="mx-auto h-12 w-12 text-stone-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                        </svg>
-                        <p class="text-sm">Belum ada percakapan aktif.</p>
-                        <p class="text-xs text-stone-400 mt-1">Hubungi petani langsung melalui halaman produk.</p>
->>>>>>> Stashed changes
                     </div>
                 @endforelse
             </div>
         </div>
 
         <!-- Chat Room -->
-<<<<<<< Updated upstream
         <div class="flex-1 flex flex-col bg-exportani-background/30 {{ !isset($conversation) ? 'hidden md:flex' : 'flex' }}">
-=======
-        <div class="flex-1 flex flex-col bg-stone-100/30 {{ !isset($conversation) ? 'hidden md:flex' : '' }}">
->>>>>>> Stashed changes
             @if(isset($conversation))
                 @php
                     $opponent = Auth::id() === $conversation->farmer_id ? $conversation->exporter : $conversation->farmer;
                 @endphp
-<<<<<<< Updated upstream
                 <!-- Header -->
                 <div class="h-16 px-6 border-b border-stone-200 bg-white flex items-center justify-between shrink-0">
                     <div class="flex items-center gap-3">
                         <!-- Back button for mobile -->
                         <a href="{{ route('chat.index') }}" class="md:hidden p-1.5 rounded-lg text-stone-500 hover:bg-stone-100 hover:text-stone-700 transition">
-=======
-                <!-- Room Header -->
-                <div class="h-14 border-b border-stone-200 bg-white px-4 flex items-center justify-between shadow-sm shrink-0">
-                    <div class="flex items-center gap-3">
-                        <a href="{{ route('chat.index') }}" class="md:hidden p-1.5 -ml-1 text-stone-500 hover:bg-stone-50 rounded-lg">
->>>>>>> Stashed changes
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                             </svg>
                         </a>
-<<<<<<< Updated upstream
                         
                         <div>
                             <h3 class="font-display font-bold text-stone-900">{{ $opponent->name }}</h3>
@@ -176,29 +112,6 @@
                     <!-- Actions (Report) -->
                     <div>
                         <button type="button" @click="reportModalOpen = true" class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-rose-600 border border-rose-200 rounded-lg hover:bg-rose-50 transition">
-=======
-                        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 font-bold text-emerald-800 text-xs">
-                            {{ substr($opponent->name, 0, 1) }}
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-2">
-                                <h3 class="font-semibold text-xs text-stone-900 leading-tight">{{ $opponent->name }}</h3>
-                                <span class="inline-flex items-center rounded bg-stone-100 px-1 py-0.2 text-[8px] font-bold text-stone-600 uppercase tracking-wide">
-                                    {{ $opponent->role === 'petani' ? 'Petani' : 'Eksportir' }}
-                                </span>
-                            </div>
-                            @if($conversation->product)
-                                <p class="text-[10px] text-stone-500 truncate max-w-[200px] md:max-w-md mt-0.5">
-                                    Terkait: <a href="{{ route('products.show', $conversation->product) }}" class="text-emerald-600 hover:underline font-medium">{{ $conversation->product->nama_produk }}</a>
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-
-                    <!-- Room Header Actions -->
-                    <div>
-                        <button type="button" @click="reportModalOpen = true" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg transition">
->>>>>>> Stashed changes
                             <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
@@ -207,7 +120,6 @@
                     </div>
                 </div>
 
-<<<<<<< Updated upstream
                 <!-- Messages Stream -->
                 <div class="flex-1 overflow-y-auto p-6 space-y-4">
                     @forelse($messages as $msg)
@@ -224,50 +136,16 @@
                                     @if($isMe)
                                         <span class="ml-1 text-exportani-primary font-semibold">{{ $msg->is_read ? 'Dibaca' : 'Terkirim' }}</span>
                                     @endif
-=======
-                <!-- Session flash messages -->
-                @if (session('success'))
-                    <div class="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-medium text-emerald-800">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if (session('error'))
-                    <div class="bg-red-50 border-b border-red-200 px-4 py-2 text-xs font-medium text-red-800">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
-                <!-- Message bubble stream -->
-                <div class="flex-1 overflow-y-auto p-4 space-y-4" id="messages-container" x-init="$nextTick(() => { $el.scrollTop = $el.scrollHeight })">
-                    @forelse($messages as $msg)
-                        @php
-                            $isOwn = $msg->sender_id === Auth::id();
-                        @endphp
-                        <div class="flex {{ $isOwn ? 'justify-end' : 'justify-start' }}">
-                            <div class="max-w-[75%] md:max-w-md rounded-2xl px-4 py-2.5 shadow-sm {{ $isOwn ? 'bg-emerald-600 text-white rounded-br-none' : 'bg-white border border-stone-200/80 text-stone-800 rounded-bl-none' }}">
-                                <p class="text-xs leading-relaxed break-words whitespace-pre-wrap">{{ $msg->message }}</p>
-                                <span class="block text-[9px] text-right mt-1 {{ $isOwn ? 'text-emerald-100' : 'text-stone-400' }}">
-                                    {{ $msg->created_at->format('H:i') }}
->>>>>>> Stashed changes
                                 </span>
                             </div>
                         </div>
                     @empty
-<<<<<<< Updated upstream
                         <div class="h-full flex flex-col items-center justify-center text-stone-400">
                             <p class="text-sm">Belum ada pesan. Mulai percakapan sekarang!</p>
-=======
-                        <div class="flex flex-col items-center justify-center h-full text-stone-500 py-10">
-                            <div class="bg-emerald-50 text-emerald-700 rounded-xl p-3.5 mb-3 font-semibold text-xs border border-emerald-100 text-center">
-                                Room chat dibuat secara terenkripsi dan aman.
-                            </div>
-                            <p class="text-xs italic">Kirim pesan pertama untuk memulai percakapan.</p>
->>>>>>> Stashed changes
                         </div>
                     @endforelse
                 </div>
 
-<<<<<<< Updated upstream
                 <!-- Input Form -->
                 <div class="p-4 border-t border-stone-200 bg-white shrink-0">
                     @if(Auth::user()->isSuspended())
@@ -327,100 +205,10 @@
                                 <button type="submit" class="px-4 py-2 text-sm font-semibold text-white bg-rose-600 rounded-lg hover:bg-rose-500 shadow-sm transition">Kirim Laporan</button>
                             </div>
                         </form>
-=======
-                <!-- Message composer -->
-                <div class="p-4 border-t border-stone-200 bg-white shrink-0">
-                    <form method="POST" action="{{ route('chat.store', $conversation) }}" class="flex gap-2">
-                        @csrf
-                        <input type="text" name="message" required autocomplete="off" placeholder="Tulis pesan Anda disini..." class="flex-1 rounded-xl border border-stone-200 px-4 py-2.5 text-xs text-stone-800 focus:outline-none focus:ring-1 focus:ring-emerald-600 focus:border-emerald-600 bg-stone-50/50">
-                        <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-emerald-500 focus:outline-none transition">
-                            Kirim
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Reporting Modal (Alpine.js) -->
-                <div x-show="reportModalOpen" 
-                     class="fixed inset-0 z-50 overflow-y-auto" 
-                     x-cloak
-                     style="display: none;">
-                    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-                        <div x-show="reportModalOpen"
-                             x-transition:enter="ease-out duration-300"
-                             x-transition:enter-start="opacity-0"
-                             x-transition:enter-end="opacity-100"
-                             x-transition:leave="ease-in duration-200"
-                             x-transition:leave-start="opacity-100"
-                             x-transition:leave-end="opacity-0"
-                             class="fixed inset-0 transition-opacity bg-stone-900/60 backdrop-blur-sm"
-                             @click="reportModalOpen = false"></div>
-
-                        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-
-                        <div x-show="reportModalOpen"
-                             x-transition:enter="ease-out duration-300"
-                             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                             x-transition:leave="ease-in duration-200"
-                             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                             class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-2xl shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-stone-200/80">
-                            
-                            <div class="px-6 py-5 bg-stone-50 border-b border-stone-100">
-                                <h3 class="font-display text-sm font-bold text-stone-900">Laporkan Pengguna</h3>
-                                <p class="mt-1 text-xs text-stone-500">Bantu kami menjaga keamanan komunitas EXPORTANI.</p>
-                            </div>
-
-                            <form method="POST" action="{{ route('chat.report') }}" class="p-6 space-y-4">
-                                @csrf
-                                <input type="hidden" name="conversation_id" value="{{ $conversation->id }}">
-                                <input type="hidden" name="reported_user_id" value="{{ $opponent->id }}">
-
-                                <div>
-                                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">Pihak yang Dilaporkan</label>
-                                    <div class="flex items-center gap-3 p-3 bg-stone-50 rounded-xl border border-stone-150">
-                                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-800 uppercase">
-                                            {{ substr($opponent->name, 0, 1) }}
-                                        </div>
-                                        <div>
-                                            <p class="text-xs font-semibold text-stone-900">{{ $opponent->name }}</p>
-                                            <p class="text-[10px] text-stone-500 uppercase">{{ $opponent->role }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label for="reason" class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">Alasan Pelaporan</label>
-                                    <select name="reason" id="reason" required class="w-full rounded-xl border border-stone-200 px-3 py-2 text-xs text-stone-850 bg-white focus:ring-1 focus:ring-emerald-600 focus:border-emerald-600">
-                                        <option value="spam">Spam / Pesan Berulang</option>
-                                        <option value="fraud">Penipuan / Fraud</option>
-                                        <option value="harassment">Pelecehan / Harassment</option>
-                                        <option value="inappropriate">Konten Tidak Pantas</option>
-                                        <option value="other">Alasan Lain</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="description" class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">Deskripsi Pelanggaran</label>
-                                    <textarea name="description" id="description" rows="4" required placeholder="Jelaskan secara detail tindakan atau pelanggaran yang dilakukan oleh pengguna tersebut..." class="w-full rounded-xl border border-stone-200 px-3 py-2.5 text-xs text-stone-800 bg-white focus:ring-1 focus:ring-emerald-600 focus:border-emerald-600"></textarea>
-                                </div>
-
-                                <div class="flex justify-end gap-2 border-t border-stone-100 pt-4 mt-6">
-                                    <button type="button" @click="reportModalOpen = false" class="px-4 py-2.5 text-xs font-semibold text-stone-600 hover:bg-stone-50 rounded-xl transition">
-                                        Batal
-                                    </button>
-                                    <button type="submit" class="px-4 py-2.5 text-xs font-semibold text-white bg-red-600 hover:bg-red-500 rounded-xl transition shadow-sm">
-                                        Kirim Laporan
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
->>>>>>> Stashed changes
                     </div>
                 </div>
 
             @else
-<<<<<<< Updated upstream
                 <!-- Placeholder when no conversation is selected -->
                 <div class="flex-1 flex flex-col items-center justify-center p-8 bg-stone-50 text-stone-500">
                     <svg class="h-16 w-16 text-stone-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -428,21 +216,8 @@
                     </svg>
                     <h3 class="font-display font-bold text-stone-800 text-base">Mulai Diskusi Kemitraan</h3>
                     <p class="text-sm text-stone-500 text-center max-w-sm mt-1">Pilih salah satu percakapan di daftar kiri untuk membaca pesan atau hubungi petani langsung dari halaman detail produk.</p>
-=======
-                <!-- No Conversation Selected -->
-                <div class="flex-1 flex flex-col items-center justify-center p-8 text-stone-500 bg-stone-50/20">
-                    <svg class="h-16 w-16 text-stone-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                    <h3 class="font-semibold text-stone-850 text-sm">Pilih Percakapan</h3>
-                    <p class="text-xs text-stone-400 mt-1 max-w-sm text-center">Pilih percakapan dari daftar chat di sebelah kiri untuk melihat pesan atau hubungi petani langsung dari halaman produk.</p>
->>>>>>> Stashed changes
                 </div>
             @endif
         </div>
     </div>
-<<<<<<< Updated upstream
 </x-app-layout>
-=======
-</x-app-layout>
->>>>>>> Stashed changes

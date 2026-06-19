@@ -64,36 +64,23 @@ class AdminChatController extends Controller
      */
     public function resolveReport(Request $request, Report $report)
     {
-        $request->validate([
-<<<<<<< Updated upstream
-            'action' => 'required|string|in:dismiss,resolve',
-        ]);
+        if ($request->has('action')) {
+            $request->validate([
+                'action' => 'required|string|in:resolve,dismiss',
+            ]);
+            $status = $request->action === 'resolve' ? 'resolved' : 'dismissed';
+        } else {
+            $request->validate([
+                'status' => 'required|in:resolved,dismissed',
+            ]);
+            $status = $request->status;
+        }
 
-        $status = $request->action === 'resolve' ? 'resolved' : 'dismissed';
-        
         $report->update([
             'status' => $status,
         ]);
 
-        $message = $status === 'resolved' 
-            ? 'Laporan ditandai sebagai diselesaikan dengan tindakan.' 
-            : 'Laporan ditolak/diabaikan.';
-
-        return redirect()->route('admin.chat.dashboard')->with('success', $message);
-    }
-
-    /**
-     * Toggle the status of a user (active, suspended, banned).
-=======
-            'status' => 'required|in:resolved,dismissed',
-            'action_taken' => 'nullable|string|max:500',
-        ]);
-
-        $report->update([
-            'status' => $request->status,
-        ]);
-
-        $msg = $request->status === 'resolved' 
+        $msg = $status === 'resolved' 
             ? 'Laporan berhasil diselesaikan dengan tindakan.' 
             : 'Laporan berhasil ditolak (dismissed).';
 
@@ -102,27 +89,17 @@ class AdminChatController extends Controller
 
     /**
      * Update user status (active, suspended, banned).
->>>>>>> Stashed changes
      */
     public function toggleUserStatus(Request $request, User $user)
     {
         $request->validate([
-<<<<<<< Updated upstream
-            'status' => 'required|string|in:active,suspended,banned',
-=======
             'status' => 'required|in:active,suspended,banned',
->>>>>>> Stashed changes
         ]);
 
         $user->update([
             'status' => $request->status,
         ]);
 
-<<<<<<< Updated upstream
-        return redirect()->back()->with('success', "Status pengguna {$user->name} berhasil diubah menjadi: " . strtoupper($request->status));
-    }
-}
-=======
         // If suspending/banning an exporter, optionally log them out or just rely on EnsureNotSuspended middleware.
         $statusLabels = [
             'active' => 'diaktifkan kembali',
@@ -133,4 +110,3 @@ class AdminChatController extends Controller
         return redirect()->back()->with('success', "Status user {$user->name} berhasil diubah menjadi {$statusLabels[$request->status]}.");
     }
 }
->>>>>>> Stashed changes

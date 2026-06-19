@@ -29,10 +29,7 @@ class User extends Authenticatable
         'phone',
         'is_trusted_petani',
         'status',
-<<<<<<< Updated upstream
         'avatar',
-=======
->>>>>>> Stashed changes
     ];
 
     /**
@@ -150,7 +147,6 @@ class User extends Authenticatable
     {
         return $this->status === 'banned';
     }
-<<<<<<< Updated upstream
 
     /**
      * Get the user's avatar URL or null if not set.
@@ -179,7 +175,5 @@ class User extends Authenticatable
         }
         return $initials;
     }
-=======
->>>>>>> Stashed changes
 }
 
