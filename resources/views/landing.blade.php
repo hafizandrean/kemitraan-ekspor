@@ -430,7 +430,10 @@
         </div>
         <div class="relative">
             <div class="absolute inset-0 bg-exportani-primary rounded-3xl rotate-3 opacity-10"></div>
-            <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?q=80&w=800&auto=format&fit=crop" alt="Petani Indonesia" class="relative z-10 w-full h-[450px] object-cover rounded-3xl shadow-sm">
+            <img 
+src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=1200&auto=format&fit=crop"
+alt="Kemitraan Petani Indonesia"
+class="relative z-10 w-full h-[450px] object-cover rounded-3xl shadow-sm">
         </div>
     </div>
 </section>
