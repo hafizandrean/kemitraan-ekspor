@@ -1,0 +1,179 @@
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'role',
+        'account_tier',
+        'premium_expires_at',
+        'phone',
+        'is_trusted_petani',
+        'status',
+        'avatar',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'is_trusted_petani' => 'boolean',
+        'premium_expires_at' => 'datetime',
+    ];
+
+    /**
+     * Get the products for the user.
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Get the partnerships for the user.
+     */
+    public function partnerships(): HasMany
+    {
+        return $this->hasMany(Partnership::class, 'eksportir_id');
+    }
+
+    public function incomingPartnerships(): HasMany
+    {
+        return $this->hasMany(Partnership::class, 'petani_id');
+    }
+
+    public function systemNotifications(): HasMany
+    {
+        return $this->hasMany(SystemNotification::class);
+    }
+
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'favorites')
+            ->withTimestamps();
+    }
+
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function isPremium(): bool
+    {
+        return app(\App\Services\PremiumAccessService::class)->isPremium($this);
+    }
+
+    public function hasPremiumAccess(): bool
+    {
+        return $this->isPremium();
+    }
+
+    public function premiumBadgeLabel(): string
+    {
+        if ($this->role === 'admin') {
+            return 'Admin';
+        }
+
+        return $this->isPremium() ? 'Premium' : 'Free';
+    }
+
+    public function farmerConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'farmer_id');
+    }
+
+    public function exporterConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'exporter_id');
+    }
+
+    public function conversations()
+    {
+        if ($this->role === 'petani') {
+            return $this->farmerConversations();
+        }
+        return $this->exporterConversations();
+    }
+
+    public function reportsSubmitted(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reporter_id');
+    }
+
+    public function reportsAgainst(): HasMany
+    {
+        return $this->hasMany(Report::class, 'reported_user_id');
+    }
+
+    public function isSuspended(): bool
+    {
+        return $this->status === 'suspended';
+    }
+
+    public function isBanned(): bool
+    {
+        return $this->status === 'banned';
+    }
+
+    /**
+     * Get the user's avatar URL or null if not set.
+     */
+    public function getAvatarUrl(): ?string
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+        return null;
+    }
+
+    /**
+     * Get the initials of the user's name.
+     */
+    public function getInitials(): string
+    {
+        $words = preg_split("/\s+/", trim($this->name));
+        $initials = '';
+        if (count($words) >= 2) {
+            $initials = strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
+        } elseif (count($words) === 1 && !empty($words[0])) {
+            $initials = strtoupper(substr($words[0], 0, 2));
+        } else {
+            $initials = 'US';
+        }
+        return $initials;
+    }
+}
+
