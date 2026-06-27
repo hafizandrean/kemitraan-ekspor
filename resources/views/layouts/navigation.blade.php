@@ -36,6 +36,12 @@
                         </x-nav-link>
                     @endif
 
+                    @if (Auth::user()->isPremium())
+                        <x-nav-link :href="route('premium.insight')" :active="request()->routeIs('premium.insight')" dark-nav>
+                            Insight Pasar
+                        </x-nav-link>
+                    @endif
+
                     @if (Auth::user()->role === 'admin')
                         <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" dark-nav>
                             Kategori
@@ -45,6 +51,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
                             Petani Tepercaya
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.commodities.index')" :active="request()->routeIs('admin.commodities.*')" dark-nav>
+                            Komoditas
                         </x-nav-link>
                         <x-nav-link :href="route('admin.chat.dashboard')" :active="request()->routeIs('admin.chat.*')" dark-nav>
                             Moderasi Chat
@@ -158,6 +167,12 @@
                 </x-responsive-nav-link>
             @endif
 
+            @if (Auth::user()->isPremium())
+                <x-responsive-nav-link :href="route('premium.insight')" :active="request()->routeIs('premium.insight')" dark-nav>
+                    Insight Pasar
+                </x-responsive-nav-link>
+            @endif
+
             @if (Auth::user()->role === 'admin')
                 <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')" dark-nav>
                     Kategori
@@ -167,6 +182,9 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.trusted-farmers.index')" :active="request()->routeIs('admin.trusted-farmers.*')" dark-nav>
                     Petani Tepercaya
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.commodities.index')" :active="request()->routeIs('admin.commodities.*')" dark-nav>
+                    Komoditas
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.chat.dashboard')" :active="request()->routeIs('admin.chat.*')" dark-nav>
                     Moderasi Chat

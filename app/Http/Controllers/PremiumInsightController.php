@@ -10,6 +10,23 @@ class PremiumInsightController extends Controller
     {
         $commodities = \App\Models\Commodity::with('prices')->withLatestPrice()->get();
 
+        foreach ($commodities as $commodity) {
+            $commodity->trend_percentage = 0;
+            $commodity->trend_direction = 'neutral';
+            
+            $sortedPrices = $commodity->prices->sortByDesc('recorded_date')->values();
+            if ($sortedPrices->count() >= 2) {
+                $current = $sortedPrices[0]->price;
+                $previous = $sortedPrices[1]->price;
+                
+                if ($previous > 0) {
+                    $diff = $current - $previous;
+                    $commodity->trend_percentage = round(($diff / $previous) * 100, 2);
+                    $commodity->trend_direction = $diff > 0 ? 'up' : ($diff < 0 ? 'down' : 'neutral');
+                }
+            }
+        }
+
         // Format data for chart
         $chartData = [];
         foreach ($commodities as $commodity) {

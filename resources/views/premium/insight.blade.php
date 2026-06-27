@@ -17,9 +17,25 @@
                         <div>
                             <p class="text-xs text-exportani-secondaryText font-semibold uppercase tracking-wider">{{ $commodity->name }}</p>
                             @if($commodity->latestPrice)
-                                <p class="text-xl font-extrabold text-exportani-text mt-1">
+                                <p class="text-xl font-extrabold text-exportani-text mt-1 flex items-center gap-2">
                                     Rp {{ number_format($commodity->latestPrice->price, 0, ',', '.') }} 
                                     <span class="text-xs text-exportani-secondaryText font-normal">/ {{ $commodity->unit }}</span>
+                                    
+                                    @if(isset($commodity->trend_direction) && $commodity->trend_direction !== 'neutral')
+                                        <span class="inline-flex items-center rounded-full px-1.5 py-0.5 text-xs font-medium {{ $commodity->trend_direction === 'up' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                                            @if($commodity->trend_direction === 'up')
+                                                <svg class="mr-1 h-3 w-3 flex-shrink-0 self-center text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z" clip-rule="evenodd" />
+                                                </svg>
+                                                +{{ $commodity->trend_percentage }}%
+                                            @else
+                                                <svg class="mr-1 h-3 w-3 flex-shrink-0 self-center text-red-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                                    <path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v10.638l3.96-4.158a.75.75 0 111.08 1.04l-5.25 5.5a.75.75 0 01-1.08 0l-5.25-5.5a.75.75 0 111.08-1.04l3.96 4.158V3.75A.75.75 0 0110 3z" clip-rule="evenodd" />
+                                                </svg>
+                                                {{ $commodity->trend_percentage }}%
+                                            @endif
+                                        </span>
+                                    @endif
                                 </p>
                                 <p class="text-xs text-gray-500 mt-1">Terakhir update: {{ $commodity->latestPrice->recorded_date->format('d M Y') }}</p>
                             @else
